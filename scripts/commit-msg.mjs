@@ -28,9 +28,9 @@ const selectMsgType = () => {
         "😈 refactor",
         "💄 style",
         "👀 test",
-        "build",
-        "ci",
-        "docs",
+        "🔧 build",
+        "⚙️ ci",
+        "📘 docs",
       ],
       filter: function (val) {
         return val.split(" ")[1];
