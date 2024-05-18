@@ -1,10 +1,11 @@
-import WebRoute from "./routes/WebRoute"
+import Header from "./components/Header/Header"
+
 
 
 function App() {
 
   return (
-    <WebRoute />
+  <Header/>
   )
 }
 
