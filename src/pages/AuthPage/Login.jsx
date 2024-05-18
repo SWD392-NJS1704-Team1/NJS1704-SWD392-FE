@@ -1,7 +1,7 @@
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import { PATHS } from "@/constant/path";
-import { MESS, REGEX } from "@/constant/validate";
+import { Length_Password, MESS, REGEX } from "@/constant/validate";
 import { UnlockOutlined, UserOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,13 @@ const Login = () => {
             cssLabel={
               "absolute text-base text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-amber-400 peer-focus:dark:text-amber-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             }
-            {...register("password", { required: MESS.ERROR_PASSWORD })}
+            {...register("password", {
+              required: MESS.ERROR_PASSWORD,
+              minLength: {
+                  value: Length_Password,
+                  message: MESS.ERROR_PASSWORD_INVALID
+              }
+          })}
             icon={<UnlockOutlined className="absolute top-4 right-4" />}
             error={errors?.password?.message}
           />
