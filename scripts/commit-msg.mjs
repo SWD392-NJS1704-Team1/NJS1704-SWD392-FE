@@ -29,7 +29,7 @@ const selectMsgType = () => {
         "💄 style",
         "👀 test",
         "🔧 build",
-        "⚙️ ci",
+        "⚙️  ci",
         "📘 docs",
       ],
       filter: function (val) {
