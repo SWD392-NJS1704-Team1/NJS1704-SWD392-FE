@@ -1,0 +1,44 @@
+import { Menu, Layout, Button } from "antd";
+import { CloseOutlined, BarsOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MenuItems } from "@/constant/menu-data";
+
+const { Sider } = Layout;
+
+export default function Navigator() {
+  const [isCollapse, setIsCollapse] = useState(false);
+  const navigate = useNavigate();
+  const toggleCollapse = () => setIsCollapse((prev) => !prev);
+
+  return (
+    <div className="bg-white ">
+      <Sider
+        className="h-full"
+        collapsible
+        trigger={null}
+        collapsed={isCollapse}
+      >
+        <div className="bg-white ">
+          <Button
+            className={isCollapse ? "mx-4 my-2" : "mx-2.5 my-2"}
+            type="text"
+            onClick={toggleCollapse}
+          >
+            {isCollapse ? (
+              <BarsOutlined className="text-lg" />
+            ) : (
+              <CloseOutlined className="text-lg" />
+            )}
+          </Button>
+        </div>
+        <Menu
+          onClick={({ key }) => navigate(key)}
+          className="bg-white"
+          mode="inline"
+          items={MenuItems}
+        />
+      </Sider>
+    </div>
+  );
+}
