@@ -4,27 +4,30 @@ const Input = (
   {
     label,
     type = "text",
-    required,
+    cssClass,
+    cssLabel,
     error,
     renderInput = undefined,
+    icon,
     ...restProps
   },
   ref
 ) => {
   return (
-    <div className="form-group">
-      <label className="label" style={{ width: "100%" }}>
-        {label} {required && <span>*</span>}
-      </label>
-      {renderInput?.({ ...restProps, error, ref }) || (
+    <div className="form-group relative my-4">
+      {renderInput?.({ ...restProps, ref }) || (
         <input
           type={type}
           {...restProps}
-          className={`form-control ${error ? "input-error" : ""}`}
+          className={`form-control ${cssClass}`}
           ref={ref}
         />
       )}
-      {error && <p className="form-error">{error}</p>}
+      <label className={`label ${cssLabel}`} htmlFor="">
+        {label}
+      </label>
+      {icon ? icon : ""}
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </div>
   );
 };
