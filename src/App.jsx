@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PATH } from "./constant/path";
 import Dashboard from "./pages/Dashboard/Dashboard ";
-import WebRoute from "./routes/WebRoute"
+import WebRoute from "./routes/WebRoute";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
-
-function App() {
+const App = () => {
   return (
     <>
       <BrowserRouter>
@@ -17,6 +16,6 @@ function App() {
       <WebRoute />
     </>
   );
-}
+};
 
 export default App;

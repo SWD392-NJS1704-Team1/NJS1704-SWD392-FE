@@ -5,9 +5,9 @@ export const PATHS = {
   HOME: "/",
   LOGIN: "/login",
   REGISTER: "/register",
-  FORGOT_PASSWORD: "/forgot",
-  VERIFY_OTP: "/verify",
-  RESET_PASSWORD: "/reset",
+  FORGOT_PASSWORD: "/forgot-password",
+  VERIFY_OTP: "/verify-otp",
+  RESET_PASSWORD: "/reset-password",
   USER: {
     INDEX: USER_MANAGEMENT,
   },

@@ -41,7 +41,7 @@ const Button = ({
   }
   return (
     <button
-      className={`${variantClass} ${classCss} h-8 px-4 rounded-[10px] cursor-pointer flex justify-center items-center duration-300`}
+      className={`${variantClass} ${classCss} h-8 px-4 rounded-[10px] cursor-pointer flex justify-center items-center duration-300 transition-colors`}
       {...restProps}
     >
       {children}

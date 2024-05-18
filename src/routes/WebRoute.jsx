@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { routes } from ".";
 
-function WebRoute() {
+const WebRoute = () => {
   return (
     <Routes>
       {routes.map((route) => {
@@ -22,6 +22,6 @@ function WebRoute() {
       })}
     </Routes>
   );
-}
+};
 
 export default WebRoute;
