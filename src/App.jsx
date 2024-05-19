@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard/Dashboard ";
 import WebRoute from "./routes/WebRoute";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import MainLayout from "./layout/MainLayout/MainLayout";
+import UserManagement from "./pages/UserManagement";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path={PATHS.HOME} element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="user-management" element={<UserManagement />} />
         </Route>
       </Routes>
     </>

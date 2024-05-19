@@ -1,4 +1,5 @@
 import {
+  ApartmentOutlined,
   DashboardOutlined,
   PercentageOutlined,
   ProductOutlined,
@@ -29,6 +30,11 @@ export const MenuItems = [
     label: "Customer",
     key: "customer",
     icon: <UserOutlined />,
+  },
+  {
+    label: "User management",
+    key: "user-management",
+    icon: <ApartmentOutlined />,
   },
   {
     label: "Counter",
