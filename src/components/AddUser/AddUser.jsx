@@ -1,160 +1,219 @@
-import { PATHS } from "@/constant/path";
 import { MESS, REGEX } from "@/constant/validate";
-import { Button, Input, Select, Typography } from "antd";
-import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-
-const ROLE = [
-    { value: 'manager', label: 'Manager' },
-    { value: 'staff', label: 'Staff' }
-]
-
-const COUNTER = [
-    { value: '1', label: '1' },
-    { value: '2', label: '2' }
-]
-
-const GENDER = [
-    { value: true, label: 'Male' },
-    { value: false, label: 'Female' }
-]
-
-const STATUS = [
-    { value: true, label: 'Active' },
-    { value: false, label: 'Inactive' }
-]
+import { useAppDispatch } from "@/lib/redux-toolkit/Hook";
+import { closePopup } from "@/lib/redux-toolkit/slices/PopupSlice";
+import { Button } from "antd";
+import { useForm } from "react-hook-form";
+import ConfigAntdButton from "../ConfigAntdButton";
 
 const AddUser = () => {
 
+    const dispatch = useAppDispatch()
+
     const {
         register,
-        control,
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         console.log(data);
-        navigate(PATHS.LOGIN);
     };
 
+    const handleCancel = () => {
+        dispatch(closePopup('Create a new User'))
+    }
+
     return (
-        <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Username</Typography.Text>
-                <Controller
-                    name="userName"
-                    control={control}
-                    render={({ field }) => (
-                        <>
-                            <Input {...field} id="userName" placeholder="Username..." />
-                            {errors.userName && <p className="text-red-500">{errors.userName.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Email name</Typography.Text>
-                <Controller
-                    name="emailName"
-                    control={control}
-                    render={({ field }) => (
-                        <>
-                            <Input
-                                {...field}
-                                id="emailName"
-                                placeholder="Email..."
-                                {...register("email", {
-                                    required: MESS.ERROR_EMAIL,
-                                    pattern: {
-                                        value: REGEX.EMAIL,
-                                        message: MESS.ERROR_EMAIL_INVALID,
-                                    },
-                                })}
-                            />
-                            {errors.emailName && <p className="text-red-500">{errors.emailName.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Phone</Typography.Text>
-                <Controller
-                    name="phone"
-                    control={control}
-                    render={({ field }) => (
-                        <>
-                            <Input {...field} id="phone" placeholder="Phone number..." />
-                            {errors.phone && <p className="text-red-500">{errors.phone.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Role</Typography.Text>
-                <Controller
-                    name="role"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                        <>
-                            <Select {...field} id="role" placeholder="Select one" options={ROLE} />
-                            {errors.role && <p className="text-red-500">{errors.role.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Counter</Typography.Text>
-                <Controller
-                    name="counter"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                        <>
-                            <Select {...field} id="counter" placeholder="Select one" options={COUNTER} />
-                            {errors.counter && <p className="text-red-500">{errors.counter.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Gender</Typography.Text>
-                <Controller
-                    name="gender"
-                    control={control}
-                    defaultValue={true}
-                    render={({ field }) => (
-                        <>
-                            <Select {...field} id="gender" options={GENDER} />
-                            {errors.gender && <p className="text-red-500">{errors.gender.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-col gap-1">
-                <Typography.Text className="font-semibold block">Status</Typography.Text>
-                <Controller
-                    name="status"
-                    control={control}
-                    defaultValue={true}
-                    render={({ field }) => (
-                        <>
-                            <Select {...field} id="status" options={STATUS} />
-                            {errors.status && <p className="text-red-500">{errors.status.message}</p>}
-                        </>
-                    )}
-                />
-            </div>
-            <div className="flex flex-row gap-1 justify-center">
-                <Button type="primary" danger>
-                    Cancel
-                </Button>
-                <Button type="primary" onClick={handleSubmit(onSubmit)}>
-                    Add
-                </Button>
-            </div>
+        <div className="p-2 border-2 border-gray-400">
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">User Name</h1>
+                    <div className="w-4/5">
+                        <input
+                            type="text"
+                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            placeholder="User name..."
+                            {...register("userName", { required: MESS.ERROR_NAME })}
+                        />
+                        {errors.userName && (
+                            <span className="text-red-500 text-sm">
+                                {errors.userName.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Email</h1>
+                    <div className="w-4/5">
+                        <input
+                            type="email"
+                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            placeholder="Email..."
+                            {...register("email", {
+                                required: MESS.ERROR_EMAIL,
+                                pattern: {
+                                    value: REGEX.EMAIL,
+                                    message: MESS.ERROR_EMAIL_INVALID,
+                                },
+                            })}
+                        />
+                        {errors.email && (
+                            <span className="text-red-500 text-sm">
+                                {errors.email.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Phone</h1>
+                    <div className="w-4/5">
+                        <input
+                            type="text"
+                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            placeholder="Phone number..."
+                            {...register("phone", {
+                                required: MESS.ERROR_PHONE,
+                                pattern: {
+                                    value: REGEX.PHONE,
+                                    message: MESS.ERROR_PHONE_INVALID,
+                                },
+                            })}
+                        />
+                        {errors.phone && (
+                            <span className="text-red-500 text-sm">
+                                {errors.phone.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Role</h1>
+                    <div className="w-4/5">
+                        <select
+                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            {...register("role", {
+                                required: MESS.ERROR_ROLE
+                            })}
+                        >
+                            <option value="" disabled>Select one</option>
+                            <option value="1">Manager</option>
+                            <option value="2">Staff</option>
+                        </select>
+                        {errors.role && (
+                            <span className="text-red-500 text-sm">
+                                {errors.role.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Counter</h1>
+                    <div className="w-4/5">
+                        <select
+                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            {...register("counter", {
+                                required: MESS.ERROR_COUNTER
+                            })}
+                        >
+                            <option value="" disabled>Select one</option>
+                            <option value="1">Counter 1</option>
+                            <option value="2">Counter 2</option>
+                        </select>
+                        {errors.counter && (
+                            <span className="text-red-500 text-sm">
+                                {errors.counter.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Gender</h1>
+                    <div className="w-4/5">
+                        <div className="flex">
+                            <div className="flex-1">
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="radio"
+                                        value={true}
+                                        {...register("gender", { required: MESS.ERROR_GENDER })}
+                                        className="gender"
+                                    />
+                                    <span className="ml-2">Male</span>
+                                </label>
+                            </div>
+                            <div className="flex-1">
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="radio"
+                                        value={false}
+                                        {...register("gender", { required: MESS.ERROR_GENDER })}
+                                        className="gender"
+                                    />
+                                    <span className="ml-2">Female</span>
+                                </label>
+                            </div>
+                        </div>
+                        {errors.gender && (
+                            <span className="text-red-500 text-sm">
+                                {errors.gender.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Status</h1>
+                    <div className="w-4/5">
+                        <div className="flex">
+                            <div className="flex-1">
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="radio"
+                                        value={true}
+                                        {...register("status", { required: MESS.ERROR_STATUS })}
+                                        className="status"
+                                    />
+                                    <span className="ml-2">Active</span>
+                                </label>
+                            </div>
+                            <div className="flex-1">
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="radio"
+                                        value={false}
+                                        {...register("status", { required: MESS.ERROR_STATUS })}
+                                        className="status"
+                                    />
+                                    <span className="ml-2">Inactive</span>
+                                </label>
+                            </div>
+                        </div>
+                        {errors.status && (
+                            <span className="text-red-500 text-sm">
+                                {errors.status.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex flex-row gap-1 justify-center">
+                    <ConfigAntdButton type='danger'>
+                        <Button type="primary" onClick={handleCancel}>
+                            Cancel
+                        </Button>
+                    </ConfigAntdButton>
+                    <ConfigAntdButton type='ok'>
+                        <Button type="primary" onClick={handleSubmit(onSubmit)}>
+                            Add
+                        </Button>
+                    </ConfigAntdButton>
+                </div>
+            </form>
         </div>
     )
 }

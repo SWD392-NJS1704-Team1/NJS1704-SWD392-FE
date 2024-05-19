@@ -1,8 +1,8 @@
 import AddUser from "@/components/AddUser/AddUser"
+import ConfigAntdButton from "@/components/ConfigAntdButton";
 import Popup from "@/components/Popup"
 import { PlusCircleOutlined, SearchOutlined, WifiOutlined } from "@ant-design/icons"
-import { Button, ConfigProvider, Input, Space, Table, Tag, Typography } from "antd"
-import { TinyColor } from '@ctrl/tinycolor';
+import { Button, Input, Space, Table, Tag, Typography } from "antd"
 
 const columns = [
     {
@@ -76,12 +76,6 @@ const data = [
     },
 ];
 
-const colors1 = ['#000', '#ccc'];
-const getHoverColors = (colors) =>
-    colors.map((color) => new TinyColor(color).lighten(5).toString());
-const getActiveColors = (colors) =>
-    colors.map((color) => new TinyColor(color).darken(5).toString());
-
 const UserManagement = () => {
     return (
         <div>
@@ -98,43 +92,21 @@ const UserManagement = () => {
                                 prefix={<SearchOutlined />}
                                 placeholder="Search by..."
                             />
-                            <ConfigProvider
-                                theme={{
-                                    components: {
-                                        Button: {
-                                            colorPrimary: `linear-gradient(135deg, ${colors1.join(', ')})`,
-                                            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(colors1).join(', ')})`,
-                                            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(colors1).join(', ')})`,
-                                            lineWidth: 0,
-                                        },
-                                    },
-                                }}
-                            >
+                            <ConfigAntdButton>
                                 <Button type="primary" icon={<WifiOutlined />}>
                                     Filter
                                 </Button>
-                            </ConfigProvider>
+                            </ConfigAntdButton>
 
                         </div>
                     </div>
                     <div className="flex">
                         <Popup title='Create a new User' content={<AddUser />}>
-                            <ConfigProvider
-                                theme={{
-                                    components: {
-                                        Button: {
-                                            colorPrimary: `linear-gradient(135deg, ${colors1.join(', ')})`,
-                                            colorPrimaryHover: `linear-gradient(135deg, ${getHoverColors(colors1).join(', ')})`,
-                                            colorPrimaryActive: `linear-gradient(135deg, ${getActiveColors(colors1).join(', ')})`,
-                                            lineWidth: 0,
-                                        },
-                                    },
-                                }}
-                            >
+                            <ConfigAntdButton>
                                 <Button type="primary" icon={<PlusCircleOutlined />}>
                                     Add new
                                 </Button>
-                            </ConfigProvider>
+                            </ConfigAntdButton>
                         </Popup>
                     </div>
                 </div>

@@ -1,29 +1,31 @@
+import { useAppDispatch, useAppSelector } from "@/lib/redux-toolkit/Hook"
+import { closePopup, openPopup } from "@/lib/redux-toolkit/slices/PopupSlice"
 import { CloseCircleOutlined } from "@ant-design/icons"
-import { Button, Modal, Typography } from "antd"
-import { useState } from "react"
+import { Modal, Typography } from "antd"
 
 
 const Popup = ({ children, content, title }) => {
-    const [open, setOpen] = useState(false)
+    const dispatch = useAppDispatch()
+    const isOpen = useAppSelector((state) => state.popup[title])
 
     return (
         <>
-            <div onClick={() => setOpen(true)}>{children}</div>
+            <div onClick={() => dispatch(openPopup(title))}>{children}</div>
             <Modal
                 centered
-                open={open}
-                onOk={() => setOpen(false)}
-                onCancel={() => setOpen(false)}
+                open={isOpen}
+                onOk={() => dispatch(closePopup(title))}
+                onCancel={() => dispatch(closePopup(title))}
                 styles={{ content: { padding: 0 } }}
                 title={
                     <div className="px-3 py-2 rounded-t-md bg-primary">
                         <div className="flex">
                             <div className="mx-auto">
-                                <Typography.Title level={5} type="secondary">
+                                <Typography.Title level={3} type="secondary">
                                     {title}
                                 </Typography.Title>
                             </div>
-                            <CloseCircleOutlined className="text-foreground" onClick={() => setOpen(false)} />
+                            <CloseCircleOutlined className="text-foreground" onClick={() => dispatch(closePopup(title))} />
                         </div>
                     </div>
                 }
