@@ -4,10 +4,12 @@ import { closePopup } from "@/lib/redux-toolkit/slices/PopupSlice";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import ConfigAntdButton from "../ConfigAntdButton";
+import useAddUser from "./useAddUser";
 
 const AddUser = () => {
 
     const dispatch = useAppDispatch()
+    const addUser = useAddUser()
 
     const {
         register,
@@ -17,6 +19,15 @@ const AddUser = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        addUser.mutate({
+            fullname: data.fullname,
+            email: data.email,
+            phone_number: data.phone_number,
+            address: data.address,
+            date_of_birth: data.date_of_birth,
+            role_id: data.role_id,
+            counter_id: data.counter_id
+        })
     };
 
     const handleCancel = () => {
@@ -27,17 +38,17 @@ const AddUser = () => {
         <div className="p-2 border-2 border-gray-400">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex m-4">
-                    <h1 className="w-1/5 flex font-bold items-center mr-4">User Name</h1>
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Full Name</h1>
                     <div className="w-4/5">
                         <input
                             type="text"
-                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
-                            placeholder="User name..."
-                            {...register("userName", { required: MESS.ERROR_NAME })}
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            placeholder="Full name..."
+                            {...register("fullname", { required: MESS.ERROR_NAME })}
                         />
-                        {errors.userName && (
+                        {errors.fullname && (
                             <span className="text-red-500 text-sm">
-                                {errors.userName.message}
+                                {errors.fullname.message}
                             </span>
                         )}
                     </div>
@@ -48,7 +59,7 @@ const AddUser = () => {
                     <div className="w-4/5">
                         <input
                             type="email"
-                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
                             placeholder="Email..."
                             {...register("email", {
                                 required: MESS.ERROR_EMAIL,
@@ -71,9 +82,9 @@ const AddUser = () => {
                     <div className="w-4/5">
                         <input
                             type="text"
-                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
                             placeholder="Phone number..."
-                            {...register("phone", {
+                            {...register("phone_number", {
                                 required: MESS.ERROR_PHONE,
                                 pattern: {
                                     value: REGEX.PHONE,
@@ -81,9 +92,49 @@ const AddUser = () => {
                                 },
                             })}
                         />
-                        {errors.phone && (
+                        {errors.phone_number && (
                             <span className="text-red-500 text-sm">
-                                {errors.phone.message}
+                                {errors.phone_number.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">Address</h1>
+                    <div className="w-4/5">
+                        <input
+                            type="text"
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            placeholder="Address..."
+                            {...register("address", { required: MESS.ERROR_ADDRESS })}
+                        />
+                        {errors.address && (
+                            <span className="text-red-500 text-sm">
+                                {errors.address.message}
+                            </span>
+                        )}
+                    </div>
+                </div>
+
+                <div className="flex m-4">
+                    <h1 className="w-1/5 flex font-bold items-center mr-4">DOB</h1>
+                    <div className="w-4/5">
+                        <input
+                            type="text"
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            placeholder="Date of birth(DD/MM/YYYY)..."
+                            {...register("date_of_birth", {
+                                required: MESS.ERROR_DOB,
+                                pattern: {
+                                    value: REGEX.DOB,
+                                    message: MESS.ERROR_DOB_INVALID,
+                                },
+                            })}
+                        />
+                        {errors.date_of_birth && (
+                            <span className="text-red-500 text-sm">
+                                {errors.date_of_birth.message}
                             </span>
                         )}
                     </div>
@@ -93,18 +144,18 @@ const AddUser = () => {
                     <h1 className="w-1/5 flex font-bold items-center mr-4">Role</h1>
                     <div className="w-4/5">
                         <select
-                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
-                            {...register("role", {
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            {...register("role_id", {
                                 required: MESS.ERROR_ROLE
                             })}
                         >
                             <option value="" disabled>Select one</option>
-                            <option value="1">Manager</option>
-                            <option value="2">Staff</option>
+                            <option value={1}>Manager</option>
+                            <option value={2}>Staff</option>
                         </select>
-                        {errors.role && (
+                        {errors.role_id && (
                             <span className="text-red-500 text-sm">
-                                {errors.role.message}
+                                {errors.role_id.message}
                             </span>
                         )}
                     </div>
@@ -114,88 +165,18 @@ const AddUser = () => {
                     <h1 className="w-1/5 flex font-bold items-center mr-4">Counter</h1>
                     <div className="w-4/5">
                         <select
-                            className="block w-full p-3 rounded-md text-md border-2 border-gray-400 focus:outline-none"
-                            {...register("counter", {
+                            className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+                            {...register("counter_id", {
                                 required: MESS.ERROR_COUNTER
                             })}
                         >
                             <option value="" disabled>Select one</option>
-                            <option value="1">Counter 1</option>
-                            <option value="2">Counter 2</option>
+                            <option value={1}>Counter 1</option>
+                            <option value={2}>Counter 2</option>
                         </select>
-                        {errors.counter && (
+                        {errors.counter_id && (
                             <span className="text-red-500 text-sm">
-                                {errors.counter.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
-
-                <div className="flex m-4">
-                    <h1 className="w-1/5 flex font-bold items-center mr-4">Gender</h1>
-                    <div className="w-4/5">
-                        <div className="flex">
-                            <div className="flex-1">
-                                <label className="inline-flex items-center">
-                                    <input
-                                        type="radio"
-                                        value={true}
-                                        {...register("gender", { required: MESS.ERROR_GENDER })}
-                                        className="gender"
-                                    />
-                                    <span className="ml-2">Male</span>
-                                </label>
-                            </div>
-                            <div className="flex-1">
-                                <label className="inline-flex items-center">
-                                    <input
-                                        type="radio"
-                                        value={false}
-                                        {...register("gender", { required: MESS.ERROR_GENDER })}
-                                        className="gender"
-                                    />
-                                    <span className="ml-2">Female</span>
-                                </label>
-                            </div>
-                        </div>
-                        {errors.gender && (
-                            <span className="text-red-500 text-sm">
-                                {errors.gender.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
-
-                <div className="flex m-4">
-                    <h1 className="w-1/5 flex font-bold items-center mr-4">Status</h1>
-                    <div className="w-4/5">
-                        <div className="flex">
-                            <div className="flex-1">
-                                <label className="inline-flex items-center">
-                                    <input
-                                        type="radio"
-                                        value={true}
-                                        {...register("status", { required: MESS.ERROR_STATUS })}
-                                        className="status"
-                                    />
-                                    <span className="ml-2">Active</span>
-                                </label>
-                            </div>
-                            <div className="flex-1">
-                                <label className="inline-flex items-center">
-                                    <input
-                                        type="radio"
-                                        value={false}
-                                        {...register("status", { required: MESS.ERROR_STATUS })}
-                                        className="status"
-                                    />
-                                    <span className="ml-2">Inactive</span>
-                                </label>
-                            </div>
-                        </div>
-                        {errors.status && (
-                            <span className="text-red-500 text-sm">
-                                {errors.status.message}
+                                {errors.counter_id.message}
                             </span>
                         )}
                     </div>
