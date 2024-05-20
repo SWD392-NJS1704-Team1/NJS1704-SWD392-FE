@@ -56,10 +56,10 @@ const Login = () => {
             {...register("password", {
               required: MESS.ERROR_PASSWORD,
               minLength: {
-                  value: Length_Password,
-                  message: MESS.ERROR_PASSWORD_INVALID
-              }
-          })}
+                value: Length_Password,
+                message: MESS.ERROR_PASSWORD_INVALID,
+              },
+            })}
             icon={<UnlockOutlined className="absolute top-4 right-4" />}
             error={errors?.password?.message}
           />
