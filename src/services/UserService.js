@@ -1,3 +1,4 @@
+import { REGISTER } from "@/constant/environments"
 import axiosInstance from "@/utils/axiosInstance"
 
 const RegisterUser = ({
@@ -10,7 +11,7 @@ const RegisterUser = ({
     counter_id
 }) => {
     try {
-        axiosInstance.post(import.meta.env.VITE_REGISTER_USER_API, {
+        axiosInstance.post(REGISTER, {
             fullname,
             email,
             phone_number,

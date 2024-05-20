@@ -4,7 +4,7 @@ import Dashboard from "./pages/Dashboard/Dashboard ";
 import WebRoute from "./routes/WebRoute";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import MainLayout from "./layout/MainLayout/MainLayout";
-import UserManagement from "./pages/UserManagement";
+import UserManagement from "./pages/UserManagementPage/UserManagement";
 
 const App = () => {
   return (
