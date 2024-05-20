@@ -1,4 +1,4 @@
-import UserManagementListAPI from "@/services/userService";
+import UserManagementListAPI from "@/services/UserService";
 import { closePopup } from "@/store/reducers/popupReducer";
 import store from "@/store/store";
 import { useMutation } from "@tanstack/react-query";
