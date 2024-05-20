@@ -1,11 +1,11 @@
-import { useAppDispatch } from "@/lib/redux-toolkit/Hook";
+import UserManagementListAPI from "@/services/UserService";
 import { closePopup } from "@/store/reducers/popupReducer";
-import UserManagementListAPI from "@/services/userService";
+import store from "@/store/store";
 import { useMutation } from "@tanstack/react-query";
 import { notification } from "antd";
 
 const useAddUser = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = store.dispatch;
 
   return useMutation({
     mutationFn: UserManagementListAPI.RegisterUser,

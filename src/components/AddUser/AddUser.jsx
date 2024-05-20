@@ -1,13 +1,13 @@
 import { MESS, REGEX } from "@/constant/validate";
-import { useAppDispatch } from "@/lib/redux-toolkit/Hook";
 import { closePopup } from "@/store/reducers/popupReducer";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import ConfigAntdButton from "../Button/ConfigAntdButton";
 import useAddUser from "./useAddUser";
+import store from "@/store/store";
 
 const AddUser = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = store.dispatch;
   const addUser = useAddUser();
 
   const {
@@ -34,14 +34,14 @@ const AddUser = () => {
   };
 
   return (
-    <div className="p-2 border-2 border-gray-400">
+    <div className="p-2">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">Full Name</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Full Name</h1>
+          <div className="w-3/4">
             <input
               type="text"
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Full name..."
               {...register("fullname", { required: MESS.ERROR_NAME })}
             />
@@ -54,11 +54,11 @@ const AddUser = () => {
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">Email</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Email</h1>
+          <div className="w-3/4">
             <input
               type="email"
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Email..."
               {...register("email", {
                 required: MESS.ERROR_EMAIL,
@@ -77,11 +77,11 @@ const AddUser = () => {
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">Phone</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Phone</h1>
+          <div className="w-3/4">
             <input
               type="text"
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Phone number..."
               {...register("phone_number", {
                 required: MESS.ERROR_PHONE,
@@ -100,11 +100,11 @@ const AddUser = () => {
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">Address</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Address</h1>
+          <div className="w-3/4">
             <input
               type="text"
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Address..."
               {...register("address", { required: MESS.ERROR_ADDRESS })}
             />
@@ -117,11 +117,11 @@ const AddUser = () => {
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">DOB</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">DOB</h1>
+          <div className="w-3/4">
             <input
               type="text"
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Date of birth(DD/MM/YYYY)..."
               {...register("date_of_birth", {
                 required: MESS.ERROR_DOB,
@@ -140,10 +140,10 @@ const AddUser = () => {
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">Role</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Role</h1>
+          <div className="w-3/4">
             <select
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               {...register("role_id", {
                 required: MESS.ERROR_ROLE,
               })}
@@ -151,8 +151,8 @@ const AddUser = () => {
               <option value="" disabled>
                 Select one
               </option>
-              <option value={1}>Manager</option>
-              <option value={2}>Staff</option>
+              <option value={2}>Manager</option>
+              <option value={3}>Staff</option>
             </select>
             {errors.role_id && (
               <span className="text-red-500 text-sm">
@@ -163,10 +163,10 @@ const AddUser = () => {
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/5 flex font-bold items-center mr-4">Counter</h1>
-          <div className="w-4/5">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
+          <div className="w-3/4">
             <select
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-400 focus:outline-none"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               {...register("counter_id", {
                 required: MESS.ERROR_COUNTER,
               })}
@@ -185,13 +185,13 @@ const AddUser = () => {
           </div>
         </div>
 
-        <div className="flex flex-row gap-1 justify-center">
+        <div className="flex flex-row gap-1 justify-center p-4">
           <ConfigAntdButton type="danger">
             <Button type="primary" onClick={handleCancel}>
               Cancel
             </Button>
           </ConfigAntdButton>
-          <ConfigAntdButton type="ok">
+          <ConfigAntdButton>
             <Button type="primary" onClick={handleSubmit(onSubmit)}>
               Add
             </Button>

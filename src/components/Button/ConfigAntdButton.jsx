@@ -1,18 +1,14 @@
 import { ConfigProvider } from "antd"
 import { TinyColor } from '@ctrl/tinycolor';
 
-const colors1 = ['#000', '#ccc'];
-const colors2 = ['#f83600', '#f9d423'];
-const colors3 = ['#2bb673', '#abecd6'];
+const colors1 = ['#000', '#000'];
+const colors2 = ['#f83600', '#f83600'];
 
 const ConfigAntdButton = ({ children, type }) => {
 
     let color = colors1
     if (type === 'danger') {
         color = colors2
-    }
-    if (type === 'ok') {
-        color = colors3
     }
 
     const getHoverColors = (colors) =>
