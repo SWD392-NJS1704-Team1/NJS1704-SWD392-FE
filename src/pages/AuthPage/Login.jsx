@@ -2,8 +2,10 @@ import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
 import { PATHS } from "@/constant/path";
 import { Length_Password, MESS, REGEX } from "@/constant/validate";
+import { handleLogin } from "@/store/reducers/authReducer";
 import { UnlockOutlined, UserOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -14,10 +16,26 @@ const Login = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate(PATHS.RESET_PASSWORD);
+  const dispatch = useDispatch();
+
+  // const onSubmit = async (data) => {
+  //   console.log(data);
+  //   navigate(PATHS.RESET_PASSWORD);
+  // };
+
+  const onSubmit = async (data) => {
+    if (data) {
+      try {
+        const res = await dispatch(handleLogin(data)).unwrap();
+        // navigate(PATHS.RESET_PASSWORD);
+        navigate(PATHS.HOME);
+        console.log("res", res);
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
   };
+
 
   return (
     <div>

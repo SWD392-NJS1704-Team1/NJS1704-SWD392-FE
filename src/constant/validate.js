@@ -4,7 +4,7 @@ export const REGEX = {
   DOB: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d\d$/
 };
 
-export const Length_Password = 6;
+export const Length_Password = 3;
 
 
 export const MESS = {

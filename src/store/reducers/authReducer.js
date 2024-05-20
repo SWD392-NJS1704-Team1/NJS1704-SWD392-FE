@@ -15,6 +15,12 @@ export const authSlice = createSlice({
   initialState,
   name: "auth",
   reducers: {
+    handleShowModal: (state, action) => {
+      state.showModal = action.payload;
+    },
+    handleCloseModal: (state) => {
+      state.showModal = "";
+    },
     handleLogout: (state) => {
       tokenMethod.remove();
       state.profile = null;
@@ -51,7 +57,7 @@ export const authSlice = createSlice({
 // Extract the action creators object and the reducer
 const { actions, reducer: authReducer } = authSlice;
 // Extract and export each action creator by name
-export const { handleShowModal, handleCloseModal, handleLogout } = actions;
+export const { handleLogout, handleShowModal, handleCloseModal } = actions;
 // Export the reducer, either as a default or named export
 export default authReducer;
 
@@ -65,7 +71,7 @@ export const handleLogin = createAsyncThunk(
         accessToken,
         refreshToken,
       });
-      thunkApi.dispatch(handleGetProfile());
+      // thunkApi.dispatch(handleGetProfile());
       message.success("Đăng nhập thành công");
       return true;
     } catch (error) {

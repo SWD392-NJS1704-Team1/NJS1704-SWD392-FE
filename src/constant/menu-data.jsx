@@ -33,7 +33,7 @@ export const MenuItems = [
   },
   {
     label: "User management",
-    key: "user-management",
+    key: PATHS.USER.INDEX,
     icon: <ApartmentOutlined />,
   },
   {
