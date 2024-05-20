@@ -1,4 +1,3 @@
-import { LOGIN } from "@/constant/environments";
 import axiosInstance from "@/utils/axiosInstance";
 
 export const authService = {

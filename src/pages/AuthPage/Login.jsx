@@ -5,7 +5,7 @@ import { Length_Password, MESS, REGEX } from "@/constant/validate";
 import { handleLogin } from "@/store/reducers/authReducer";
 import { UnlockOutlined, UserOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -17,11 +17,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   navigate(PATHS.RESET_PASSWORD);
-  // };
 
   const onSubmit = async (data) => {
     if (data) {

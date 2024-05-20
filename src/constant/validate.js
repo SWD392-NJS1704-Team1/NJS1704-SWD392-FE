@@ -12,7 +12,7 @@ export const MESS = {
   INVALID: "invalid",
   ERROR_NAME: "Please enter user name.",
   ERROR_PASSWORD: "Please enter password.",
-  ERROR_PASSWORD_INVALID: "Password must be at least 6 characters long.",
+  ERROR_PASSWORD_INVALID: "Password must be at least 3 characters long.",
   ERROR_ADDRESS: "Please enter address.",
   ERROR_EMAIL: "Please enter email address.",
   ERROR_EMAIL_INVALID: "Please enter a valid email address.",
