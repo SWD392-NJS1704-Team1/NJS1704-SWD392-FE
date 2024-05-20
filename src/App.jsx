@@ -14,7 +14,7 @@ const App = () => {
         <Route path={PATHS.HOME} element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="*" element={<PageNotFound />} />
-          <Route path="user-management" element={<UserManagement />} />
+          <Route path={PATHS.USER.INDEX} element={<UserManagement />} />
         </Route>
       </Routes>
     </>

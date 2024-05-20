@@ -4,7 +4,7 @@ export const REGEX = {
   DOB: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d\d$/
 };
 
-export const Length_Password = 6;
+export const Length_Password = 3;
 
 
 export const MESS = {
@@ -12,7 +12,7 @@ export const MESS = {
   INVALID: "invalid",
   ERROR_NAME: "Please enter user name.",
   ERROR_PASSWORD: "Please enter password.",
-  ERROR_PASSWORD_INVALID: "Password must be at least 6 characters long.",
+  ERROR_PASSWORD_INVALID: "Password must be at least 3 characters long.",
   ERROR_ADDRESS: "Please enter address.",
   ERROR_EMAIL: "Please enter email address.",
   ERROR_EMAIL_INVALID: "Please enter a valid email address.",
