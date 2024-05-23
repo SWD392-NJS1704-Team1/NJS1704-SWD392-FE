@@ -9,14 +9,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     if (data) {

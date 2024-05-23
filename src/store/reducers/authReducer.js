@@ -93,7 +93,8 @@ export const handleLogin = createAsyncThunk(
   async (payload, thunkApi) => {
     try {
       const loginRes = await authService.login(payload);
-      const { token: accessToken, refreshToken } = loginRes || {};
+      const { token: accessToken, refresh_token: refreshToken } =
+        loginRes || {};
       tokenMethod.set({
         accessToken,
         refreshToken,
