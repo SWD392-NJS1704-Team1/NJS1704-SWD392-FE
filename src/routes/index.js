@@ -5,6 +5,9 @@ import Login from "@/pages/AuthPage/Login";
 import Register from "@/pages/AuthPage/Register";
 import ResetPassword from "@/pages/ForgotPage/ResetPassword";
 import VerifyOTP from "@/pages/ForgotPage/VerifyOTP";
+import MainLayout from "@/layout/MainLayout/MainLayout";
+import Dashboard from "@/pages/Dashboard/Dashboard ";
+import PageNotFound from "@/pages/PageNotFound/PageNotFound";
 
 export const routes = [
   {
@@ -36,5 +39,16 @@ export const routes = [
     name: "Reset Password",
     component: ResetPassword,
     layout: LoginLayout,
+  },
+  {
+    path: PATHS.HOME,
+    name: "Dashboard",
+    component: Dashboard,
+    layout: MainLayout,
+  },
+  {
+    path: '*',
+    name: "Page Not Found",
+    layout: PageNotFound,
   },
 ];
