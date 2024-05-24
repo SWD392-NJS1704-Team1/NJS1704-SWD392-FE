@@ -24,7 +24,6 @@ export const authSlice = createSlice({
     handleLogout: (state) => {
       tokenMethod.remove();
       state.profile = null;
-      state.showModal = "";
       message.success("Đăng xuất thành công");
     },
   },
