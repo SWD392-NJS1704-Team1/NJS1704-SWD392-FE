@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const MainContext = createContext({});

@@ -103,7 +103,7 @@ export const handleLogin = createAsyncThunk(
       return true;
     } catch (error) {
       const errorInfo = error?.response?.data;
-      if (errorInfo.error === "Not Found") {
+      if (errorInfo.message === "FAIL") {
         message.error("Username hoặc password không đúng");
       }
       return thunkApi.rejectWithValue(errorInfo);

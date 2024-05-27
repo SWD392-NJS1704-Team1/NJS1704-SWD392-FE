@@ -1,4 +1,4 @@
-const USER_MANAGEMENT = "/user-manager";
+const USER_MANAGEMENT = "/user-management";
 const CUSTOMER = "/customer";
 
 export const PATHS = {
