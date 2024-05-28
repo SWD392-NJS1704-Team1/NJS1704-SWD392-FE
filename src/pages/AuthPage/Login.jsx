@@ -1,16 +1,19 @@
 import Button from "@/components/Button/Button";
+import ComponentLoading from "@/components/ComponentLoading/ComponentLoading";
 import Input from "@/components/Input/Input";
 import { PATHS } from "@/constant/path";
 import { Length_Password, MESS, REGEX } from "@/constant/validate";
+import useDebounce from "@/hooks/useDebounce";
 import { handleLogin } from "@/store/reducers/authReducer";
 import { UnlockOutlined, UserOutlined } from "@ant-design/icons";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
-  
+  const { loading } = useSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
@@ -19,7 +22,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    if (data) {
+    if (data && !loading.login) {
       try {
         const res = await dispatch(handleLogin(data)).unwrap();
         // navigate(PATHS.RESET_PASSWORD);
@@ -31,6 +34,7 @@ const Login = () => {
     }
   };
 
+  const apiLoading = useDebounce(loading.login, 300);
 
   return (
     <>
@@ -38,7 +42,8 @@ const Login = () => {
         <h2 className="text-4xl text-white font-bold text-center mb-6 ">
           LOGIN
         </h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="relative">
+          {apiLoading && <ComponentLoading/>}
           <Input
             label={"Email"}
             cssClass={

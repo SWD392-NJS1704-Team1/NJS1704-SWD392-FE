@@ -15,12 +15,6 @@ export const authSlice = createSlice({
   initialState,
   name: "auth",
   reducers: {
-    handleShowModal: (state, action) => {
-      state.showModal = action.payload;
-    },
-    handleCloseModal: (state) => {
-      state.showModal = "";
-    },
     handleLogout: (state) => {
       tokenMethod.remove();
       state.profile = null;
@@ -31,7 +25,6 @@ export const authSlice = createSlice({
     builder
       .addCase(handleLogin.fulfilled, (state) => {
         state.loading.login = false;
-        state.showModal = "";
       })
       .addCase(handleLogin.pending, (state) => {
         state.loading.login = true;
