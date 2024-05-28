@@ -41,7 +41,6 @@ const LoginUser = ({ email, password, role_id }) => {
 
 const GetUsersList = async ({ keyword, page, limit }) => {
   if (!page || !limit) return undefined;
-
   try {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
