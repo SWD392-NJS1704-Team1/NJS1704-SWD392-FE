@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER, USERLIST } from "@/constant/environments";
-import axiosInstance from "@/utils/axiosInstance";
+import axiosInstance, { TOKEN_KEY } from "@/utils/axiosInstance";
 
 const RegisterUser = ({
   fullname,
@@ -26,13 +26,15 @@ const RegisterUser = ({
   }
 };
 
-const LoginUser = ({ email, password, role_id }) => {
+const LoginUser = async ({ email, password, role_id }) => {
   try {
-    axiosInstance.post(LOGIN, {
+    const data = await axiosInstance.post(LOGIN, {
       email,
       password,
       role_id,
     });
+    console.log(data);
+    return data;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -40,7 +42,6 @@ const LoginUser = ({ email, password, role_id }) => {
 };
 
 const GetUsersList = async ({ keyword, page, limit }) => {
-  if (!page || !limit) return undefined;
   try {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
@@ -61,10 +62,17 @@ const GetUsersList = async ({ keyword, page, limit }) => {
   }
 };
 
+const GetCurrentUser = () => {
+  return axiosInstance.get(`/users/profile`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}` },
+  });
+};
+
 const UserManagementListAPI = {
   RegisterUser,
   GetUsersList,
   LoginUser,
+  GetCurrentUser,
 };
 
 export default UserManagementListAPI;
