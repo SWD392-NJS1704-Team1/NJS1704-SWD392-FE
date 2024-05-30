@@ -4,10 +4,8 @@ import Popup from "@/components/Popup/Popup";
 import SearchBar from "@/components/SearchBar/Search-bar";
 import {
   PlusCircleOutlined,
-  SearchOutlined,
-  WifiOutlined,
 } from "@ant-design/icons";
-import { Button, Input, Table, Typography } from "antd";
+import { Button, Table, Typography } from "antd";
 
 const columns = [
   {
@@ -44,7 +42,7 @@ const columns = [
 ];
 
 const CustomerList = () => {
-  // const { data } = useGetUsersList()
+  // const { data } = useGetCustomerList()
   const data = null;
 
   return (

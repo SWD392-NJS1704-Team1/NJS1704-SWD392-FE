@@ -3,12 +3,12 @@ import { closePopup } from "@/store/reducers/popupReducer";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import ConfigAntdButton from "../Button/ConfigAntdButton";
-// import useAddUser from "./useAddUser";
 import store from "@/store/store";
+import useAddCustomer from "./useAddCustomer";
 
 const AddCustomer = () => {
   const dispatch = store.dispatch;
-//   const addUser = useAddUser();
+  const AddCustomer = useAddCustomer();
 
   const {
     register,
@@ -18,15 +18,14 @@ const AddCustomer = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // addUser.mutate({
-    //   fullname: data.fullname,
-    //   email: data.email,
-    //   phone_number: data.phone_number,
-    //   address: data.address,
-    //   date_of_birth: data.date_of_birth,
-    //   role_id: data.role_id,
-    //   counter_id: data.counter_id,
-    // });
+    AddCustomer.mutate({
+      fullname: data.fullname,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      accumulated_point: data.point,
+     
+    });
   };
 
   const handleCancel = () => {
@@ -62,7 +61,7 @@ const AddCustomer = () => {
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Phone number..."
-              {...register("phone_number", {
+              {...register("phone", {
                 required: MESS.ERROR_PHONE,
                 pattern: {
                   value: REGEX.PHONE,
@@ -120,36 +119,20 @@ const AddCustomer = () => {
        
 
         <div className="flex m-4">
-  <h1 className="w-1/4 flex font-bold items-center mr-4">Gender</h1>
+  <h1 className="w-1/4 flex font-bold items-center mr-4">Point</h1>
   <div className="w-3/4">
-    
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          value="male"
-          {...register("gender", {
-            required: MESS.ERROR_GENDER,
-          })}
-        />
-        <span className="ml-2">Male</span>
-      </label>
-      <label className="inline-flex items-center ml-4">
-        <input
-          type="checkbox"
-          value="female"
-          {...register("gender", {
-            required: MESS.ERROR_GENDER,
-          })}
-        />
-        <span className="ml-2">Female</span>
-      </label>
-   
-    {errors.gender && (
-      <span className="text-red-500 text-sm">
-        {errors.gender.message}
-      </span>
-    )}
-  </div>
+            <input
+              type="text"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+              placeholder="Point..."
+              {...register("point", { required: MESS.ERROR_POINT })}
+            />
+            {errors.point && (
+              <span className="text-red-500 text-sm">
+                {errors.point.message}
+              </span>
+            )}
+          </div>
 </div>
 
 

@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, USERLIST } from "@/constant/environments";
+import { LOGIN, REGISTER, USERLIST, ADDCUSTOMER } from "@/constant/environments";
 import axiosInstance from "@/utils/axiosInstance";
 
 const RegisterUser = ({
@@ -39,6 +39,29 @@ const LoginUser = ({ email, password, role_id }) => {
   }
 };
 
+const AddCustomer = ({
+  fullname,
+  email,
+  phone,
+  address,
+  accumulated_point,
+  
+}) => {
+  try {
+    axiosInstance.post(ADDCUSTOMER, {
+      fullname,
+      email,
+      phone,
+      address,
+      accumulated_point,
+    });
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+
 const GetUsersList = async ({ keyword, page, limit }) => {
   if (!page || !limit) return undefined;
 
@@ -62,10 +85,34 @@ const GetUsersList = async ({ keyword, page, limit }) => {
   }
 };
 
+const GetCustomerList = async ({ keyword, page, limit }) => {
+  if (!page || !limit) return undefined;
+
+  try {
+    const endpoint = USERLIST;
+    const queryParams = `page=${page}&limit=${limit}`;
+    let value = "";
+
+    if (value && value.length > 0) {
+      value = `keyword=${keyword}&`;
+    }
+
+    const { data } = await axiosInstance.get(
+      `${endpoint}?${value}${queryParams}`
+    );
+
+    return data.data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
 const UserManagementListAPI = {
   RegisterUser,
   GetUsersList,
   LoginUser,
+  GetCustomerList,
+  AddCustomer
 };
 
 export default UserManagementListAPI;
