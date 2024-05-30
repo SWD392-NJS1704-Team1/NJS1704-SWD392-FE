@@ -15,16 +15,9 @@ export const authSlice = createSlice({
   initialState,
   name: "auth",
   reducers: {
-    handleShowModal: (state, action) => {
-      state.showModal = action.payload;
-    },
-    handleCloseModal: (state) => {
-      state.showModal = "";
-    },
     handleLogout: (state) => {
       tokenMethod.remove();
       state.profile = null;
-      state.showModal = "";
       message.success("Đăng xuất thành công");
     },
   },
@@ -32,7 +25,6 @@ export const authSlice = createSlice({
     builder
       .addCase(handleLogin.fulfilled, (state) => {
         state.loading.login = false;
-        state.showModal = "";
       })
       .addCase(handleLogin.pending, (state) => {
         state.loading.login = true;
@@ -61,12 +53,40 @@ export const { handleLogout, handleShowModal, handleCloseModal } = actions;
 // Export the reducer, either as a default or named export
 export default authReducer;
 
+export const handleRegister = createAsyncThunk(
+  "auth/handleRegister",
+  async (payload, thunkApi) => {
+    try {
+      const registerRes = await authService.register(payload);
+      if (registerRes?.id) {
+        message.success("Đăng ký thành công");
+        thunkApi.dispatch(
+          handleLogin({
+            email: payload.email,
+            password: payload.password,
+          })
+        );
+        return true;
+      } else {
+        throw false;
+      }
+    } catch (error) {
+      const errorInfo = error?.response?.data;
+      if (errorInfo.error === "Forbidden") {
+        message.error("Email đã được đăng ký");
+      }
+      return thunkApi.rejectWithValue(errorInfo);
+    }
+  }
+);
+
 export const handleLogin = createAsyncThunk(
   "auth/handleLogin",
   async (payload, thunkApi) => {
     try {
       const loginRes = await authService.login(payload);
-      const { token: accessToken, refreshToken } = loginRes || {};
+      const { token: accessToken, refresh_token: refreshToken } =
+        loginRes || {};
       tokenMethod.set({
         accessToken,
         refreshToken,
@@ -76,7 +96,7 @@ export const handleLogin = createAsyncThunk(
       return true;
     } catch (error) {
       const errorInfo = error?.response?.data;
-      if (errorInfo.error === "Not Found") {
+      if (errorInfo.message === "FAIL") {
         message.error("Username hoặc password không đúng");
       }
       return thunkApi.rejectWithValue(errorInfo);

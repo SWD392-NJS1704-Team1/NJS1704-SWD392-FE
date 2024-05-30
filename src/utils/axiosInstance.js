@@ -9,10 +9,10 @@ const axiosInstance = axios.create({
 // Interceptor cho phép can thiệp vào quá trình nhận phản hồi (RESPONSE) từ server.
 axiosInstance.interceptors.response.use(
   (response) => {
-    return response?.data?.data;
+    return response?.data;
   },
   async (error) => {
-    console.log("error", error);
+    // console.log("error", error);
     const originalRequest = error.config;
 
     // Nếu mã lỗi 403 hoặc 401 và request không chứa key _retry
@@ -23,10 +23,11 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // Gọi API để cập nhật token mới
-        const res = await axiosInstance.put("/customer/refresh", {
+        const res = await axiosInstance.put("/users/refresh", {
           refreshToken: tokenMethod.get()?.refreshToken,
         });
-        const { token: accessToken, refreshToken } = res.data?.data || {};
+        const { token: accessToken, refresh_token: refreshToken } =
+          res.data?.data || {};
 
         // Lưu lại token mới vào local storage hoặc cookie
         tokenMethod.set({
@@ -48,7 +49,7 @@ axiosInstance.interceptors.response.use(
 
     // Nếu lỗi không phải 403 hoặc 401, trả về lỗi ban đầu
     return Promise.reject(error);
-  },
+  }
 );
 
 // Interceptor cho phép can thiệp vào quá trình gửi yêu cầu (REQUEST) từ server.
@@ -61,7 +62,7 @@ axiosInstance.interceptors.request.use(
   (error) => {
     // xử lý lỗi nếu có
     return Promise.reject(error);
-  },
+  }
 );
 
 export default axiosInstance;

@@ -2,9 +2,11 @@ import Logo from "@/assets/logo.png";
 import avatar from "@/assets/avatar.svg";
 import { Header as AntHeader } from "antd/es/layout/layout";
 import { Avatar, Typography } from "antd";
-import { Navigate } from "react-router-dom";
 import { PATHS } from "@/constant/path";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { handleLogout } from "@/store/reducers/authReducer";
+import { useNavigate } from "react-router-dom";
 
 const LinkStyled = styled.a`
   color: #fff !important;
@@ -16,10 +18,15 @@ const LinkStyled = styled.a`
 `;
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const _onLogout = (e) => {
-    e.preventDefault();
-    Navigate(PATHS.LOGIN);
+    e?.preventDefault();
+    dispatch(handleLogout())
+    navigate(PATHS.LOGIN);
   };
+  
   return (
     <AntHeader className="bg-black flex justify-between items-center">
       <img src={Logo} alt="Logo" className="w-28" />

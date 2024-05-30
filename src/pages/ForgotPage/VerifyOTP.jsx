@@ -15,7 +15,7 @@ const VerifyOTP = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="bg-slate-950 border border-slate-400 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-40 relative">
         <h1 className="text-4xl text-white font-bold text-center mb-6">
           FORGOT PASSWORD
@@ -52,7 +52,7 @@ const VerifyOTP = () => {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 };
 export default VerifyOTP;
