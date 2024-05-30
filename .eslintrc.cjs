@@ -21,4 +21,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  globals: {
+    someGlobalVariable: "readonly", // Define your global variables here
+  },
 };
