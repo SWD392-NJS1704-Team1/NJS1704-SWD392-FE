@@ -1,5 +1,5 @@
 import { LOGIN, REGISTER, USERLIST } from "@/constant/environments";
-import axiosInstance, { TOKEN_KEY } from "@/utils/axiosInstance";
+import axiosInstance from "@/utils/axiosInstance";
 
 const RegisterUser = ({
   fullname,
@@ -41,13 +41,34 @@ const LoginUser = async ({ email, password, role_id }) => {
   }
 };
 
+// const GetUsersList = async ({ keyword, page, limit }) => {
+//   try {
+//     const endpoint = USERLIST;
+//     const queryParams = `page=${page}&limit=${limit}`;
+//     let value = "";
+
+//     if (value && value.length > 0) {
+//       value = `keyword=${keyword}&`;
+//     }
+
+//     const { data } = await axiosInstance.get(
+//       `${endpoint}?${value}${queryParams}`
+//     );
+
+//     return data.data;
+//   } catch (error) {
+//     const errorResponse = error;
+//     throw new Error(errorResponse.response?.data.message);
+//   }
+// };
+
 const GetUsersList = async ({ keyword, page, limit }) => {
   try {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
     let value = "";
 
-    if (value && value.length > 0) {
+    if (keyword && keyword.length > 0) {
       value = `keyword=${keyword}&`;
     }
 
@@ -57,14 +78,16 @@ const GetUsersList = async ({ keyword, page, limit }) => {
 
     return data.data;
   } catch (error) {
-    const errorResponse = error;
-    throw new Error(errorResponse.response?.data.message);
+    console.error(error); // Log the error for debugging purposes
+    // Return a default error message if the error response doesn't contain a message
+    const errorMessage = error.response?.data.message;
+    throw new Error(errorMessage);
   }
 };
 
 const GetCurrentUser = () => {
   return axiosInstance.get(`/users/profile`, {
-    headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
   });
 };
 
