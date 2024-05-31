@@ -21,5 +21,6 @@ export const MESS = {
   ERROR_DOB: "Please enter date of birth.",
   ERROR_DOB_INVALID: "Invalid date format (DD/MM/YYYY).",
   ERROR_ROLE: "Please choose role.",
-  ERROR_COUNTER: "Please choose counter."
+  ERROR_COUNTER: "Please choose counter.",
+  ERROR_POINT: "Please enter accumulated point.",
 };

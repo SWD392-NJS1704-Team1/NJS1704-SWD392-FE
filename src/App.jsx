@@ -12,13 +12,14 @@ import Register from "./pages/AuthPage/Register";
 import ForgotPassword from "./pages/ForgotPage/ForgotPassword";
 import VerifyOTP from "./pages/ForgotPage/VerifyOTP";
 import ResetPassword from "./pages/ForgotPage/ResetPassword";
+import CustomerList from "./pages/CustomerList/CustomerList";
 
 const App = () => {
   return (
     <>
       {/* <WebRoute /> */}
       <Routes>
-        <Route element={<LoginLayout />}>
+      <Route element={<LoginLayout />}>
           <Route path={PATHS.LOGIN} element={<Login />} />
           <Route path={PATHS.FORGOT_PASSWORD} element={<ForgotPassword />} />
           <Route path={PATHS.VERIFY_OTP} element={<VerifyOTP />} />
@@ -28,6 +29,7 @@ const App = () => {
           <Route path={PATHS.HOME} element={<MainLayout />}>
             <Route index element={<Dashboard />} />
             <Route path={PATHS.USER.INDEX} element={<UserManagement />} />
+            <Route path={PATHS.CUSTOMER.INDEX} element={<CustomerList />} />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />
