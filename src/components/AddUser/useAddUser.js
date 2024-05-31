@@ -1,3 +1,4 @@
+import { queryClient } from "@/constant/storage";
 import UserManagementListAPI from "@/services/userService";
 import { closePopup } from "@/store/reducers/popupReducer";
 import { useMutation } from "@tanstack/react-query";
@@ -11,6 +12,7 @@ const useAddUser = () => {
     mutationFn: UserManagementListAPI.RegisterUser,
     onSuccess: () => {
       dispatch(closePopup("Create a new User"));
+      queryClient.invalidateQueries({ queryKey: ['getUsersList'] })
       notification.success({
         message: "Create successfully",
         description: "Create a new User successfully",

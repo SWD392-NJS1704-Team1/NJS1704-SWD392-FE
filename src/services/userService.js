@@ -20,7 +20,6 @@ const RegisterUser = async ({
       role_id,
       counter_id,
     });
-    console.log("register", data);
     return data;
   } catch (error) {
     const errorResponse = error;
@@ -53,11 +52,10 @@ const GetUsersList = async ({ keyword, page, limit }) => {
       value = `keyword=${keyword}&`;
     }
 
-    const { data } = await axiosInstance.get(
+    const data = await axiosInstance.get(
       `${endpoint}?${value}${queryParams}`
     );
-
-    return data.data;
+    return data.users;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);

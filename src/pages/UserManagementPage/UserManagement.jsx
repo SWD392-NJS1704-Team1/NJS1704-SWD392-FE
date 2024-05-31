@@ -12,8 +12,8 @@ import useGetUsersList from "./useGetUsersList";
 const columns = [
   {
     title: "Full Name",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "fullname",
+    key: "fullname",
     render: (text) => <a>{text}</a>,
   },
   {
@@ -23,18 +23,13 @@ const columns = [
   },
   {
     title: "Phone",
-    dataIndex: "phone",
-    key: "phone",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    dataIndex: "phone_number",
+    key: "phone_number",
   },
   {
     title: "DOB",
-    dataIndex: "dob",
-    key: "dob",
+    dataIndex: "date_of_birth",
+    key: "date_of_birth",
   },
   {
     title: "Role ID",
