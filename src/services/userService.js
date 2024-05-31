@@ -1,7 +1,7 @@
 import { LOGIN, REGISTER, USERLIST } from "@/constant/environments";
 import axiosInstance from "@/utils/axiosInstance";
 
-const RegisterUser = ({
+const RegisterUser = async ({
   fullname,
   email,
   phone_number,
@@ -11,7 +11,7 @@ const RegisterUser = ({
   counter_id,
 }) => {
   try {
-    axiosInstance.post(REGISTER, {
+    const data = await axiosInstance.post(REGISTER, {
       fullname,
       email,
       phone_number,
@@ -20,6 +20,8 @@ const RegisterUser = ({
       role_id,
       counter_id,
     });
+    console.log(data);
+    return data
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -85,11 +87,7 @@ const GetUsersList = async ({ keyword, page, limit }) => {
   }
 };
 
-const GetCurrentUser = () => {
-  return axiosInstance.get(`/users/profile`, {
-    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-  });
-};
+
 const AddCustomer = ({
   fullname,
   email,
@@ -129,10 +127,18 @@ const GetCustomerList = async ({ keyword, page, limit }) => {
     );
 
     return data.data;
+
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
+};
+
+
+const GetCurrentUser = () => {
+  return axiosInstance.get(`/users/profile`, {
+    headers: { Authorization: `Bearer ${tokenMethod.get()?.accessToken}` },
+  });
 };
 
 const UserManagementListAPI = {

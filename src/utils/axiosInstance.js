@@ -1,6 +1,6 @@
 import axios from "axios";
 import tokenMethod from "@/utils/token.js";
-import { BASE_URL } from "@/constant/environments";
+import { BASE_URL, LOGIN } from "@/constant/environments";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -23,7 +23,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // Gọi API để cập nhật token mới
-        const res = await axiosInstance.put("/users/refresh", {
+        const res = await axiosInstance.post(LOGIN, {
           refreshToken: tokenMethod.get()?.refreshToken,
         });
         const { token: accessToken, refresh_token: refreshToken } =
