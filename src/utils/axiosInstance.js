@@ -24,10 +24,10 @@ axiosInstance.interceptors.response.use(
       try {
         // Gọi API để cập nhật token mới
         const res = await axiosInstance.post(LOGIN, {
-          refreshToken: tokenMethod.get()?.refreshToken,
+          refresh_token: tokenMethod.get()?.refresh_token,
         });
         const { token: accessToken, refresh_token: refreshToken } =
-          res.data?.data || {};
+          res.data || {};
 
         // Lưu lại token mới vào local storage hoặc cookie
         tokenMethod.set({

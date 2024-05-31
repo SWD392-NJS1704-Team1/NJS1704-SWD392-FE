@@ -20,8 +20,8 @@ const RegisterUser = async ({
       role_id,
       counter_id,
     });
-    console.log(data);
-    return data
+    console.log("register", data);
+    return data;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -43,34 +43,13 @@ const LoginUser = async ({ email, password, role_id }) => {
   }
 };
 
-// const GetUsersList = async ({ keyword, page, limit }) => {
-//   try {
-//     const endpoint = USERLIST;
-//     const queryParams = `page=${page}&limit=${limit}`;
-//     let value = "";
-
-//     if (value && value.length > 0) {
-//       value = `keyword=${keyword}&`;
-//     }
-
-//     const { data } = await axiosInstance.get(
-//       `${endpoint}?${value}${queryParams}`
-//     );
-
-//     return data.data;
-//   } catch (error) {
-//     const errorResponse = error;
-//     throw new Error(errorResponse.response?.data.message);
-//   }
-// };
-
 const GetUsersList = async ({ keyword, page, limit }) => {
   try {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
     let value = "";
 
-    if (keyword && keyword.length > 0) {
+    if (value && value.length > 0) {
       value = `keyword=${keyword}&`;
     }
 
@@ -80,13 +59,10 @@ const GetUsersList = async ({ keyword, page, limit }) => {
 
     return data.data;
   } catch (error) {
-    console.error(error); // Log the error for debugging purposes
-    // Return a default error message if the error response doesn't contain a message
-    const errorMessage = error.response?.data.message;
-    throw new Error(errorMessage);
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
   }
 };
-
 
 const AddCustomer = ({
   fullname,
@@ -94,7 +70,6 @@ const AddCustomer = ({
   phone,
   address,
   accumulated_point,
-  
 }) => {
   try {
     axiosInstance.post(ADDCUSTOMER, {
@@ -117,7 +92,6 @@ const GetCustomerList = async ({ keyword, page, limit }) => {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
     let value = "";
-
     if (value && value.length > 0) {
       value = `keyword=${keyword}&`;
     }
@@ -127,13 +101,11 @@ const GetCustomerList = async ({ keyword, page, limit }) => {
     );
 
     return data.data;
-
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
-
 
 const GetCurrentUser = () => {
   return axiosInstance.get(`/users/profile`, {
@@ -147,7 +119,7 @@ const UserManagementListAPI = {
   LoginUser,
   GetCurrentUser,
   AddCustomer,
-  GetCustomerList
+  GetCustomerList,
 };
 
 export default UserManagementListAPI;

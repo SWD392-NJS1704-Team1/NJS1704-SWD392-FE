@@ -1,11 +1,11 @@
-import UserManagementListAPI from "@/services/UserService";
+import UserManagementListAPI from "@/services/userService";
 import { closePopup } from "@/store/reducers/popupReducer";
-import store from "@/store/store";
 import { useMutation } from "@tanstack/react-query";
 import { notification } from "antd";
+import { useDispatch } from "react-redux";
 
 const useAddCustomer = () => {
-  const dispatch = store.dispatch;
+  const dispatch = useDispatch();
 
   return useMutation({
     mutationFn: UserManagementListAPI.RegisterUser,

@@ -3,11 +3,11 @@ import { closePopup } from "@/store/reducers/popupReducer";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import ConfigAntdButton from "../Button/ConfigAntdButton";
-import store from "@/store/store";
 import useAddCustomer from "./useAddCustomer";
+import { useDispatch } from "react-redux";
 
 const AddCustomer = () => {
-  const dispatch = store.dispatch;
+  const dispatch = useDispatch();
   const AddCustomer = useAddCustomer();
 
   const {

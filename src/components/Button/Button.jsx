@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Button = ({
@@ -7,7 +6,6 @@ const Button = ({
   disabled,
   variant = "primary",
   classCss,
-  loading,
   ...restProps
 }) => {
   let variantClass = "";
