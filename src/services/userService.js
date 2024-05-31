@@ -58,11 +58,13 @@ const GetUsersList = async ({ keyword, page, limit }) => {
     );
 
     return data.data;
+
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
+
 
 const GetCurrentUser = () => {
   return axiosInstance.get(`/users/profile`, {

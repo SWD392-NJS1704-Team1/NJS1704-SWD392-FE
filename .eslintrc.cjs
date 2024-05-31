@@ -3,7 +3,6 @@ module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
-    "eslint-disable-next-line",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
@@ -15,7 +14,7 @@ module.exports = {
   rules: {
     "react/jsx-no-target-blank": "off",
     "react/prop-types": "off",
-    "no-undef": "error",
+    "no-undef": ["error", { typeof: off }],
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

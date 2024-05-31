@@ -51,7 +51,6 @@ const columns = [
 const UserManagement = () => {
 
   const { data } = useGetUsersList()
-  // const data = null
 
   return (
     <div>
