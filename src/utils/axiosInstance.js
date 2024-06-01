@@ -1,6 +1,6 @@
-import axios from "axios";
-import tokenMethod from "@/utils/token.js";
-import { BASE_URL, LOGIN } from "@/constant/environments";
+import axios from 'axios';
+import tokenMethod from '@/utils/token.js';
+import { BASE_URL, LOGIN } from '@/constant/environments';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -56,7 +56,9 @@ axiosInstance.interceptors.response.use(
 axiosInstance.interceptors.request.use(
   (config) => {
     // xử lý yêu cầu trước khi gửi đi
-    config.headers.Authorization = `Bearer ${tokenMethod.get()?.accessToken}`;
+    config.headers['Authorization'] = `Bearer ${
+      tokenMethod.get()?.accessToken
+    }`;
     return config;
   },
   (error) => {

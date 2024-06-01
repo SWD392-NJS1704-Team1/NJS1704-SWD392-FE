@@ -13,6 +13,7 @@ import ForgotPassword from "./pages/ForgotPage/ForgotPassword";
 import VerifyOTP from "./pages/ForgotPage/VerifyOTP";
 import ResetPassword from "./pages/ForgotPage/ResetPassword";
 import CustomerList from "./pages/CustomerList/CustomerList";
+import ProductPage from "./pages/ProductPage/ProductPage";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route index element={<Dashboard />} />
             <Route path={PATHS.USER.INDEX} element={<UserManagement />} />
             <Route path={PATHS.CUSTOMER.INDEX} element={<CustomerList />} />
+            <Route path={PATHS.PRODUCT.INDEX} element={<ProductPage/>} />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

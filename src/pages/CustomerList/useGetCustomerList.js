@@ -1,4 +1,4 @@
-import UserManagementListAPI from '@/services/UserService'
+import UserManagementListAPI from '@/services/userService'
 import { useQuery } from '@tanstack/react-query'
 
 const useGetCustomerList = () => {
@@ -6,7 +6,7 @@ const useGetCustomerList = () => {
     return useQuery({
         queryKey: ['getCustomerList'],
         queryFn: () =>
-            UserManagementListAPI.GetCustomerList({ keyword: '', page: 1, limit: 100 })
+            UserManagementListAPI.GetCustomerList({ keyword: '', page: 0, limit: 10 })
     })
 }
 

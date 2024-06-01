@@ -18,7 +18,7 @@ export const MenuItems = [
   },
   {
     label: "Product",
-    key: "product",
+    key: PATHS.PRODUCT.INDEX,
     icon: <ProductOutlined />,
   },
   {
@@ -28,7 +28,7 @@ export const MenuItems = [
   },
   {
     label: "Customer",
-    key: "customer",
+    key: PATHS.CUSTOMER.INDEX,
     icon: <UserOutlined />,
   },
   {

@@ -1,5 +1,5 @@
-import { LOGIN, REGISTER, USERLIST } from "@/constant/environments";
-import axiosInstance from "@/utils/axiosInstance";
+import { LOGIN, REGISTER, USERLIST } from '@/constant/environments';
+import axiosInstance from '@/utils/axiosInstance';
 
 const RegisterUser = async ({
   fullname,
@@ -46,59 +46,14 @@ const GetUsersList = async ({ keyword, page, limit }) => {
   try {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
-    let value = "";
+    let value = '';
 
     if (value && value.length > 0) {
       value = `keyword=${keyword}&`;
     }
 
-    const data = await axiosInstance.get(
-      `${endpoint}?${value}${queryParams}`
-    );
-    return data.users;
-  } catch (error) {
-    const errorResponse = error;
-    throw new Error(errorResponse.response?.data.message);
-  }
-};
-
-const AddCustomer = ({
-  fullname,
-  email,
-  phone,
-  address,
-  accumulated_point,
-}) => {
-  try {
-    axiosInstance.post(ADDCUSTOMER, {
-      fullname,
-      email,
-      phone,
-      address,
-      accumulated_point,
-    });
-  } catch (error) {
-    const errorResponse = error;
-    throw new Error(errorResponse.response?.data.message);
-  }
-};
-
-const GetCustomerList = async ({ keyword, page, limit }) => {
-  if (!page || !limit) return undefined;
-
-  try {
-    const endpoint = USERLIST;
-    const queryParams = `page=${page}&limit=${limit}`;
-    let value = "";
-    if (value && value.length > 0) {
-      value = `keyword=${keyword}&`;
-    }
-
-    const { data } = await axiosInstance.get(
-      `${endpoint}?${value}${queryParams}`
-    );
-
-    return data.data;
+    const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
+    return res.users;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -116,8 +71,6 @@ const UserManagementListAPI = {
   GetUsersList,
   LoginUser,
   GetCurrentUser,
-  AddCustomer,
-  GetCustomerList,
 };
 
 export default UserManagementListAPI;

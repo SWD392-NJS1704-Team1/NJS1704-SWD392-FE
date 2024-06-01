@@ -5,3 +5,4 @@ export const REGISTER = import.meta.env.VITE_REGISTER_USER_API;
 export const LOGIN = import.meta.env.VITE_LOGIN_USER_API;
 export const USERLIST = import.meta.env.VITE_GET_USER_LIST_API;
 export const ADDCUSTOMER = import.meta.env.VITE_ADD_CUSTOMER_API;
+export const PRODUCTS_LIST = import.meta.env.VITE_GET_ALL_PRODUCT;
