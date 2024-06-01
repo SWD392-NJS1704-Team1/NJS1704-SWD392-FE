@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
-import useAddProduct from './useAddProduct';
 import { useForm } from 'react-hook-form';
 import { closePopup } from '@/store/reducers/popupReducer';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
 import { Button } from 'antd';
 import { MESS } from '@/constant/validate';
 import { useState } from 'react';
+import useAddProduct from '@/utils/useAddProduct';
 
 const AddProduct = () => {
   const dispatch = useDispatch();

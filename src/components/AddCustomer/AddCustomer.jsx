@@ -2,9 +2,9 @@ import { MESS, REGEX } from "@/constant/validate";
 import { closePopup } from "@/store/reducers/popupReducer";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
-import ConfigAntdButton from "../Button/ConfigAntdButton";
-import useAddCustomer from "./useAddCustomer";
 import { useDispatch } from "react-redux";
+import useAddCustomer from "@/utils/useAddCustomer";
+import ConfigAntdButton from "../Button/ConfigAntdButton";
 
 const AddCustomer = () => {
   const dispatch = useDispatch();
