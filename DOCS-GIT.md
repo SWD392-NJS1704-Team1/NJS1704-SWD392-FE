@@ -1,13 +1,13 @@
 # CẤU TRÚC CHUNG CỦA 1 COMMIT MESSAGE:
 
-- <type>: <description>
+`<type>: <description>`
 
 Ví dụ:
 feat: add email notifications on new messages
 
 ---
 
-- <type>
+## `<type>`
 - **feat**: Một tính năng mới (feature)
 - **fix**: Sửa lỗi (fix bug)
 - **docs**: Cập nhật tài liệu (sửa documents)
@@ -18,7 +18,7 @@ feat: add email notifications on new messages
 - **build**: Những thay đổi ảnh hưởng đến quá trình build
 - **ci**: Thay đổi file cấu hình hoặc script CI
 
-- <description>
+## `<description>`
 - Mô tả ngắn gọn về nội dung commit
 - Không dài quá 50 ký tự để có thể dễ dàng đọc trên GitHub, cũng như các git tool khác
 - Sử dụng câu mệnh lệnh, ở thì hiện tại. Ví dụ: “change ...“ thay vì “changed ...“
