@@ -53,33 +53,6 @@ export const { handleLogout, handleShowModal, handleCloseModal } = actions;
 // Export the reducer, either as a default or named export
 export default authReducer;
 
-export const handleRegister = createAsyncThunk(
-  "auth/handleRegister",
-  async (payload, thunkApi) => {
-    try {
-      const registerRes = await authService.register(payload);
-      if (registerRes?.id) {
-        message.success("Đăng ký thành công");
-        thunkApi.dispatch(
-          handleLogin({
-            email: payload.email,
-            password: payload.password,
-          })
-        );
-        return true;
-      } else {
-        throw false;
-      }
-    } catch (error) {
-      const errorInfo = error?.response?.data;
-      if (errorInfo.error === "Forbidden") {
-        message.error("Email đã được đăng ký");
-      }
-      return thunkApi.rejectWithValue(errorInfo);
-    }
-  }
-);
-
 export const handleLogin = createAsyncThunk(
   "auth/handleLogin",
   async (payload, thunkApi) => {

@@ -11,7 +11,7 @@ const RegisterUser = async ({
   counter_id,
 }) => {
   try {
-    const data = await axiosInstance.post(REGISTER, {
+    const res = await axiosInstance.post(REGISTER, {
       fullname,
       email,
       phone_number,
@@ -20,7 +20,7 @@ const RegisterUser = async ({
       role_id,
       counter_id,
     });
-    return data;
+    return res;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);

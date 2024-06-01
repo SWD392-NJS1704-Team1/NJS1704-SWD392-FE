@@ -1,31 +1,37 @@
-import { PRODUCTS_LIST } from '@/constant/environments';
+import { ADD_PRODUCT, PRODUCTS_LIST } from '@/constant/environments';
 import axiosInstance from '@/utils/axiosInstance';
 
 const handleAddProduct = async ({
-    fullname,
-    email,
-    phone_number,
-    address,
-    date_of_birth,
-    role_id,
-    counter_id,
-  }) => {
-    try {
-      const data = await axiosInstance.post(REGISTER, {
-        fullname,
-        email,
-        phone_number,
-        address,
-        date_of_birth,
-        role_id,
-        counter_id,
-      });
-      return data;
-    } catch (error) {
-      const errorResponse = error;
-      throw new Error(errorResponse.response?.data.message);
-    }
-  };
+  product_name,
+  barcode,
+  quantity,
+  price_processing,
+  price_stone,
+  weight,
+  description,
+  image_url,
+  type_id,
+  counter_id,
+}) => {
+  try {
+    const res = await axiosInstance.post(ADD_PRODUCT, {
+      product_name,
+      barcode,
+      quantity,
+      price_processing,
+      price_stone,
+      weight,
+      description,
+      image_url,
+      type_id,
+      counter_id,
+    });
+    return res;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
 
 const getAllProducts = async ({ keyword, page, limit }) => {
   try {

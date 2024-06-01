@@ -12,7 +12,7 @@ axiosInstance.interceptors.response.use(
     return response?.data;
   },
   async (error) => {
-    // console.log("error", error);
+    console.log('error', error);
     const originalRequest = error.config;
 
     // Nếu mã lỗi 403 hoặc 401 và request không chứa key _retry
@@ -23,12 +23,11 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // Gọi API để cập nhật token mới
-        const res = await axiosInstance.post(LOGIN, {
-          refresh_token: tokenMethod.get()?.refresh_token,
+        const res = await axiosInstance.put(`users/refresh`, {
+          refreshToken: tokenMethod.get()?.refreshToken,
         });
         const { token: accessToken, refresh_token: refreshToken } =
-          res.data || {};
-
+          res.data.data || {};
         // Lưu lại token mới vào local storage hoặc cookie
         tokenMethod.set({
           accessToken,
@@ -56,9 +55,8 @@ axiosInstance.interceptors.response.use(
 axiosInstance.interceptors.request.use(
   (config) => {
     // xử lý yêu cầu trước khi gửi đi
-    config.headers['Authorization'] = `Bearer ${
-      tokenMethod.get()?.accessToken
-    }`;
+    config.headers.Authorization = `Bearer ${tokenMethod.get()?.accessToken}`;
+    config.headers['Content-Type'] = 'application/json';
     return config;
   },
   (error) => {
