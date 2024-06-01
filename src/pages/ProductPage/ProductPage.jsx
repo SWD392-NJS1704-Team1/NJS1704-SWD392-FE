@@ -1,12 +1,9 @@
 import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
-import Pagination from '@/components/Pagination/Pagination';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
-import { useQuery } from '@tanstack/react-query';
-import ProductService from '@/services/productService';
+import { Button, Pagination, Table, Typography } from 'antd';
 import useGetProductsList from './useGetProductsList';
 
 const columns = [
@@ -92,7 +89,7 @@ const ProductPage = () => {
         </div>
         <Table columns={columns} dataSource={data?.productsData} />
       </div>
-      <Pagination />
+      <Pagination defaultCurrent={1} total={20} />
     </div>
   );
 };
