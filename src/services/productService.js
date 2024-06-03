@@ -33,7 +33,7 @@ const handleAddProduct = async ({
   }
 };
 
-const getAllProducts = async ({ keyword, page, limit }) => {
+const getAllProducts = async (keyword, page, limit) => {
   try {
     const endpoint = PRODUCTS_LIST;
     const queryParams = `page=${page}&limit=${limit}`;

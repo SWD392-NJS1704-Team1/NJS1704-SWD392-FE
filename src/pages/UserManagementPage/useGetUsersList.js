@@ -5,7 +5,7 @@ const useGetUsersList = () => {
   return useQuery({
     queryKey: ['getUsersList'],
     queryFn: () =>
-      UserManagementListAPI.GetUsersList({ keyword: '', page: 0, limit: 10 }),
+      UserManagementListAPI.GetUsersList({ keyword: '', page: 0, limit: 5 }),
   });
 };
 
