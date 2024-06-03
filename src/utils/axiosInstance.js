@@ -1,6 +1,6 @@
-import axios from "axios";
-import tokenMethod from "@/utils/token.js";
-import { BASE_URL, LOGIN } from "@/constant/environments";
+import axios from 'axios';
+import tokenMethod from '@/utils/token.js';
+import { BASE_URL, LOGIN } from '@/constant/environments';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -12,7 +12,7 @@ axiosInstance.interceptors.response.use(
     return response?.data;
   },
   async (error) => {
-    // console.log("error", error);
+    console.log('error', error);
     const originalRequest = error.config;
 
     // Nếu mã lỗi 403 hoặc 401 và request không chứa key _retry
@@ -23,12 +23,11 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // Gọi API để cập nhật token mới
-        const res = await axiosInstance.post(LOGIN, {
+        const res = await axiosInstance.put(`users/refresh`, {
           refreshToken: tokenMethod.get()?.refreshToken,
         });
         const { token: accessToken, refresh_token: refreshToken } =
-          res.data?.data || {};
-
+          res.data.data || {};
         // Lưu lại token mới vào local storage hoặc cookie
         tokenMethod.set({
           accessToken,
@@ -57,6 +56,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     // xử lý yêu cầu trước khi gửi đi
     config.headers.Authorization = `Bearer ${tokenMethod.get()?.accessToken}`;
+    config.headers['Content-Type'] = 'application/json';
     return config;
   },
   (error) => {

@@ -1,28 +1,28 @@
 import UserManagementListAPI from "@/services/userService";
 import { closePopup } from "@/store/reducers/popupReducer";
-import store from "@/store/store";
 import { useMutation } from "@tanstack/react-query";
 import { notification } from "antd";
+import { useDispatch } from "react-redux";
 
-const useAddUser = () => {
-  const dispatch = store.dispatch;
+const useAddCustomer = () => {
+  const dispatch = useDispatch();
 
   return useMutation({
     mutationFn: UserManagementListAPI.RegisterUser,
     onSuccess: () => {
-      dispatch(closePopup("Create a new User"));
+      dispatch(closePopup("Create a new Customer"));
       notification.success({
         message: "Create successfully",
-        description: "Create a new User successfully",
+        description: "Create a new Customer successfully",
       });
     },
     onError: () => {
       notification.error({
         message: "Create failed",
-        description: "Create a new User failed",
+        description: "Create a new Customer failed",
       });
     },
   });
 };
 
-export default useAddUser;
+export default useAddCustomer;

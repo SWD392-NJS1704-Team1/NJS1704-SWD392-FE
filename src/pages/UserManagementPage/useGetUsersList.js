@@ -1,11 +1,11 @@
-import UserManagementListAPI from "@/services/userService";
-import { useQuery } from "@tanstack/react-query";
+import UserManagementListAPI from '@/services/userService';
+import { useQuery } from '@tanstack/react-query';
 
 const useGetUsersList = () => {
   return useQuery({
-    queryKey: ["getUsersList"],
+    queryKey: ['getUsersList'],
     queryFn: () =>
-      UserManagementListAPI.GetUsersList({ keyword: "", page: 1, limit: 100 }),
+      UserManagementListAPI.GetUsersList({ keyword: '', page: 0, limit: 5 }),
   });
 };
 

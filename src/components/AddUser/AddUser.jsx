@@ -3,11 +3,11 @@ import { closePopup } from "@/store/reducers/popupReducer";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import ConfigAntdButton from "../Button/ConfigAntdButton";
-import useAddUser from "./useAddUser";
-import store from "@/store/store";
+import { useDispatch } from "react-redux";
+import useAddUser from "@/utils/useAddUser";
 
 const AddUser = () => {
-  const dispatch = store.dispatch;
+  const dispatch = useDispatch();
   const addUser = useAddUser();
 
   const {
@@ -17,7 +17,7 @@ const AddUser = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     addUser.mutate({
       fullname: data.fullname,
       email: data.email,

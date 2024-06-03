@@ -3,7 +3,6 @@ import { CloseOutlined, BarsOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MenuItems } from "@/constant/menu-data";
-import styled from "styled-components";
 
 const { Sider } = Layout;
 
@@ -23,9 +22,7 @@ export default function Navigator() {
         <div className="bg-white flex items-center">
           <Button
             className={
-              isCollapse
-                ? "mx-4 my-2 duration-300"
-                : "mx-2.5 my-2 duration-300"
+              isCollapse ? "mx-4 my-2 duration-300" : "mx-2.5 my-2 duration-300"
             }
             type="text"
             onClick={toggleCollapse}

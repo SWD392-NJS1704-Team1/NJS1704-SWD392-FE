@@ -20,8 +20,7 @@ const RegisterUser = async ({
       role_id,
       counter_id,
     });
-    console.log(data);
-    return data
+    return res;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -47,24 +46,19 @@ const GetUsersList = async ({ keyword, page, limit }) => {
   try {
     const endpoint = USERLIST;
     const queryParams = `page=${page}&limit=${limit}`;
-    let value = "";
+    let value = '';
 
     if (value && value.length > 0) {
       value = `keyword=${keyword}&`;
     }
 
-    const { data } = await axiosInstance.get(
-      `${endpoint}?${value}${queryParams}`
-    );
-
-    return data.data;
-
+    const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
+    return res.users;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
-
 
 const GetCurrentUser = () => {
   return axiosInstance.get(`/users/profile`, {
