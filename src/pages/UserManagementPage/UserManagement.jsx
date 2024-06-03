@@ -8,45 +8,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Input, Table, Typography } from "antd";
 import useGetUsersList from "./useGetUsersList";
-
-const columns = [
-  {
-    title: "Full Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "Phone",
-    dataIndex: "phone",
-    key: "phone",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "DOB",
-    dataIndex: "dob",
-    key: "dob",
-  },
-  {
-    title: "Role ID",
-    dataIndex: "role_id",
-    key: "role_id",
-  },
-  {
-    title: "Counter ID",
-    dataIndex: "counter_id",
-    key: "counter_id",
-  }
-];
+import { UsersColumn } from "@/constant/table-column";
 
 const UserManagement = () => {
 
@@ -81,7 +43,7 @@ const UserManagement = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={UsersColumn} dataSource={data} />
       </div>
     </div>
   );

@@ -1,6 +1,12 @@
 // ref: https://vitejs.dev/guide/env-and-mode.html
 export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const ENV = import.meta.env.VITE_ENV;
-export const REGISTER = import.meta.env.VITE_REGISTER_USER_API;
 export const LOGIN = import.meta.env.VITE_LOGIN_USER_API;
+
+// User API
+export const ADDUSER = import.meta.env.VITE_REGISTER_USER_API;
+export const DELETEUSER = import.meta.env.VITE_DELETE_USER_API;
 export const USERLIST = import.meta.env.VITE_GET_USER_LIST_API;
+
+// Costumer API
+export const ADDCUSTOMER = import.meta.env.VITE_ADD_CUSTOMER_API;

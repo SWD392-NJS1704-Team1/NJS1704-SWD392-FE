@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, USERLIST } from "@/constant/environments";
+import { ADDUSER, LOGIN, USERLIST } from "@/constant/environments";
 import axiosInstance from "@/utils/axiosInstance";
 
 const RegisterUser = async ({
@@ -11,7 +11,7 @@ const RegisterUser = async ({
   counter_id,
 }) => {
   try {
-    const data = await axiosInstance.post(REGISTER, {
+    const data = await axiosInstance.post(ADDUSER, {
       fullname,
       email,
       phone_number,

@@ -1,6 +1,8 @@
 import {
   ApartmentOutlined,
+  CloseCircleOutlined,
   DashboardOutlined,
+  EditOutlined,
   PercentageOutlined,
   ProductOutlined,
   ShopOutlined,
@@ -8,6 +10,9 @@ import {
   WalletFilled,
 } from "@ant-design/icons";
 import { PATHS } from "./path";
+import { Link } from "react-router-dom";
+import Popup from "@/components/Popup/Popup";
+import DeleteUser from "@/components/DeleteUser/DeleteUser";
 
 // Navigation Sider
 export const MenuItems = [
@@ -47,3 +52,26 @@ export const MenuItems = [
     icon: <PercentageOutlined />,
   },
 ];
+
+
+export const ViewUserOptionDropdown = (id, name) => (
+  [
+    {
+      label: <a href="">Edit</a>,
+      key: 'edit',
+      icon: <EditOutlined />
+    },
+    {
+      label: (
+        <Popup
+          title="Delete User"
+          content={<DeleteUser id={id} name={name} />}
+        >
+          Delete User
+        </Popup>
+      ),
+      key: 'delete',
+      icon: <CloseCircleOutlined />
+    },
+  ]
+)
