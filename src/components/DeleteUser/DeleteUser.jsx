@@ -2,10 +2,12 @@ import { Button, Typography } from "antd";
 import ConfigAntdButton from "../Button/ConfigAntdButton";
 import { useDispatch } from "react-redux";
 import { closePopup } from "@/store/reducers/popupReducer";
+import { useDeleteUser } from "./useDeleteUser";
 
 const DeleteUser = ({ id, name }) => {
 
     const dispatch = useDispatch();
+    const deleteUser = useDeleteUser(id)
 
     const handleCancel = () => {
         console.log('Cancel');
@@ -13,12 +15,11 @@ const DeleteUser = ({ id, name }) => {
     }
 
     const handleDelete = () => {
-        console.log('Delete');
-        dispatch(closePopup("Delete User"));
+        deleteUser.mutate()
     }
 
     return (
-        <div>
+        <div className="p-2">
             <Typography.Text>Are you sure to delete {name}?</Typography.Text>
             <div className="flex flex-row gap-1 justify-center p-4">
                 <ConfigAntdButton type="danger">
