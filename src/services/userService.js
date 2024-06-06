@@ -1,11 +1,10 @@
-import { ADDUSER, LOGIN, USERLIST } from "@/constant/environments";
+import { ADDUSER, DELETEUSER, GETUSERINFO, LOGIN, UPDATEUSER, USERLIST } from "@/constant/environments";
 import axiosInstance from "@/utils/axiosInstance";
 
 const RegisterUser = async ({
   fullname,
   email,
   phone_number,
-  address,
   date_of_birth,
   role_id,
   counter_id,
@@ -15,12 +14,44 @@ const RegisterUser = async ({
       fullname,
       email,
       phone_number,
-      address,
       date_of_birth,
       role_id,
       counter_id,
     });
-    return res;
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+const UpdateUser = async ({
+  id,
+  fullname,
+  email,
+  phone_number,
+  date_of_birth,
+  role_id,
+  counter_id,
+}) => {
+  try {
+    console.log({
+      fullname,
+      email,
+      phone_number,
+      date_of_birth,
+      role_id,
+      counter_id,
+    });
+    const data = await axiosInstance.put(UPDATEUSER + '/' + id, {
+      fullname,
+      email,
+      phone_number,
+      date_of_birth,
+      role_id,
+      counter_id,
+    });
+    return data;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -35,6 +66,27 @@ const LoginUser = async ({ email, password, role_id }) => {
       role_id,
     });
     console.log(data);
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+const DeleteUser = async (userId) => {
+  try {
+    const data = await axiosInstance.delete(DELETEUSER + '/' + userId);
+    console.log(data);
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+const GetUserInfo = async (userId) => {
+  try {
+    const data = await axiosInstance.get(GETUSERINFO + '/' + userId);
     return data;
   } catch (error) {
     const errorResponse = error;
@@ -71,6 +123,9 @@ const UserManagementListAPI = {
   GetUsersList,
   LoginUser,
   GetCurrentUser,
+  DeleteUser,
+  GetUserInfo,
+  UpdateUser,
 };
 
 export default UserManagementListAPI;

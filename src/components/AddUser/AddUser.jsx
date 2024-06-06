@@ -17,12 +17,11 @@ const AddUser = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     addUser.mutate({
       fullname: data.fullname,
       email: data.email,
       phone_number: data.phone_number,
-      address: data.address,
       date_of_birth: data.date_of_birth,
       role_id: data.role_id,
       counter_id: data.counter_id,
@@ -94,23 +93,6 @@ const AddUser = () => {
             {errors.phone_number && (
               <span className="text-red-500 text-sm">
                 {errors.phone_number.message}
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="flex m-4">
-          <h1 className="w-1/4 flex font-bold items-center mr-4">Address</h1>
-          <div className="w-3/4">
-            <input
-              type="text"
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-              placeholder="Address..."
-              {...register("address", { required: MESS.ERROR_ADDRESS })}
-            />
-            {errors.address && (
-              <span className="text-red-500 text-sm">
-                {errors.address.message}
               </span>
             )}
           </div>
