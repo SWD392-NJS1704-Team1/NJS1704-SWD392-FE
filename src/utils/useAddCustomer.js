@@ -1,4 +1,4 @@
-import UserManagementListAPI from "@/services/userService";
+import CustomerService from "@/services/customerService";
 import { closePopup } from "@/store/reducers/popupReducer";
 import { useMutation } from "@tanstack/react-query";
 import { notification } from "antd";
@@ -8,7 +8,7 @@ const useAddCustomer = () => {
   const dispatch = useDispatch();
 
   return useMutation({
-    mutationFn: UserManagementListAPI.RegisterUser,
+    mutationFn: CustomerService.AddCustomer,
     onSuccess: () => {
       dispatch(closePopup("Create a new Customer"));
       notification.success({

@@ -1,5 +1,8 @@
+import { ADDCUSTOMER, CUSTOMERLIST } from "@/constant/environments";
+import axiosInstance from "@/utils/axiosInstance";
+
 const AddCustomer = ({
-  fullname,
+  fullName,
   email,
   phone,
   address,
@@ -7,34 +10,34 @@ const AddCustomer = ({
 }) => {
   try {
     axiosInstance.post(ADDCUSTOMER, {
-      fullname,
+      fullName,
       email,
       phone,
       address,
       accumulated_point,
     });
+   
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
 
-const GetCustomerList = async ({ keyword, page, limit }) => {
-  if (!page || !limit) return undefined;
+const GetCustomerList = async ({ keyword}) => {
+
 
   try {
-    const endpoint = USERLIST;
-    const queryParams = `page=${page}&limit=${limit}`;
+    const endpoint = CUSTOMERLIST;
     let value = '';
-    if (value && value.length > 0) {
-      value = `keyword=${keyword}&`;
+    if (keyword && keyword.length > 0) {
+      value = `?keyword=${keyword}`;
     }
 
-    const { data } = await axiosInstance.get(
-      `${endpoint}?${value}${queryParams}`
+    const res = await axiosInstance.get(
+      `${endpoint}${value}`
     );
 
-    return data.data;
+    return res;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);

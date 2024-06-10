@@ -19,7 +19,7 @@ const AddCustomer = () => {
   const onSubmit = (data) => {
     console.log(data);
     AddCustomer.mutate({
-      fullname: data.fullname,
+      fullName: data.fullName,
       email: data.email,
       phone: data.phone,
       address: data.address,
@@ -29,7 +29,7 @@ const AddCustomer = () => {
   };
 
   const handleCancel = () => {
-    dispatch(closePopup("Create a new User"));
+    dispatch(closePopup("Add a new Customer"));
   };
 
   return (
@@ -42,11 +42,11 @@ const AddCustomer = () => {
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Customer name..."
-              {...register("fullname", { required: MESS.ERROR_NAME })}
+              {...register("fullName", { required: MESS.ERROR_NAME })}
             />
-            {errors.fullname && (
+            {errors.fullName && (
               <span className="text-red-500 text-sm">
-                {errors.fullname.message}
+                {errors.fullName.message}
               </span>
             )}
           </div>

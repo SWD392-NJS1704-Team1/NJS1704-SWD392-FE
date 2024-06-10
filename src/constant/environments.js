@@ -12,6 +12,7 @@ export const UPDATEUSER = import.meta.env.VITE_UPDATE_USER_API;
 
 // Costumer API
 export const ADDCUSTOMER = import.meta.env.VITE_ADD_CUSTOMER_API;
+export const CUSTOMERLIST = import.meta.env.VITE_GET_CUSTOMER_LIST_API;
 
 // Product API
 export const PRODUCTS_LIST = import.meta.env.VITE_GET_ALL_PRODUCT;

@@ -83,3 +83,31 @@ export const ViewUserOptionDropdown = (id, name) => (
     },
   ]
 )
+export const ViewCustomerOptionDropdown = (id, name) => (
+  [
+    {
+      label: (
+        <Popup
+          title="Update Customer"
+          // content={<UpdateCustomer id={id} />}
+        >
+          Update Customer
+        </Popup>
+      ),
+      key: 'edit',
+      icon: <EditOutlined />
+    },
+    {
+      label: (
+        <Popup
+          title="Delete Customer"
+          // content={<DeleteCustomer id={id} name={name} />}
+        >
+          Delete Customer
+        </Popup>
+      ),
+      key: 'delete',
+      icon: <CloseCircleOutlined />
+    },
+  ]
+)
