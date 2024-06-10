@@ -5,45 +5,14 @@ import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Typography } from 'antd';
 import useGetCustomerList from './useGetCustomerList';
+import { CustomersColumn } from '@/constant/table-column';
 
-const columns = [
-  {
-    title: 'No',
-    dataIndex: 'no',
-    key: 'no',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Customer Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-  },
-  {
-    title: 'Phone number',
-    dataIndex: 'phone',
-    key: 'phone',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Point',
-    dataIndex: 'point',
-    key: 'point',
-  },
-];
+
 
 const CustomerList = () => {
   const { data } = useGetCustomerList();
   // const data = null;
-
+console.log(data)
   return (
     <div>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
@@ -66,7 +35,8 @@ const CustomerList = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={CustomersColumn} dataSource={data} />
+      
       </div>
     </div>
   );
