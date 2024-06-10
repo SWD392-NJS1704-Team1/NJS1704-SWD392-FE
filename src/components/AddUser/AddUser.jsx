@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form";
 import ConfigAntdButton from "../Button/ConfigAntdButton";
 import { useDispatch } from "react-redux";
 import useAddUser from "@/utils/useAddUser";
+import useGetCounterList from "@/utils/useGetCounterList";
 
 const AddUser = () => {
   const dispatch = useDispatch();
   const addUser = useAddUser();
+  const { data: counterList, isLoading } = useGetCounterList()
 
   const {
     register,
@@ -31,6 +33,10 @@ const AddUser = () => {
   const handleCancel = () => {
     dispatch(closePopup("Create a new User"));
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="p-2">
@@ -156,8 +162,11 @@ const AddUser = () => {
               <option value="" disabled>
                 Select one
               </option>
-              <option value={1}>Counter 1</option>
-              <option value={2}>Counter 2</option>
+              {counterList?.map((counter) => (
+                <option key={counter.id} value={counter.id}>
+                  {counter.counterName}
+                </option>
+              ))}
             </select>
             {errors.counter_id && (
               <span className="text-red-500 text-sm">

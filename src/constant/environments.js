@@ -16,3 +16,6 @@ export const ADDCUSTOMER = import.meta.env.VITE_ADD_CUSTOMER_API;
 // Product API
 export const PRODUCTS_LIST = import.meta.env.VITE_GET_ALL_PRODUCT;
 export const ADD_PRODUCT = import.meta.env.VITE_ADD_PRODUCT;
+
+// Counter API
+export const COUNTERLIST = import.meta.env.VITE_GET_COUNTER_LIST_API;

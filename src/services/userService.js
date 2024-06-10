@@ -1,4 +1,4 @@
-import { ADDUSER, DELETEUSER, GETUSERINFO, LOGIN, UPDATEUSER, USERLIST } from "@/constant/environments";
+import { ADDUSER, COUNTERLIST, DELETEUSER, GETUSERINFO, LOGIN, UPDATEUSER, USERLIST } from "@/constant/environments";
 import axiosInstance from "@/utils/axiosInstance";
 
 const RegisterUser = async ({
@@ -65,7 +65,6 @@ const LoginUser = async ({ email, password, role_id }) => {
       password,
       role_id,
     });
-    console.log(data);
     return data;
   } catch (error) {
     const errorResponse = error;
@@ -76,7 +75,6 @@ const LoginUser = async ({ email, password, role_id }) => {
 const DeleteUser = async (userId) => {
   try {
     const data = await axiosInstance.delete(DELETEUSER + '/' + userId);
-    console.log(data);
     return data;
   } catch (error) {
     const errorResponse = error;
@@ -105,7 +103,29 @@ const GetUsersList = async ({ keyword, page, limit }) => {
     }
 
     const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
-    return res.users;
+
+    const data = res.users.map(item => ({
+      id: item.id,
+      key: item.id,
+      fullname: item.fullname,
+      email: item.email,
+      phone_number: item.phone_number,
+      date_of_birth: item.date_of_birth,
+      role_name: item.role?.name,
+      counter_name: item.counter?.counterName
+    }))
+
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+const GetCounterList = async () => {
+  try {
+    const response = await axiosInstance.get(COUNTERLIST);
+    return response;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
@@ -126,6 +146,7 @@ const UserManagementListAPI = {
   DeleteUser,
   GetUserInfo,
   UpdateUser,
+  GetCounterList,
 };
 
 export default UserManagementListAPI;

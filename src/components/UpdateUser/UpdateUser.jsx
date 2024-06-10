@@ -7,12 +7,14 @@ import { useGetUserInfo } from "./useGetUserInfo";
 import { closePopup } from "@/store/reducers/popupReducer";
 import { useEffect } from "react";
 import useUpdateUser from "./useUpdateUser";
+import useGetCounterList from "@/utils/useGetCounterList";
 
 
 const UpdateUser = ({ id }) => {
     const dispatch = useDispatch();
     const { data } = useGetUserInfo(id);
-    const updateUser = useUpdateUser()
+    const updateUser = useUpdateUser();
+    const { data: counterList, isLoading } = useGetCounterList();
 
     const {
         register,
@@ -20,6 +22,10 @@ const UpdateUser = ({ id }) => {
         reset,
         formState: { errors },
     } = useForm();
+
+    const handleCancel = () => {
+        dispatch(closePopup("Update User"));
+    };
 
     const onSubmit = (data) => {
         updateUser.mutate({
@@ -33,10 +39,6 @@ const UpdateUser = ({ id }) => {
         });
     };
 
-    const handleCancel = () => {
-        dispatch(closePopup("Update User"));
-    };
-
     useEffect(() => {
         if (data) {
             reset({
@@ -44,11 +46,15 @@ const UpdateUser = ({ id }) => {
                 email: data.email,
                 phone_number: data.phone_number,
                 date_of_birth: data.date_of_birth,
-                role_id: data.role_id === 'Manager' ? 2 : 3,
-                counter_id: data.counter_id === 'Slot A' ? 1 : 1
+                role_id: data?.role.id,
+                counter_id: data?.counter.id
             })
         }
     }, [data, reset])
+
+    if (isLoading) {
+        return <div>Loading</div>
+    }
 
     return (
         <div className="p-2">
@@ -174,8 +180,11 @@ const UpdateUser = ({ id }) => {
                             <option value="" disabled>
                                 Select one
                             </option>
-                            <option value={1}>Counter 1</option>
-                            <option value={2}>Counter 2</option>
+                            {counterList?.map((counter) => (
+                                <option key={counter.id} value={counter.id}>
+                                    {counter.counterName}
+                                </option>
+                            ))}
                         </select>
                         {errors.counter_id && (
                             <span className="text-red-500 text-sm">

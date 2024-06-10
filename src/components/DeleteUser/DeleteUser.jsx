@@ -19,9 +19,9 @@ const DeleteUser = ({ id, name }) => {
     }
 
     return (
-        <div className="p-2">
+        <div className="px-6 py-2">
             <Typography.Text>Are you sure to delete {name}?</Typography.Text>
-            <div className="flex flex-row gap-1 justify-center p-4">
+            <div className="flex flex-row gap-1 justify-center p-4 mt-2">
                 <ConfigAntdButton type="danger">
                     <Button type="primary" onClick={handleCancel}>
                         Cancel
