@@ -32,14 +32,14 @@ export const UsersColumn = [
         key: "date_of_birth",
     },
     {
-        title: "Role ID",
-        dataIndex: "role_id",
-        key: "role_id",
+        title: "Role",
+        dataIndex: "role_name",
+        key: "role_name",
     },
     {
-        title: "Counter ID",
-        dataIndex: "counter_id",
-        key: "counter_id",
+        title: "Counter",
+        dataIndex: "counter_name",
+        key: "counter_name",
     },
     {
         title: 'Action',
