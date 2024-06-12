@@ -5,7 +5,7 @@ import { MESS, REGEX } from "@/constant/validate";
 import { useForm } from "react-hook-form";
 import { useGetUserInfo } from "./useGetUserInfo";
 import { closePopup } from "@/store/reducers/popupReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useUpdateUser from "./useUpdateUser";
 import useGetCounterList from "@/utils/useGetCounterList";
 
@@ -15,6 +15,8 @@ const UpdateUser = ({ id }) => {
     const { data } = useGetUserInfo(id);
     const updateUser = useUpdateUser();
     const { data: counterList, isLoading } = useGetCounterList();
+    let temp = (data?.role.id) ? data?.role.id : 2
+    const [selectedRole, setSelectedRole] = useState(temp)
 
     const {
         register,
@@ -35,22 +37,25 @@ const UpdateUser = ({ id }) => {
             phone_number: data.phone_number,
             date_of_birth: data.date_of_birth,
             role_id: data.role_id,
-            counter_id: data.counter_id,
+            counter_id: (selectedRole !== 2) ? data.counter_id : null,
         });
     };
 
     useEffect(() => {
         if (data) {
+            setSelectedRole(temp)
             reset({
                 fullname: data.fullname,
                 email: data.email,
                 phone_number: data.phone_number,
                 date_of_birth: data.date_of_birth,
                 role_id: data?.role.id,
-                counter_id: data?.counter.id
+                counter_id: null
             })
         }
-    }, [data, reset])
+    }, [data, reset, temp])
+
+    console.log(selectedRole, temp);
 
     if (isLoading) {
         return <div>Loading</div>
@@ -153,6 +158,11 @@ const UpdateUser = ({ id }) => {
                             {...register("role_id", {
                                 required: MESS.ERROR_ROLE,
                             })}
+                            onChange={(e) => {
+                                const selectedRoleId = e.target.value;
+                                temp = selectedRoleId
+                                setSelectedRole(temp);
+                            }}
                         >
                             <option value="" disabled>
                                 Select one
@@ -168,31 +178,34 @@ const UpdateUser = ({ id }) => {
                     </div>
                 </div>
 
-                <div className="flex m-4">
-                    <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
-                    <div className="w-3/4">
-                        <select
-                            className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                            {...register("counter_id", {
-                                required: MESS.ERROR_COUNTER,
-                            })}
-                        >
-                            <option value="" disabled>
-                                Select one
-                            </option>
-                            {counterList?.map((counter) => (
-                                <option key={counter.id} value={counter.id}>
-                                    {counter.counterName}
+                {(selectedRole !== 2 && temp !== 2) ?
+                    <div className="flex m-4">
+                        <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
+                        <div className="w-3/4">
+                            <select
+                                className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+                                {...register("counter_id", {
+                                    required: MESS.ERROR_COUNTER,
+                                })}
+                                defaultValue=""
+                            >
+                                <option value="" disabled>
+                                    Select one
                                 </option>
-                            ))}
-                        </select>
-                        {errors.counter_id && (
-                            <span className="text-red-500 text-sm">
-                                {errors.counter_id.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
+                                {counterList?.map((counter) => (
+                                    <option key={counter.id} value={counter.id}>
+                                        {counter.counterName}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.counter_id && (
+                                <span className="text-red-500 text-sm">
+                                    {errors.counter_id.message}
+                                </span>
+                            )}
+                        </div>
+                    </div> : <div></div>
+                }
 
                 <div className="flex flex-row gap-1 justify-center p-4">
                     <ConfigAntdButton type="danger">
