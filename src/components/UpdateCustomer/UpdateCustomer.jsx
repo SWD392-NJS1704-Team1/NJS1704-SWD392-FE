@@ -6,7 +6,7 @@ import { closePopup } from '@/store/reducers/popupReducer';
 import useUpdateCustomer from './useUpdateCustomer';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
 
-  const UpdateCustomer = ({ id }) => {
+const UpdateCustomer = ({ id }) => {
   const dispatch = useDispatch();
   const updateCustomer = useUpdateCustomer();
 

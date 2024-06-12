@@ -7,59 +7,7 @@ import { Button, Pagination, Table, Typography } from 'antd';
 import useGetProductsList from './useGetProductsList';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import queryString from 'query-string';
-
-const columns = [
-  {
-    title: 'Product Name',
-    dataIndex: 'product_name',
-    key: 'product_name',
-  },
-  {
-    title: 'Barcode',
-    dataIndex: 'barcode',
-    key: 'barcode',
-  },
-  {
-    title: 'Quantity',
-    dataIndex: 'quantity',
-    key: 'quantity',
-  },
-  {
-    title: 'Price (Processing)',
-    dataIndex: 'price_processing',
-    key: 'price_processing',
-  },
-  {
-    title: 'Price (Stone)',
-    dataIndex: 'price_stone',
-    key: 'price_stone',
-  },
-  {
-    title: 'Weight',
-    dataIndex: 'weight',
-    key: 'weight',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
-  },
-  {
-    title: 'Image URL',
-    dataIndex: 'image_url',
-    key: 'image_url',
-  },
-  {
-    title: 'Type ID',
-    dataIndex: 'type_id',
-    key: 'type_id',
-  },
-  {
-    title: 'Counter ID',
-    dataIndex: 'counter_id',
-    key: 'counter_id',
-  },
-];
+import { ProductsColumn } from '@/constant/table-column';
 
 const PRODUCT_LIMITS = 5;
 
@@ -108,10 +56,10 @@ const ProductPage = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={columns} dataSource={data?.productsData} />
+        <Table columns={ProductsColumn} dataSource={data?.productsData} />
       </div>
-      <div className='pagination flex items-center justify-center'>
-        <Pagination defaultCurrent={1} total={20} onChange={onPagiChange} />
+      <div className="pagination flex items-center justify-center">
+        <Pagination defaultCurrent={1} onChange={onPagiChange} />
       </div>
     </div>
   );
