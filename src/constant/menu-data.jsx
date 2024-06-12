@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import Popup from "@/components/Popup/Popup";
 import DeleteUser from "@/components/DeleteUser/DeleteUser";
 import UpdateUser from "@/components/UpdateUser/UpdateUser";
+import DeleteCustomer from "@/components/DeleteCustomer/DeleteCustomer";
+import UpdateCustomer from "@/components/UpdateCustomer/UpdateCustomer";
 
 // Navigation Sider
 export const MenuItems = [
@@ -89,7 +91,7 @@ export const ViewCustomerOptionDropdown = (id, name) => (
       label: (
         <Popup
           title="Update Customer"
-          // content={<UpdateCustomer id={id} />}
+          content={<UpdateCustomer id={id} name={name} />}
         >
           Update Customer
         </Popup>
@@ -101,7 +103,7 @@ export const ViewCustomerOptionDropdown = (id, name) => (
       label: (
         <Popup
           title="Delete Customer"
-          // content={<DeleteCustomer id={id} name={name} />}
+          content={<DeleteCustomer id={id} name={name} />}
         >
           Delete Customer
         </Popup>

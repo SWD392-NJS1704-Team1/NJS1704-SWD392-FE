@@ -1,3 +1,4 @@
+import { queryClient } from "@/constant/storage";
 import CustomerService from "@/services/customerService";
 import { closePopup } from "@/store/reducers/popupReducer";
 import { useMutation } from "@tanstack/react-query";
@@ -10,16 +11,20 @@ const useAddCustomer = () => {
   return useMutation({
     mutationFn: CustomerService.AddCustomer,
     onSuccess: () => {
-      dispatch(closePopup("Create a new Customer"));
-      notification.success({
-        message: "Create successfully",
-        description: "Create a new Customer successfully",
-      });
-    },
+  dispatch(closePopup("Add a new Customer"));
+  setTimeout(() => {
+    queryClient.invalidateQueries('getCustomerList');
+  }, 1000); // delay of 1 second
+  notification.success({
+    message: "Create successfully",
+    description: "Add a new Customer successfully",
+  });
+},
     onError: () => {
+      console.log(error);
       notification.error({
         message: "Create failed",
-        description: "Create a new Customer failed",
+        description: "Add a new Customer failed",
       });
     },
   });

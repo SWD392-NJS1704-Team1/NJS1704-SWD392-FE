@@ -1,5 +1,5 @@
 import Dropdown from "@/components/Dropdown/Dropdown";
-import { ViewUserOptionDropdown } from "./menu-data";
+import { ViewCustomerOptionDropdown, ViewUserOptionDropdown } from "./menu-data";
 
 export const UsersColumn = [
     {
@@ -90,7 +90,7 @@ export const CustomersColumn = [
         title: 'Action',
         key: 'operation',
         render: (record) => {
-            const items = ViewUserOptionDropdown(record.id, record.fullname);
+            const items = ViewCustomerOptionDropdown(record.id, record.fullName);
             return <Dropdown items={items} />;
         }
     },
