@@ -16,6 +16,8 @@ import DeleteUser from '@/components/DeleteUser/DeleteUser';
 import UpdateUser from '@/components/UpdateUser/UpdateUser';
 import DeleteCustomer from '@/components/DeleteCustomer/DeleteCustomer';
 import UpdateCustomer from '@/components/UpdateCustomer/UpdateCustomer';
+import DeleteCounter from '@/components/DeleteCounter/DeleteCounter';
+import UpdateCounter from '@/components/UpdateCounter/UpdateCounter';
 
 // Navigation Sider
 export const MenuItems = [
@@ -96,6 +98,26 @@ export const ViewCustomerOptionDropdown = (id, name) => [
         content={<DeleteCustomer id={id} name={name} />}
       >
         Delete Customer
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+];
+export const ViewCounterOptionDropdown = (id, name) => [
+  {
+    label: (
+      <Popup title="Update Counter" content={<UpdateCounter id={id} name={name} />}>
+        Update Counter
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup title="Delete Counter" content={<DeleteCounter id={id} name={name} />}>
+        Delete Counter
       </Popup>
     ),
     key: 'delete',

@@ -30,3 +30,7 @@ export const TYPEPRICES = import.meta.env.VITE_TYPE_PRICES;
 
 // Counter API
 export const COUNTERLIST = import.meta.env.VITE_GET_COUNTER_LIST_API;
+export const UPDATECOUNTER = import.meta.env.VITE_UPDATE_COUNTER_API;
+export const CREATECOUNTER = import.meta.env.VITE_CREATE_COUNTER_API;
+export const COUNTERBYNAME = import.meta.env.VITE_GET_COUNTER_BY_NAME_API;
+export const DELETECOUNTER = import.meta.env.VITE_GET_COUNTER_API;

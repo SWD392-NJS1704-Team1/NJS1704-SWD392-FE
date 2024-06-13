@@ -1,5 +1,6 @@
 import Dropdown from '@/components/Dropdown/Dropdown';
 import {
+  ViewCounterOptionDropdown,
   ViewCustomerOptionDropdown,
   ViewUserOptionDropdown,
 } from './menu-data';
@@ -149,5 +150,40 @@ export const ProductsColumn = [
     title: 'Counter ID',
     dataIndex: 'counter_id',
     key: 'counter_id',
+  },
+];
+
+export const CounterColumn = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    width: 100,
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Counter Name',
+    dataIndex: 'counterName',
+    width: 500,
+    key: 'counterName',
+  },
+  {
+    title: 'Location',
+    dataIndex: 'location',
+    width: 500,
+    key: 'location',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    width: 200,
+    align: 'center',
+    render: (record) => {
+      const items = ViewCounterOptionDropdown(record.id, record.counterName);
+      return <Dropdown items={items} />;
+    },
   },
 ];
