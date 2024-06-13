@@ -40,7 +40,7 @@ const ResetPassword = ({ id }) => {
                     <h1 className="w-2/5 flex font-bold items-center mr-4">Old Password</h1>
                     <div className="w-3/5">
                         <input
-                            type="text"
+                            type="password"
                             className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                             placeholder="Old password..."
                             {...register('oldPassword', { required: MESS.ERROR_OLD_PASSWORD })}
@@ -57,7 +57,7 @@ const ResetPassword = ({ id }) => {
                     <h1 className="w-2/5 flex font-bold items-center mr-4">New Password</h1>
                     <div className="w-3/5">
                         <input
-                            type="email"
+                            type="password"
                             className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                             placeholder="Password..."
                             {...register('password', {
@@ -80,7 +80,7 @@ const ResetPassword = ({ id }) => {
                     <h1 className="w-2/5 flex font-bold items-center mr-4">Confirm Password</h1>
                     <div className="w-3/5">
                         <input
-                            type="text"
+                            type="password"
                             className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                             placeholder="Confirm password..."
                             {...register('retypePassword', {
