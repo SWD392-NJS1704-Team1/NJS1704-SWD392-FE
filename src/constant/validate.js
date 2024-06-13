@@ -33,4 +33,7 @@ export const MESS = {
   ERROR_PRODUCT_CATEGORY_ID: 'Please choose product category id.',
   ERROR_COUNTER_NAME: 'Please enter counter name.',
   ERROR_LOCATION: 'Please enter location.',
+  ERROR_OLD_PASSWORD: 'Please enter old password.',
+  ERROR_NEW_PASSWORD: 'Please enter new password.',
+  ERROR_CONFIRM_PASSWORD: 'Please enter confirm password.',
 };

@@ -6,16 +6,17 @@ import {
   PercentageOutlined,
   ProductOutlined,
   ShopOutlined,
+  SyncOutlined,
   UserOutlined,
   WalletFilled,
 } from '@ant-design/icons';
 import { PATHS } from './path';
-import { Link } from 'react-router-dom';
 import Popup from '@/components/Popup/Popup';
 import DeleteUser from '@/components/DeleteUser/DeleteUser';
 import UpdateUser from '@/components/UpdateUser/UpdateUser';
 import DeleteCustomer from '@/components/DeleteCustomer/DeleteCustomer';
 import UpdateCustomer from '@/components/UpdateCustomer/UpdateCustomer';
+import ResetPassword from '@/components/ResetUserPassword/ResetPassword';
 import DeleteCounter from '@/components/DeleteCounter/DeleteCounter';
 import UpdateCounter from '@/components/UpdateCounter/UpdateCounter';
 
@@ -76,6 +77,15 @@ export const ViewUserOptionDropdown = (id, name) => [
     ),
     key: 'delete',
     icon: <CloseCircleOutlined />,
+  },
+  {
+    label: (
+      <Popup title="Reset Password" content={<ResetPassword id={id} />}>
+        Reset Password
+      </Popup>
+    ),
+    key: 'reset',
+    icon: <SyncOutlined />,
   },
 ];
 export const ViewCustomerOptionDropdown = (id, name) => [
