@@ -1,5 +1,13 @@
-import { ADDUSER, COUNTERLIST, DELETEUSER, GETUSERINFO, LOGIN, UPDATEUSER, USERLIST } from "@/constant/environments";
-import axiosInstance from "@/utils/axiosInstance";
+import {
+  ADDUSER,
+  COUNTERLIST,
+  DELETEUSER,
+  GETUSERINFO,
+  LOGIN,
+  UPDATEUSER,
+  USERLIST,
+} from '@/constant/environments';
+import axiosInstance from '@/utils/axiosInstance';
 
 const RegisterUser = async ({
   fullname,
@@ -103,7 +111,7 @@ const GetUsersList = async ({ keyword, page, limit }) => {
     }
     const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
 
-    const data = res.users.map(item => ({
+    const data = res.users.map((item) => ({
       id: item.id,
       key: item.id,
       fullname: item.fullname,
@@ -111,8 +119,8 @@ const GetUsersList = async ({ keyword, page, limit }) => {
       phone_number: item.phone_number,
       date_of_birth: item.date_of_birth,
       role_name: item.role?.name,
-      counter_name: item.counter?.counterName
-    }))
+      counter_name: item.counter?.counterName,
+    }));
 
     return data;
   } catch (error) {

@@ -1,7 +1,7 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient } from '@tanstack/react-query';
 
 export const STORAGE = {
-  token: "token-swd392",
+  token: 'token-swd392',
 };
 
 export const queryClient = new QueryClient({

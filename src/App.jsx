@@ -12,7 +12,7 @@ import Register from "./pages/AuthPage/Register";
 import ForgotPassword from "./pages/ForgotPage/ForgotPassword";
 import VerifyOTP from "./pages/ForgotPage/VerifyOTP";
 import ResetPassword from "./pages/ForgotPage/ResetPassword";
-import CustomerList from "./pages/CustomerList/CustomerList";
+import CustomerList from "./pages/CustomerManagement/CustomerManagement";
 import ProductPage from "./pages/ProductPage/ProductPage";
 
 const App = () => {

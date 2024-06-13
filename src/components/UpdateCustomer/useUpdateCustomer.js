@@ -1,30 +1,31 @@
 import { queryClient } from '@/constant/storage';
-import UserManagementListAPI from '@/services/userService';
+import CustomerService from '@/services/customerService';
+
 import { closePopup } from '@/store/reducers/popupReducer';
 import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 import { useDispatch } from 'react-redux';
 
-const useUpdateUser = () => {
+const useUpdateCustomer = () => {
   const dispatch = useDispatch();
 
   return useMutation({
-    mutationFn: UserManagementListAPI.UpdateUser,
+    mutationFn: CustomerService.UpdateCustomer,
     onSuccess: () => {
-      dispatch(closePopup('Update User'));
+      dispatch(closePopup('Update Customer'));
       queryClient.invalidateQueries({ queryKey: ['getUsersList'] });
       notification.success({
         message: 'Update successfully',
-        description: 'Update a User successfully',
+        description: 'Update customer successfully',
       });
     },
     onError: () => {
       notification.error({
         message: 'Update failed',
-        description: 'Update a User failed',
+        description: 'Update customer failed',
       });
     },
   });
 };
 
-export default useUpdateUser;
+export default useUpdateCustomer;

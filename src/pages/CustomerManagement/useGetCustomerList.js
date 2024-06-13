@@ -6,9 +6,7 @@ const useGetCustomerList = () => {
     queryKey: ['getCustomerList'],
     queryFn: () =>
       CustomerService.GetCustomerList({
-        keyword: '',
-        page: 0,
-        limit: 10,
+        keyword: ''
       }),
   });
 };

@@ -1,5 +1,8 @@
+import { ADDCUSTOMER, CUSTOMERLIST, DELETECUSTOMER, UPDATECUSTOMER } from "@/constant/environments";
+import axiosInstance from "@/utils/axiosInstance";
+
 const AddCustomer = ({
-  fullname,
+  fullName,
   email,
   phone,
   address,
@@ -7,42 +10,87 @@ const AddCustomer = ({
 }) => {
   try {
     axiosInstance.post(ADDCUSTOMER, {
-      fullname,
+      fullName,
       email,
       phone,
       address,
       accumulated_point,
     });
+   
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
 
-const GetCustomerList = async ({ keyword, page, limit }) => {
-  if (!page || !limit) return undefined;
+const GetCustomerList = async ({ keyword}) => {
+
 
   try {
-    const endpoint = USERLIST;
-    const queryParams = `page=${page}&limit=${limit}`;
+    const endpoint = CUSTOMERLIST;
     let value = '';
-    if (value && value.length > 0) {
-      value = `keyword=${keyword}&`;
+    if (keyword && keyword.length > 0) {
+      value = `?keyword=${keyword}`;
     }
 
-    const { data } = await axiosInstance.get(
-      `${endpoint}?${value}${queryParams}`
+    const res = await axiosInstance.get(
+      `${endpoint}${value}`
     );
 
-    return data.data;
+    return res;
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
+
+const DeleteCustomer = async (id) => {
+  try {
+    const data = await axiosInstance.delete(DELETECUSTOMER + '/' + id);
+    console.log(data);
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+const UpdateCustomer = async ({
+  id,
+  fullName,
+  email,
+  phone,
+  address,
+  accumulated_point,
+ 
+}) => {
+  try {
+    console.log({
+      fullName,
+      email,
+      phone,
+      address,
+      accumulated_point,
+    });
+    const data = await axiosInstance.put(UPDATECUSTOMER + '/' + id, {
+      fullName,
+      email,
+      phone,
+      address,
+      accumulated_point,
+    });
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
 const CustomerService = {
   AddCustomer,
   GetCustomerList,
+  DeleteCustomer,
+  UpdateCustomer
 };
 
 export default CustomerService;

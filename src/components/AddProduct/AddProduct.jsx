@@ -4,20 +4,22 @@ import { closePopup } from '@/store/reducers/popupReducer';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
 import { Button } from 'antd';
 import { MESS } from '@/constant/validate';
-import { useState } from 'react';
 import useAddProduct from '@/utils/useAddProduct';
+import ComponentLoading from '../ComponentLoading/ComponentLoading';
+import useGetCounterList from '@/utils/useGetCounterList';
+import { useState } from 'react';
 
 const AddProduct = () => {
   const dispatch = useDispatch();
   const addProduct = useAddProduct();
+  const { data: counterList, isLoading } = useGetCounterList();
+  const [selectedCounter, setSelectedCounter] = useState('');
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const [selectedImage, setSelectedImage] = useState(null);
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -38,6 +40,10 @@ const AddProduct = () => {
   const handleCancel = () => {
     dispatch(closePopup('Create a new Product'));
   };
+
+  if (isLoading) {
+    return <ComponentLoading />;
+  }
 
   return (
     <div className="py-2 px-4">
@@ -188,13 +194,6 @@ const AddProduct = () => {
                   {errors.image_url.message}
                 </span>
               )}
-              {selectedImage && (
-                <img
-                  src={selectedImage}
-                  alt="Selected"
-                  style={{ width: '100%', height: 'auto' }}
-                />
-              )}
             </div>
           </div>
           <div className="">
@@ -203,7 +202,7 @@ const AddProduct = () => {
               <input
                 type="number"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                placeholder="Price Stone"
+                placeholder="Type ID"
                 {...register('type_id', {
                   required: MESS.ERROR_PRODUCT_CATEGORY_ID,
                 })}
@@ -223,12 +222,17 @@ const AddProduct = () => {
                 {...register('counter_id', {
                   required: MESS.ERROR_COUNTER,
                 })}
+                value={selectedCounter}
+                onChange={(e) => setSelectedCounter(e.target.value)}
               >
                 <option value="" disabled>
                   Select one
                 </option>
-                <option value={1}>Counter 1</option>
-                <option value={2}>Counter 2</option>
+                {counterList?.map((counter) => (
+                  <option key={counter.id} value={counter.id}>
+                    {counter.counterName}
+                  </option>
+                ))}
               </select>
               {errors.counter_id && (
                 <span className="text-red-500 text-sm">

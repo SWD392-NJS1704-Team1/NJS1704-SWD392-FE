@@ -18,16 +18,16 @@ const UpdateUser = ({ id }) => {
     let temp = (data?.role.id) ? data?.role.id : 2
     const [selectedRole, setSelectedRole] = useState(temp)
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-    const handleCancel = () => {
-        dispatch(closePopup("Update User"));
-    };
+  const handleCancel = () => {
+    dispatch(closePopup('Update User'));
+  };
 
     const onSubmit = (data) => {
         updateUser.mutate({
@@ -57,98 +57,98 @@ const UpdateUser = ({ id }) => {
 
     console.log(selectedRole, temp);
 
-    if (isLoading) {
-        return <div>Loading</div>
-    }
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
 
-    return (
-        <div className="p-2">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex m-4">
-                    <h1 className="w-1/4 flex font-bold items-center mr-4">Full Name</h1>
-                    <div className="w-3/4">
-                        <input
-                            type="text"
-                            className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                            placeholder="Full name..."
-                            {...register("fullname", { required: MESS.ERROR_NAME })}
-                        />
-                        {errors.fullname && (
-                            <span className="text-red-500 text-sm">
-                                {errors.fullname.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
+  return (
+    <div className="p-2">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex m-4">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Full Name</h1>
+          <div className="w-3/4">
+            <input
+              type="text"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+              placeholder="Full name..."
+              {...register('fullname', { required: MESS.ERROR_NAME })}
+            />
+            {errors.fullname && (
+              <span className="text-red-500 text-sm">
+                {errors.fullname.message}
+              </span>
+            )}
+          </div>
+        </div>
 
-                <div className="flex m-4">
-                    <h1 className="w-1/4 flex font-bold items-center mr-4">Email</h1>
-                    <div className="w-3/4">
-                        <input
-                            type="email"
-                            className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                            placeholder="Email..."
-                            {...register("email", {
-                                required: MESS.ERROR_EMAIL,
-                                pattern: {
-                                    value: REGEX.EMAIL,
-                                    message: MESS.ERROR_EMAIL_INVALID,
-                                },
-                            })}
-                        />
-                        {errors.email && (
-                            <span className="text-red-500 text-sm">
-                                {errors.email.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
+        <div className="flex m-4">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Email</h1>
+          <div className="w-3/4">
+            <input
+              type="email"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+              placeholder="Email..."
+              {...register('email', {
+                required: MESS.ERROR_EMAIL,
+                pattern: {
+                  value: REGEX.EMAIL,
+                  message: MESS.ERROR_EMAIL_INVALID,
+                },
+              })}
+            />
+            {errors.email && (
+              <span className="text-red-500 text-sm">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+        </div>
 
-                <div className="flex m-4">
-                    <h1 className="w-1/4 flex font-bold items-center mr-4">Phone</h1>
-                    <div className="w-3/4">
-                        <input
-                            type="text"
-                            className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                            placeholder="Phone number..."
-                            {...register("phone_number", {
-                                required: MESS.ERROR_PHONE,
-                                pattern: {
-                                    value: REGEX.PHONE,
-                                    message: MESS.ERROR_PHONE_INVALID,
-                                },
-                            })}
-                        />
-                        {errors.phone_number && (
-                            <span className="text-red-500 text-sm">
-                                {errors.phone_number.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
+        <div className="flex m-4">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Phone</h1>
+          <div className="w-3/4">
+            <input
+              type="text"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+              placeholder="Phone number..."
+              {...register('phone_number', {
+                required: MESS.ERROR_PHONE,
+                pattern: {
+                  value: REGEX.PHONE,
+                  message: MESS.ERROR_PHONE_INVALID,
+                },
+              })}
+            />
+            {errors.phone_number && (
+              <span className="text-red-500 text-sm">
+                {errors.phone_number.message}
+              </span>
+            )}
+          </div>
+        </div>
 
-                <div className="flex m-4">
-                    <h1 className="w-1/4 flex font-bold items-center mr-4">DOB</h1>
-                    <div className="w-3/4">
-                        <input
-                            type="text"
-                            className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                            placeholder="Date of birth(DD/MM/YYYY)..."
-                            {...register("date_of_birth", {
-                                required: MESS.ERROR_DOB,
-                                pattern: {
-                                    value: REGEX.DOB,
-                                    message: MESS.ERROR_DOB_INVALID,
-                                },
-                            })}
-                        />
-                        {errors.date_of_birth && (
-                            <span className="text-red-500 text-sm">
-                                {errors.date_of_birth.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
+        <div className="flex m-4">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">DOB</h1>
+          <div className="w-3/4">
+            <input
+              type="text"
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+              placeholder="Date of birth(DD/MM/YYYY)..."
+              {...register('date_of_birth', {
+                required: MESS.ERROR_DOB,
+                pattern: {
+                  value: REGEX.DOB,
+                  message: MESS.ERROR_DOB_INVALID,
+                },
+              })}
+            />
+            {errors.date_of_birth && (
+              <span className="text-red-500 text-sm">
+                {errors.date_of_birth.message}
+              </span>
+            )}
+          </div>
+        </div>
 
                 <div className="flex m-4">
                     <h1 className="w-1/4 flex font-bold items-center mr-4">Role</h1>
@@ -207,21 +207,21 @@ const UpdateUser = ({ id }) => {
                     </div> : <div></div>
                 }
 
-                <div className="flex flex-row gap-1 justify-center p-4">
-                    <ConfigAntdButton type="danger">
-                        <Button type="primary" onClick={handleCancel}>
-                            Cancel
-                        </Button>
-                    </ConfigAntdButton>
-                    <ConfigAntdButton>
-                        <Button type="primary" onClick={handleSubmit(onSubmit)}>
-                            Update
-                        </Button>
-                    </ConfigAntdButton>
-                </div>
-            </form>
+        <div className="flex flex-row gap-1 justify-center p-4">
+          <ConfigAntdButton type="danger">
+            <Button type="primary" onClick={handleCancel}>
+              Cancel
+            </Button>
+          </ConfigAntdButton>
+          <ConfigAntdButton>
+            <Button type="primary" onClick={handleSubmit(onSubmit)}>
+              Update
+            </Button>
+          </ConfigAntdButton>
         </div>
-    );
+      </form>
+    </div>
+  );
 };
 
 export default UpdateUser;
