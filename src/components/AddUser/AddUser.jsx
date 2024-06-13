@@ -6,11 +6,14 @@ import ConfigAntdButton from "../Button/ConfigAntdButton";
 import { useDispatch } from "react-redux";
 import useAddUser from "@/utils/useAddUser";
 import useGetCounterList from "@/utils/useGetCounterList";
+import { useState } from "react";
 
 const AddUser = () => {
   const dispatch = useDispatch();
   const addUser = useAddUser();
   const { data: counterList, isLoading } = useGetCounterList()
+
+  const [selectedRole, setSelectedRole] = useState('2')
 
   const {
     register,
@@ -26,7 +29,7 @@ const AddUser = () => {
       phone_number: data.phone_number,
       date_of_birth: data.date_of_birth,
       role_id: data.role_id,
-      counter_id: data.counter_id,
+      counter_id: (selectedRole !== '2') ? data.counter_id : null,
     });
   };
 
@@ -135,6 +138,11 @@ const AddUser = () => {
               {...register("role_id", {
                 required: MESS.ERROR_ROLE,
               })}
+              onChange={(e) => {
+                const selectedRoleId = e.target.value;
+                setSelectedRole(selectedRoleId);
+              }}
+              defaultValue=""
             >
               <option value="" disabled>
                 Select one
@@ -150,31 +158,34 @@ const AddUser = () => {
           </div>
         </div>
 
-        <div className="flex m-4">
-          <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
-          <div className="w-3/4">
-            <select
-              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-              {...register("counter_id", {
-                required: MESS.ERROR_COUNTER,
-              })}
-            >
-              <option value="" disabled>
-                Select one
-              </option>
-              {counterList?.map((counter) => (
-                <option key={counter.id} value={counter.id}>
-                  {counter.counterName}
+        {(selectedRole !== '2') ?
+          <div className="flex m-4">
+            <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
+            <div className="w-3/4">
+              <select
+                className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+                {...register("counter_id", {
+                  required: MESS.ERROR_COUNTER,
+                })}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select one
                 </option>
-              ))}
-            </select>
-            {errors.counter_id && (
-              <span className="text-red-500 text-sm">
-                {errors.counter_id.message}
-              </span>
-            )}
-          </div>
-        </div>
+                {counterList?.map((counter) => (
+                  <option key={counter.id} value={counter.id}>
+                    {counter.counterName}
+                  </option>
+                ))}
+              </select>
+              {selectedRole === '2' || errors.counter_id && (
+                <span className="text-red-500 text-sm">
+                  {errors.counter_id.message}
+                </span>
+              )}
+            </div>
+          </div> : <div></div>
+        }
 
         <div className="flex flex-row gap-1 justify-center p-4">
           <ConfigAntdButton type="danger">

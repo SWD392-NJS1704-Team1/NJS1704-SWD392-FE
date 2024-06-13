@@ -1,11 +1,15 @@
 import UserManagementListAPI from '@/services/userService';
 import { useQuery } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
 
 const useGetUsersList = () => {
+
+  const searchValue = useSelector((state) => state.user.searchValue);
+
   return useQuery({
-    queryKey: ['getUsersList'],
+    queryKey: ['getUsersList', searchValue],
     queryFn: () =>
-      UserManagementListAPI.GetUsersList({ keyword: '', page: 0, limit: 100 }),
+      UserManagementListAPI.GetUsersList({ keyword: searchValue, page: 0, limit: 100 }),
   });
 };
 

@@ -107,10 +107,9 @@ const GetUsersList = async ({ keyword, page, limit }) => {
     const queryParams = `page=${page}&limit=${limit}`;
     let value = '';
 
-    if (value && value.length > 0) {
+    if (keyword && keyword.length > 0) {
       value = `keyword=${keyword}&`;
     }
-
     const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
 
     const data = res.users.map((item) => ({
