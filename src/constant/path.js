@@ -1,6 +1,7 @@
 const USER_MANAGEMENT = '/user-management';
 const CUSTOMER = '/customers';
 const PRODUCT = '/products';
+const COUNTER = '/counter';
 
 export const PATHS = {
   HOME: '/',
@@ -17,5 +18,8 @@ export const PATHS = {
   },
   CUSTOMER: {
     INDEX: CUSTOMER,
+  },
+  COUNTER: {
+    INDEX: COUNTER,
   },
 };
