@@ -4,6 +4,7 @@ import {
   DELETEUSER,
   GETUSERINFO,
   LOGIN,
+  RESETPASSWORD,
   UPDATEUSER,
   USERLIST,
 } from '@/constant/environments';
@@ -140,6 +141,25 @@ const GetCounterList = async () => {
   }
 };
 
+const ResetPassword = async ({
+  id,
+  oldPassword,
+  password,
+  retypePassword
+}) => {
+  try {
+    const data = await axiosInstance.put(RESETPASSWORD + '/' + id, {
+      oldPassword,
+      password,
+      retypePassword
+    });
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
 const GetCurrentUser = () => {
   return axiosInstance.get(`/users/profile`, {
     headers: { Authorization: `Bearer ${tokenMethod.get()?.accessToken}` },
@@ -155,6 +175,7 @@ const UserManagementListAPI = {
   GetUserInfo,
   UpdateUser,
   GetCounterList,
+  ResetPassword,
 };
 
 export default UserManagementListAPI;
