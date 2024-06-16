@@ -21,10 +21,12 @@ axiosInstance.interceptors.response.use(
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
+      window.location.href = '/login';
       try {
         // Gọi API để cập nhật token mới
-        const res = await axiosInstance.put(`users/refresh`, {
-          refreshToken: tokenMethod.get()?.refreshToken,
+        const res = await authService.login({
+          email,
+          password,
         });
         const { token: accessToken, refresh_token: refreshToken } =
           res.data.data || {};
@@ -33,7 +35,6 @@ axiosInstance.interceptors.response.use(
           accessToken,
           refreshToken,
         });
-
         // Thay đổi token trong header của yêu cầu ban đầu
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
