@@ -1,22 +1,21 @@
-import { Button } from "antd";
-import ConfigAntdButton from "../Button/ConfigAntdButton";
-import { useDispatch } from "react-redux";
-import { MESS, REGEX } from "@/constant/validate";
-import { useForm } from "react-hook-form";
-import { useGetUserInfo } from "./useGetUserInfo";
-import { closePopup } from "@/store/reducers/popupReducer";
-import { useEffect, useState } from "react";
-import useUpdateUser from "./useUpdateUser";
-import useGetCounterList from "@/utils/useGetCounterList";
-
+import { Button } from 'antd';
+import ConfigAntdButton from '../Button/ConfigAntdButton';
+import { useDispatch } from 'react-redux';
+import { MESS, REGEX } from '@/constant/validate';
+import { useForm } from 'react-hook-form';
+import { useGetUserInfo } from './useGetUserInfo';
+import { closePopup } from '@/store/reducers/popupReducer';
+import { useEffect, useState } from 'react';
+import useUpdateUser from './useUpdateUser';
+import useGetCounterList from '@/utils/useGetCounterList';
 
 const UpdateUser = ({ id }) => {
-    const dispatch = useDispatch();
-    const { data } = useGetUserInfo(id);
-    const updateUser = useUpdateUser();
-    const { data: counterList, isLoading } = useGetCounterList();
-    let temp = (data?.role.id) ? data?.role.id : 2
-    const [selectedRole, setSelectedRole] = useState(temp)
+  const dispatch = useDispatch();
+  const { data } = useGetUserInfo(id);
+  const updateUser = useUpdateUser();
+  const { data: counterList, isLoading } = useGetCounterList();
+  let temp = data?.role.id ? data?.role.id : 2;
+  const [selectedRole, setSelectedRole] = useState(temp);
 
   const {
     register,
@@ -29,33 +28,33 @@ const UpdateUser = ({ id }) => {
     dispatch(closePopup('Update User'));
   };
 
-    const onSubmit = (data) => {
-        updateUser.mutate({
-            id: id,
-            fullname: data.fullname,
-            email: data.email,
-            phone_number: data.phone_number,
-            date_of_birth: data.date_of_birth,
-            role_id: data.role_id,
-            counter_id: (selectedRole !== 2) ? data.counter_id : null,
-        });
-    };
+  const onSubmit = (data) => {
+    updateUser.mutate({
+      id: id,
+      fullname: data.fullname,
+      email: data.email,
+      phone_number: data.phone_number,
+      date_of_birth: data.date_of_birth,
+      role_id: data.role_id,
+      counter_id: selectedRole !== 2 ? data.counter_id : null,
+    });
+  };
 
-    useEffect(() => {
-        if (data) {
-            setSelectedRole(temp)
-            reset({
-                fullname: data.fullname,
-                email: data.email,
-                phone_number: data.phone_number,
-                date_of_birth: data.date_of_birth,
-                role_id: data?.role.id,
-                counter_id: null
-            })
-        }
-    }, [data, reset, temp])
+  useEffect(() => {
+    if (data) {
+      setSelectedRole(temp);
+      reset({
+        fullname: data.fullname,
+        email: data.email,
+        phone_number: data.phone_number,
+        date_of_birth: data.date_of_birth,
+        role_id: data?.role.id,
+        counter_id: null,
+      });
+    }
+  }, [data, reset, temp]);
 
-    console.log(selectedRole, temp);
+  console.log(selectedRole, temp);
 
   if (isLoading) {
     return <div>Loading</div>;
@@ -150,62 +149,64 @@ const UpdateUser = ({ id }) => {
           </div>
         </div>
 
-                <div className="flex m-4">
-                    <h1 className="w-1/4 flex font-bold items-center mr-4">Role</h1>
-                    <div className="w-3/4">
-                        <select
-                            className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                            {...register("role_id", {
-                                required: MESS.ERROR_ROLE,
-                            })}
-                            onChange={(e) => {
-                                const selectedRoleId = e.target.value;
-                                temp = selectedRoleId
-                                setSelectedRole(temp);
-                            }}
-                        >
-                            <option value="" disabled>
-                                Select one
-                            </option>
-                            <option value={2}>Manager</option>
-                            <option value={3}>Staff</option>
-                        </select>
-                        {errors.role_id && (
-                            <span className="text-red-500 text-sm">
-                                {errors.role_id.message}
-                            </span>
-                        )}
-                    </div>
-                </div>
+        <div className="flex m-4">
+          <h1 className="w-1/4 flex font-bold items-center mr-4">Role</h1>
+          <div className="w-3/4">
+            <select
+              className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+              {...register('role_id', {
+                required: MESS.ERROR_ROLE,
+              })}
+              onChange={(e) => {
+                const selectedRoleId = e.target.value;
+                temp = selectedRoleId;
+                setSelectedRole(temp);
+              }}
+            >
+              <option value="" disabled>
+                Select one
+              </option>
+              <option value={2}>Manager</option>
+              <option value={3}>Staff</option>
+            </select>
+            {errors.role_id && (
+              <span className="text-red-500 text-sm">
+                {errors.role_id.message}
+              </span>
+            )}
+          </div>
+        </div>
 
-                {(selectedRole !== 2 && temp !== 2) ?
-                    <div className="flex m-4">
-                        <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
-                        <div className="w-3/4">
-                            <select
-                                className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                                {...register("counter_id", {
-                                    required: MESS.ERROR_COUNTER,
-                                })}
-                                defaultValue=""
-                            >
-                                <option value="" disabled>
-                                    Select one
-                                </option>
-                                {counterList?.map((counter) => (
-                                    <option key={counter.id} value={counter.id}>
-                                        {counter.counterName}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.counter_id && (
-                                <span className="text-red-500 text-sm">
-                                    {errors.counter_id.message}
-                                </span>
-                            )}
-                        </div>
-                    </div> : <div></div>
-                }
+        {selectedRole !== 2 && temp !== 2 ? (
+          <div className="flex m-4">
+            <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
+            <div className="w-3/4">
+              <select
+                className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+                {...register('counter_id', {
+                  required: MESS.ERROR_COUNTER,
+                })}
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select one
+                </option>
+                {counterList?.map((counter) => (
+                  <option key={counter.id} value={counter.id}>
+                    {counter.counterName}
+                  </option>
+                ))}
+              </select>
+              {errors.counter_id && (
+                <span className="text-red-500 text-sm">
+                  {errors.counter_id.message}
+                </span>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
 
         <div className="flex flex-row gap-1 justify-center p-4">
           <ConfigAntdButton type="danger">
