@@ -1,10 +1,12 @@
 import {
   ApartmentOutlined,
   CloseCircleOutlined,
+  CustomerServiceFilled,
   DashboardOutlined,
   EditOutlined,
   PercentageOutlined,
   ProductOutlined,
+  ProjectOutlined,
   ShopOutlined,
   SyncOutlined,
   UserOutlined,
@@ -19,6 +21,7 @@ import UpdateCustomer from '@/components/UpdateCustomer/UpdateCustomer';
 import ResetPassword from '@/components/ResetUserPassword/ResetPassword';
 import DeleteCounter from '@/components/DeleteCounter/DeleteCounter';
 import UpdateCounter from '@/components/UpdateCounter/UpdateCounter';
+import CustomerService from '@/services/customerService';
 
 // Navigation Sider
 export const MenuItems = [
@@ -41,6 +44,11 @@ export const MenuItems = [
     label: 'Customer',
     key: PATHS.CUSTOMER.INDEX,
     icon: <UserOutlined />,
+  },
+  {
+    label: 'Customer Policy',
+    key: PATHS.CUSTOMER_POLICY.INDEX,
+    icon: <ProjectOutlined/>,
   },
   {
     label: 'User management',

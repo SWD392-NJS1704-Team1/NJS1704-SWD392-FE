@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ForgotPage/ResetPassword";
 import CustomerList from "./pages/CustomerManagement/CustomerManagement";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import CounterManagement from "./pages/CounterManagement/CounterManagement";
+import PolicyManagement from "./pages/PolicyManagement/PolicyManagement";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
             <Route path={PATHS.CUSTOMER.INDEX} element={<CustomerList />} />
             <Route path={PATHS.PRODUCT.INDEX} element={<ProductPage />} />
             <Route path={PATHS.COUNTER.INDEX} element={<CounterManagement />} />
+            <Route path={PATHS.CUSTOMER_POLICY.INDEX} element={<PolicyManagement />} />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

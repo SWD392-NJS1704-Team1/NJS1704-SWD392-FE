@@ -187,3 +187,53 @@ export const CounterColumn = [
     },
   },
 ];
+
+export const CustomersPolicyColumn = [
+  {
+    title: 'ID',
+    dataIndex: 'customer_id',
+    key: 'customer_id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Full Name',
+    dataIndex: 'fullName',
+    key: 'fullName',
+  },
+  {
+    title: 'Discount',
+    dataIndex: 'discount_rate',
+    key: 'discount_rate',
+  },
+  {
+    title: 'Created At',
+    dataIndex: 'valid_from',
+    key: 'valid_from',
+  },
+  {
+    title: 'Valid Date',
+    dataIndex: 'valid_to',
+    key: 'valid_to',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'approval_required',
+    key: 'approval_required',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      // const items = ViewCustomerPolicyOptionDropdown(record.id, record.fullName);
+      return <Dropdown items={items} />;
+    },
+  },
+];
