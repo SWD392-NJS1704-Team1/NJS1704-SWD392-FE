@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {};
 
@@ -8,13 +8,13 @@ const popupSlice = createSlice({
   initialState,
   reducers: {
     openPopup: (state, action) => {
-      state[action.payload] = true
+      state[action.payload] = true;
     },
     closePopup: (state, action) => {
-      state[action.payload] = false
-    }
-  }
-})
+      state[action.payload] = false;
+    },
+  },
+});
 
 // Extract the action creators object and the reducer
 const { actions, reducer: popupReducer } = popupSlice;

@@ -22,6 +22,8 @@ import DeleteCounter from '@/components/DeleteCounter/DeleteCounter';
 import UpdateCounter from '@/components/UpdateCounter/UpdateCounter';
 import UpdateProduct from '@/components/UpdateProduct/UpdateProduct';
 import DeleteProduct from '@/components/DeleteProduct/DeleteProduct';
+import UpdateTypePrices from '@/components/UpdateTypePrices/UpdateTypePrices';
+import DeleteTypePrice from '@/components/DeleteTypePrice/DeleteTypePrice';
 
 // Navigation Sider
 export const MenuItems = [
@@ -168,6 +170,27 @@ export const ViewProductOptionDropdown = (id, product_name) => [
         content={<DeleteProduct id={id} product_name={product_name} />}
       >
         Delete Product
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+];
+
+export const ViewTypePricesOptionDropdown = (id) => [
+  {
+    label: (
+      <Popup title="Update Type Price" content={<UpdateTypePrices id={id} />}>
+        Update Type Price
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup title="Delete Type Price" content={<DeleteTypePrice id={id} />}>
+        Delete Type Price
       </Popup>
     ),
     key: 'delete',

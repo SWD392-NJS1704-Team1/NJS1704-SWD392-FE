@@ -5,14 +5,23 @@ import {
   GET_TYPE_PRICE_BY_ID,
   UPDATE_TYPE_PRICE,
 } from '@/constant/environments';
+import axiosInstance from '@/utils/axiosInstance';
+import dayjs from 'dayjs';
 
 const handleGetAllTypePrices = async () => {
   try {
-    const data = await axiosInstance.get(GET_ALL_TYPE_PRICE);
-    return data;
+    const res = await axiosInstance.get(GET_ALL_TYPE_PRICE);
+    console.log(res);
+    // Convert timestamps to dates
+    const formattedData = res.map((item) => ({
+      ...item,
+      date: dayjs(item.date).format('DD/MM/YYYY'),
+    }));
+
+    return formattedData;
   } catch (error) {
-    const errorResponse = error;
-    throw new Error(errorResponse.response?.data.message);
+    const errorMessage = error.response?.data?.message || error.message;
+    throw new Error(errorMessage);
   }
 };
 
@@ -41,8 +50,8 @@ const handleCreateTypePrice = async ({
     });
     return data;
   } catch (error) {
-    const errorResponse = error;
-    throw new Error(errorResponse.response?.data.message);
+    const errorMessage = error.response?.data?.message || error.message;
+    throw new Error(errorMessage);
   }
 };
 

@@ -1,19 +1,19 @@
-import { MESS, REGEX } from "@/constant/validate";
-import { closePopup } from "@/store/reducers/popupReducer";
-import { Button } from "antd";
-import { useForm } from "react-hook-form";
-import ConfigAntdButton from "../Button/ConfigAntdButton";
-import { useDispatch } from "react-redux";
-import useAddUser from "@/utils/useAddUser";
-import useGetCounterList from "@/utils/useGetCounterList";
-import { useState } from "react";
+import { MESS, REGEX } from '@/constant/validate';
+import { closePopup } from '@/store/reducers/popupReducer';
+import { Button } from 'antd';
+import { useForm } from 'react-hook-form';
+import ConfigAntdButton from '../Button/ConfigAntdButton';
+import { useDispatch } from 'react-redux';
+import useAddUser from '@/utils/useAddUser';
+import useGetCounterList from '@/utils/useGetCounterList';
+import { useState } from 'react';
 
 const AddUser = () => {
   const dispatch = useDispatch();
   const addUser = useAddUser();
-  const { data: counterList, isLoading } = useGetCounterList()
+  const { data: counterList, isLoading } = useGetCounterList();
 
-  const [selectedRole, setSelectedRole] = useState('2')
+  const [selectedRole, setSelectedRole] = useState('2');
 
   const {
     register,
@@ -22,23 +22,23 @@ const AddUser = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     addUser.mutate({
       fullname: data.fullname,
       email: data.email,
       phone_number: data.phone_number,
       date_of_birth: data.date_of_birth,
       role_id: data.role_id,
-      counter_id: (selectedRole !== '2') ? data.counter_id : null,
+      counter_id: selectedRole !== '2' ? data.counter_id : null,
     });
   };
 
   const handleCancel = () => {
-    dispatch(closePopup("Create a new User"));
+    dispatch(closePopup('Create a new User'));
   };
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -51,7 +51,7 @@ const AddUser = () => {
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Full name..."
-              {...register("fullname", { required: MESS.ERROR_NAME })}
+              {...register('fullname', { required: MESS.ERROR_NAME })}
             />
             {errors.fullname && (
               <span className="text-red-500 text-sm">
@@ -68,7 +68,7 @@ const AddUser = () => {
               type="email"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Email..."
-              {...register("email", {
+              {...register('email', {
                 required: MESS.ERROR_EMAIL,
                 pattern: {
                   value: REGEX.EMAIL,
@@ -91,7 +91,7 @@ const AddUser = () => {
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Phone number..."
-              {...register("phone_number", {
+              {...register('phone_number', {
                 required: MESS.ERROR_PHONE,
                 pattern: {
                   value: REGEX.PHONE,
@@ -114,7 +114,7 @@ const AddUser = () => {
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Date of birth(DD/MM/YYYY)..."
-              {...register("date_of_birth", {
+              {...register('date_of_birth', {
                 required: MESS.ERROR_DOB,
                 pattern: {
                   value: REGEX.DOB,
@@ -135,7 +135,7 @@ const AddUser = () => {
           <div className="w-3/4">
             <select
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-              {...register("role_id", {
+              {...register('role_id', {
                 required: MESS.ERROR_ROLE,
               })}
               onChange={(e) => {
@@ -158,13 +158,13 @@ const AddUser = () => {
           </div>
         </div>
 
-        {(selectedRole !== '2') ?
+        {selectedRole !== '2' ? (
           <div className="flex m-4">
             <h1 className="w-1/4 flex font-bold items-center mr-4">Counter</h1>
             <div className="w-3/4">
               <select
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                {...register("counter_id", {
+                {...register('counter_id', {
                   required: MESS.ERROR_COUNTER,
                 })}
                 defaultValue=""
@@ -178,14 +178,17 @@ const AddUser = () => {
                   </option>
                 ))}
               </select>
-              {selectedRole === '2' || errors.counter_id && (
-                <span className="text-red-500 text-sm">
-                  {errors.counter_id.message}
-                </span>
-              )}
+              {selectedRole === '2' ||
+                (errors.counter_id && (
+                  <span className="text-red-500 text-sm">
+                    {errors.counter_id.message}
+                  </span>
+                ))}
             </div>
-          </div> : <div></div>
-        }
+          </div>
+        ) : (
+          <div></div>
+        )}
 
         <div className="flex flex-row gap-1 justify-center p-4">
           <ConfigAntdButton type="danger">

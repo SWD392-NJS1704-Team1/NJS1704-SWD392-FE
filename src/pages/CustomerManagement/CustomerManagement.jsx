@@ -11,8 +11,7 @@ import { CustomersColumn } from '@/constant/table-column';
 
 const CustomerList = () => {
   const { data } = useGetCustomerList();
-  // const data = null;
-console.log(data)
+// console.log(data)
   return (
     <div>
       <div className="bg-primary w-full flex items-center p-4 mt-1">

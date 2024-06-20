@@ -2,10 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import useAddTypePrice from './useAddTypePrice';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
-import { Button, DatePicker, Input } from 'antd';
+import { Button, DatePicker } from 'antd';
 import { MESS } from '@/constant/validate';
 import { Controller, useForm } from 'react-hook-form';
 import { closePopup } from '@/store/reducers/popupReducer';
+import dayjs from 'dayjs';
 
 const AddTypePrices = () => {
   const dispatch = useDispatch();
@@ -21,16 +22,17 @@ const AddTypePrices = () => {
   const onSubmit = (data) => {
     // console.log(data);
     addTypePrice.mutate({
-      date: data.date,
-      buy_price_per_gram: data.buy_price_per_gram,
-      sell_price_per_gram: data.sell_price_per_gram,
+      date: dayjs(data.date).valueOf(),
+      buy_price_per_gram: parseFloat(data.buy_price_per_gram),
+      sell_price_per_gram: parseFloat(data.sell_price_per_gram),
       type: data.type,
     });
   };
 
   const handleCancel = () => {
-    dispatch(closePopup('Create a new counter'));
+    dispatch(closePopup('Add a new counter'));
   };
+
   return (
     <div className="p-2">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,14 +42,15 @@ const AddTypePrices = () => {
             <Controller
               name="date"
               control={control}
-              defaultValue=""
+              defaultValue={null}
               render={({ field }) => (
                 <>
                   <DatePicker
                     {...field}
-                    id="date"
                     className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                     placeholder="DD/MM/YYYY"
+                    format="DD/MM/YYYY"
+                    onChange={(date) => field.onChange(date)}
                   />
                   {errors.date && (
                     <p className="text-red-500">{errors.date.message}</p>
@@ -67,6 +70,7 @@ const AddTypePrices = () => {
               placeholder="Buy Price..."
               {...register('buy_price_per_gram', {
                 required: MESS.ERROR_TYPE_PRICE_BUY_PRICE,
+                valueAsNumber: true, // Ensure input is handled as a number
               })}
             />
             {errors.buy_price_per_gram && (
@@ -86,6 +90,7 @@ const AddTypePrices = () => {
               placeholder="Sell Price..."
               {...register('sell_price_per_gram', {
                 required: MESS.ERROR_TYPE_PRICE_SELL_PRICE,
+                valueAsNumber: true, // Ensure input is handled as a number
               })}
             />
             {errors.sell_price_per_gram && (

@@ -3,32 +3,13 @@ import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
 import { TypePricesColumn } from '@/constant/table-column';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Pagination, Table, Typography } from 'antd';
+import { Button, Table, Typography } from 'antd';
 import React from 'react';
 import useGetTypePricesList from './useGetTypePricesList';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import queryString from 'query-string';
 import AddTypePrices from '@/components/AddTypePrices/AddTypePrices';
 
-const PRICES_LIMITS = 5;
-
 const TypePricesPage = () => {
-  const { search } = useLocation();
-  // console.log("search", search);
-  const queryObject = queryString.parse(search);
-  const [_, setSearchParams] = useSearchParams();
-  const updateQueryString = (queryObject) => {
-    const newQueryString = queryString.stringify({
-      ...queryObject,
-      limit: PRICES_LIMITS,
-    });
-    setSearchParams(new URLSearchParams(newQueryString));
-  };
-  const onPagiChange = (page) => {
-    updateQueryString({ ...queryObject, page: page });
-  };
-
-  const { data } = useGetTypePricesList(search);
+  const { data } = useGetTypePricesList();
   return (
     <>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
@@ -57,9 +38,6 @@ const TypePricesPage = () => {
           </div>
         </div>
         <Table columns={TypePricesColumn} dataSource={data} />
-      </div>
-      <div className="pagination flex items-center justify-center">
-        <Pagination defaultCurrent={1} onChange={onPagiChange} />
       </div>
     </>
   );

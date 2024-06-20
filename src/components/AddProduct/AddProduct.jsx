@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { closePopup } from '@/store/reducers/popupReducer';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
 import { Button } from 'antd';
-import { MESS } from '@/constant/validate';
+import { MESS, REGEX } from '@/constant/validate';
 import useAddProduct from '@/utils/useAddProduct';
 import ComponentLoading from '../ComponentLoading/ComponentLoading';
 import useGetCounterList from '@/utils/useGetCounterList';
@@ -50,10 +50,13 @@ const AddProduct = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-2">
           <div className="">
-            <h3 className="font-bold mb-1">Product Name</h3>
+            <label htmlFor="product_name" className="font-bold mb-1">
+              Product Name
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="text"
+                name="product_name"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Product Name"
                 {...register('product_name', {
@@ -68,10 +71,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Barcode</h3>
+            <label htmlFor="barcode" className="font-bold mb-1">
+              Barcode
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="text"
+                name="barcode"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Barcode"
                 {...register('barcode', {
@@ -86,10 +92,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Quantity</h3>
+            <label htmlFor="quantity" className="font-bold mb-1">
+              Quantity
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="number"
+                name="quantity"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Quantity"
                 {...register('quantity', {
@@ -104,10 +113,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Price Processing</h3>
+            <label htmlFor="price_processing" className="font-bold mb-1">
+              Price Processing
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="number"
+                name="price_processing"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Price Processing"
                 {...register('price_processing', {
@@ -122,10 +134,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Price Stone</h3>
+            <label htmlFor="price_stone" className="font-bold mb-1">
+              Price Stone
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="number"
+                name="price_stone"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Price Stone"
                 {...register('price_stone', {
@@ -140,10 +155,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Weight</h3>
+            <label htmlFor="weight" className="font-bold mb-1">
+              Weight
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="number"
+                name="weight"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Weight Stone"
                 {...register('weight', {
@@ -158,10 +176,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Description</h3>
+            <label htmlFor="description" className="font-bold mb-1">
+              Description
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="text"
+                name="description"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Description"
                 {...register('description', {
@@ -176,15 +197,18 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Upload Image</h3>
+            <label htmlFor="image_url" className="font-bold mb-1">
+              Upload Image
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="url"
+                name="image_url"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 {...register('image_url', {
                   required: MESS.ERROR_PRODUCT_IMAGE,
                   pattern: {
-                    value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/,
+                    value: REGEX.URL_IMG,
                     message: 'URL không hợp lệ',
                   },
                 })}
@@ -197,10 +221,13 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Type</h3>
+            <label htmlFor="type_id" className="font-bold mb-1">
+              Type
+            </label>
             <div className="w-full flex flex-col">
               <input
                 type="number"
+                name="type_id"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Type ID"
                 {...register('type_id', {
@@ -215,7 +242,9 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <h3 className="font-bold mb-1">Counter</h3>
+            <label htmlFor="counter_id" className="font-bold mb-1">
+              Counter
+            </label>
             <div className="w-full flex flex-col">
               <select
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
