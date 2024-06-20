@@ -8,11 +8,13 @@ import useAddProduct from '@/utils/useAddProduct';
 import ComponentLoading from '../ComponentLoading/ComponentLoading';
 import useGetCounterList from '@/utils/useGetCounterList';
 import { useState } from 'react';
+import useGetTypePricesList from '@/pages/TypePricespage/useGetTypePricesList';
 
 const AddProduct = () => {
   const dispatch = useDispatch();
   const addProduct = useAddProduct();
   const { data: counterList, isLoading } = useGetCounterList();
+  const { data: typePriceList } = useGetTypePricesList();
   const [selectedCounter, setSelectedCounter] = useState('');
 
   const {
@@ -225,15 +227,23 @@ const AddProduct = () => {
               Type
             </label>
             <div className="w-full flex flex-col">
-              <input
-                type="number"
-                name="type_id"
+              <select
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                placeholder="Type ID"
                 {...register('type_id', {
                   required: MESS.ERROR_PRODUCT_CATEGORY_ID,
                 })}
-              />
+                value={selectedCounter}
+                onChange={(e) => setSelectedCounter(e.target.value)}
+              >
+                <option value="" disabled>
+                  Select one
+                </option>
+                {typePriceList?.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.type}
+                  </option>
+                ))}
+              </select>
               {errors.type_id && (
                 <span className="text-red-500 text-sm">
                   {errors.type_id.message}
