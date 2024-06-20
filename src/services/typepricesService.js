@@ -71,11 +71,11 @@ const handleDeleteTypePrice = async (id) => {
   }
 };
 
-const typepricesService = {
+const TypePricesService = {
   handleGetAllTypePrices,
   handleGetTypePriceById,
   handleCreateTypePrice,
   handleUpdateTypePrice,
   handleDeleteTypePrice,
 };
-export default typepricesService;
+export default TypePricesService;
