@@ -4,12 +4,22 @@ import SearchBar from '@/components/SearchBar/Search-bar';
 import { TypePricesColumn } from '@/constant/table-column';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Typography } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import useGetTypePricesList from './useGetTypePricesList';
 import AddTypePrices from '@/components/AddTypePrices/AddTypePrices';
 
 const TypePricesPage = () => {
   const { data } = useGetTypePricesList();
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 5,
+    total: data ? data.length : 0,
+  });
+
+  const handleTableChange = (pagination) => {
+    setPagination(pagination);
+  };
+
   return (
     <>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
@@ -17,7 +27,6 @@ const TypePricesPage = () => {
           TYPE PRICES
         </Typography.Title>
       </div>
-      {/* Add your product details and components here */}
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
@@ -37,7 +46,16 @@ const TypePricesPage = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={TypePricesColumn} dataSource={data} />
+        <Table
+          columns={TypePricesColumn}
+          dataSource={data}
+          pagination={{
+            ...pagination,
+            position: ['bottomCenter'],
+            showSizeChanger: false,
+          }}
+          onChange={handleTableChange}
+        />
       </div>
     </>
   );

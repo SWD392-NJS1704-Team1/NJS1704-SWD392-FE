@@ -27,6 +27,9 @@ const useAddTypePrice = () => {
         description: 'Create a new type price failed',
       });
     },
+    onSettled: () => {
+      dispatch(closePopup('Create a new type price'));
+    },
   });
 };
 
