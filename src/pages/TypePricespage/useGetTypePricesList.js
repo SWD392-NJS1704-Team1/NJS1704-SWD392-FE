@@ -1,14 +1,14 @@
-import UserManagementListAPI from '@/services/userService';
+import TypePricesService from '@/services/typepricesService';
 import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 
-const useGetUsersList = () => {
+const useGetTypePricesList = () => {
   const searchValue = useSelector((state) => state.user.searchValue);
 
   return useQuery({
-    queryKey: ['getUsersList', searchValue],
+    queryKey: ['typePrices', searchValue],
     queryFn: () =>
-      UserManagementListAPI.GetUsersList({
+      TypePricesService.handleGetAllTypePrices({
         keyword: searchValue,
         page: 0,
         limit: 5,
@@ -16,4 +16,4 @@ const useGetUsersList = () => {
   });
 };
 
-export default useGetUsersList;
+export default useGetTypePricesList;

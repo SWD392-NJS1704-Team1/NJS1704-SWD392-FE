@@ -102,6 +102,15 @@ export const CustomersColumn = [
 
 export const ProductsColumn = [
   {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
     title: 'Product Name',
     dataIndex: 'product_name',
     key: 'product_name',
@@ -151,6 +160,14 @@ export const ProductsColumn = [
     dataIndex: 'counter_id',
     key: 'counter_id',
   },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      const items = ViewCustomerOptionDropdown(record.id, record.fullName);
+      return <Dropdown items={items} />;
+    },
+  },
 ];
 
 export const CounterColumn = [
@@ -181,6 +198,46 @@ export const CounterColumn = [
     key: 'operation',
     width: 200,
     align: 'center',
+    render: (record) => {
+      const items = ViewCounterOptionDropdown(record.id, record.counterName);
+      return <Dropdown items={items} />;
+    },
+  },
+];
+
+export const TypePricesColumn = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
+  },
+  {
+    title: 'Buy Price Per Gram',
+    dataIndex: 'buy_price_per_gram',
+    key: 'buy_price_per_gram',
+  },
+  {
+    title: 'Sell Price Per Gram',
+    dataIndex: 'sell_price_per_gram',
+    key: 'sell_price_per_gram',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
     render: (record) => {
       const items = ViewCounterOptionDropdown(record.id, record.counterName);
       return <Dropdown items={items} />;

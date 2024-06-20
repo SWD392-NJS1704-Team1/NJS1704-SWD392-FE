@@ -5,8 +5,6 @@ import ConfigAntdButton from '../Button/ConfigAntdButton';
 import { Button } from 'antd';
 import { MESS } from '@/constant/validate';
 import ComponentLoading from '../ComponentLoading/ComponentLoading';
-import useGetCounterList from '@/utils/useGetCounterList';
-import { useState } from 'react';
 import useUpdateProduct from './useUpdateProduct';
 
 const UpdateProduct = () => {
@@ -215,14 +213,25 @@ const UpdateProduct = () => {
           <div className="">
             <h3 className="font-bold mb-1">Type</h3>
             <div className="w-full flex flex-col">
-              <input
+              <select
                 type="number"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Type ID"
                 {...register('type_id', {
                   required: MESS.ERROR_PRODUCT_CATEGORY_ID,
                 })}
-              />
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+              >
+                <option value="" disabled>
+                  --Select Type--
+                </option>
+                {typeList?.map((type) => (
+                  <option key={type.id} value={type.id}>
+                    {type.typeName}
+                  </option>
+                ))}
+              </select>
               {errors.type_id && (
                 <span className="text-red-500 text-sm">
                   {errors.type_id.message}
@@ -242,7 +251,7 @@ const UpdateProduct = () => {
                 onChange={(e) => setSelectedCounter(e.target.value)}
               >
                 <option value="" disabled>
-                  Select one
+                  --Select Counter--
                 </option>
                 {counterList?.map((counter) => (
                   <option key={counter.id} value={counter.id}>
@@ -267,7 +276,7 @@ const UpdateProduct = () => {
           </ConfigAntdButton>
           <ConfigAntdButton>
             <Button type="primary" onClick={handleSubmit(onSubmit)}>
-              Add
+              Update
             </Button>
           </ConfigAntdButton>
         </div>

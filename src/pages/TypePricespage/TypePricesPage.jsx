@@ -1,17 +1,18 @@
-import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
+import { TypePricesColumn } from '@/constant/table-column';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Pagination, Table, Typography } from 'antd';
-import useGetProductsList from './useGetProductsList';
+import React from 'react';
+import useGetTypePricesList from './useGetTypePricesList';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import queryString from 'query-string';
-import { ProductsColumn } from '@/constant/table-column';
+import AddTypePrices from '@/components/AddTypePrices/AddTypePrices';
 
-const PRODUCT_LIMITS = 5;
+const PRICES_LIMITS = 5;
 
-const ProductPage = () => {
+const TypePricesPage = () => {
   const { search } = useLocation();
   // console.log("search", search);
   const queryObject = queryString.parse(search);
@@ -19,7 +20,7 @@ const ProductPage = () => {
   const updateQueryString = (queryObject) => {
     const newQueryString = queryString.stringify({
       ...queryObject,
-      limit: PRODUCT_LIMITS,
+      limit: PRICES_LIMITS,
     });
     setSearchParams(new URLSearchParams(newQueryString));
   };
@@ -27,13 +28,12 @@ const ProductPage = () => {
     updateQueryString({ ...queryObject, page: page });
   };
 
-  const { data } = useGetProductsList(search);
-
+  const { data } = useGetTypePricesList(search);
   return (
     <>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
         <Typography.Title level={3} type="secondary">
-          PRODUCTS
+          TYPE PRICES
         </Typography.Title>
       </div>
       {/* Add your product details and components here */}
@@ -43,20 +43,20 @@ const ProductPage = () => {
             <SearchBar />
           </div>
           <div className="flex">
-            <Popup title="Add a new Product" content={<AddProduct />}>
+            <Popup title="Add a new Product" content={<AddTypePrices />}>
               <ConfigAntdButton>
                 <Button
                   type="primary"
                   className="hover:"
                   icon={<PlusCircleOutlined />}
                 >
-                  Add Product
+                  Add Type Price
                 </Button>
               </ConfigAntdButton>
             </Popup>
           </div>
         </div>
-        <Table columns={ProductsColumn} dataSource={data?.productsData} />
+        <Table columns={TypePricesColumn} dataSource={data} />
       </div>
       <div className="pagination flex items-center justify-center">
         <Pagination defaultCurrent={1} onChange={onPagiChange} />
@@ -65,4 +65,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default TypePricesPage;
