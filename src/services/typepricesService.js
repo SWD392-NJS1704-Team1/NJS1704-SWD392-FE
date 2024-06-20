@@ -11,7 +11,6 @@ import dayjs from 'dayjs';
 const handleGetAllTypePrices = async () => {
   try {
     const res = await axiosInstance.get(GET_ALL_TYPE_PRICE);
-    console.log(res);
     // Convert timestamps to dates
     const formattedData = res.map((item) => ({
       ...item,

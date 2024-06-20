@@ -20,8 +20,8 @@ const useAddTypePrice = () => {
         description: 'Create a new type price successfully',
       });
     },
-    onError: () => {
-      console.log(error);
+    onError: (error) => {
+      console.log('Mutation failed:', error);
       notification.error({
         message: 'Create failed',
         description: 'Create a new type price failed',
