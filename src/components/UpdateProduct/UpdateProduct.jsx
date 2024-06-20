@@ -3,29 +3,28 @@ import { useForm } from 'react-hook-form';
 import { closePopup } from '@/store/reducers/popupReducer';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
 import { Button } from 'antd';
-import { MESS, REGEX } from '@/constant/validate';
-import useAddProduct from '@/utils/useAddProduct';
+import { MESS } from '@/constant/validate';
 import ComponentLoading from '../ComponentLoading/ComponentLoading';
-import useGetCounterList from '@/utils/useGetCounterList';
-import { useState } from 'react';
-import useGetTypePricesList from '@/pages/TypePricespage/useGetTypePricesList';
+import useUpdateProduct from './useUpdateProduct';
 
-const AddProduct = () => {
+const UpdateProduct = () => {
   const dispatch = useDispatch();
-  const addProduct = useAddProduct();
-  const { data: counterList, isLoading } = useGetCounterList();
-  const { data: typePriceList } = useGetTypePricesList();
-  const [selectedCounter, setSelectedCounter] = useState('');
+  const { data } = useGetUserInfo(id);
+  const updateProduct = useUpdateProduct();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
+  const handleCancel = () => {
+    dispatch(closePopup('Update User'));
+  };
+
   const onSubmit = (data) => {
-    // console.log(data);
-    addProduct.mutate({
+    updateProduct.mutate({
       product_name: data.product_name,
       barcode: data.barcode,
       quantity: data.quantity,
@@ -39,9 +38,22 @@ const AddProduct = () => {
     });
   };
 
-  const handleCancel = () => {
-    dispatch(closePopup('Create a new Product'));
-  };
+  useEffect(() => {
+    if (data) {
+      reset({
+        product_name: data.product_name,
+        barcode: data.barcode,
+        quantity: data.quantity,
+        price_processing: data.price_processing,
+        price_stone: data.price_stone,
+        weight: data.weight,
+        description: data.description,
+        image_url: data.image_url,
+        type_id: data.type_id,
+        counter_id: data.counter_id,
+      });
+    }
+  }, [data, reset]);
 
   if (isLoading) {
     return <ComponentLoading />;
@@ -52,13 +64,10 @@ const AddProduct = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-2">
           <div className="">
-            <label htmlFor="product_name" className="font-bold mb-1">
-              Product Name
-            </label>
+            <h3 className="font-bold mb-1">Product Name</h3>
             <div className="w-full flex flex-col">
               <input
                 type="text"
-                name="product_name"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Product Name"
                 {...register('product_name', {
@@ -73,13 +82,10 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="barcode" className="font-bold mb-1">
-              Barcode
-            </label>
+            <h3 className="font-bold mb-1">Barcode</h3>
             <div className="w-full flex flex-col">
               <input
                 type="text"
-                name="barcode"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Barcode"
                 {...register('barcode', {
@@ -94,13 +100,10 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="quantity" className="font-bold mb-1">
-              Quantity
-            </label>
+            <h3 className="font-bold mb-1">Quantity</h3>
             <div className="w-full flex flex-col">
               <input
                 type="number"
-                name="quantity"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Quantity"
                 {...register('quantity', {
@@ -115,13 +118,10 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="price_processing" className="font-bold mb-1">
-              Price Processing
-            </label>
+            <h3 className="font-bold mb-1">Price Processing</h3>
             <div className="w-full flex flex-col">
               <input
                 type="number"
-                name="price_processing"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Price Processing"
                 {...register('price_processing', {
@@ -136,13 +136,10 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="price_stone" className="font-bold mb-1">
-              Price Stone
-            </label>
+            <h3 className="font-bold mb-1">Price Stone</h3>
             <div className="w-full flex flex-col">
               <input
                 type="number"
-                name="price_stone"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Price Stone"
                 {...register('price_stone', {
@@ -157,13 +154,10 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="weight" className="font-bold mb-1">
-              Weight
-            </label>
+            <h3 className="font-bold mb-1">Weight</h3>
             <div className="w-full flex flex-col">
               <input
                 type="number"
-                name="weight"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Weight Stone"
                 {...register('weight', {
@@ -178,13 +172,10 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="description" className="font-bold mb-1">
-              Description
-            </label>
+            <h3 className="font-bold mb-1">Description</h3>
             <div className="w-full flex flex-col">
               <input
                 type="text"
-                name="description"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 placeholder="Description"
                 {...register('description', {
@@ -199,18 +190,15 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="image_url" className="font-bold mb-1">
-              Upload Image
-            </label>
+            <h3 className="font-bold mb-1">Upload Image</h3>
             <div className="w-full flex flex-col">
               <input
                 type="url"
-                name="image_url"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
                 {...register('image_url', {
                   required: MESS.ERROR_PRODUCT_IMAGE,
                   pattern: {
-                    value: REGEX.URL_IMG,
+                    value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/,
                     message: 'URL không hợp lệ',
                   },
                 })}
@@ -223,24 +211,24 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="type_id" className="font-bold mb-1">
-              Type
-            </label>
+            <h3 className="font-bold mb-1">Type</h3>
             <div className="w-full flex flex-col">
               <select
+                type="number"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
+                placeholder="Type ID"
                 {...register('type_id', {
                   required: MESS.ERROR_PRODUCT_CATEGORY_ID,
                 })}
-                value={selectedCounter}
-                onChange={(e) => setSelectedCounter(e.target.value)}
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
               >
                 <option value="" disabled>
-                  Select one
+                  --Select Type--
                 </option>
-                {typePriceList?.map((type) => (
+                {typeList?.map((type) => (
                   <option key={type.id} value={type.id}>
-                    {type.type}
+                    {type.typeName}
                   </option>
                 ))}
               </select>
@@ -252,9 +240,7 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="">
-            <label htmlFor="counter_id" className="font-bold mb-1">
-              Counter
-            </label>
+            <h3 className="font-bold mb-1">Counter</h3>
             <div className="w-full flex flex-col">
               <select
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
@@ -265,7 +251,7 @@ const AddProduct = () => {
                 onChange={(e) => setSelectedCounter(e.target.value)}
               >
                 <option value="" disabled>
-                  Select one
+                  --Select Counter--
                 </option>
                 {counterList?.map((counter) => (
                   <option key={counter.id} value={counter.id}>
@@ -290,7 +276,7 @@ const AddProduct = () => {
           </ConfigAntdButton>
           <ConfigAntdButton>
             <Button type="primary" onClick={handleSubmit(onSubmit)}>
-              Add
+              Update
             </Button>
           </ConfigAntdButton>
         </div>
@@ -299,4 +285,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

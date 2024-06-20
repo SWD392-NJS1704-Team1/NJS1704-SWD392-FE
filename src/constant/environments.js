@@ -27,7 +27,11 @@ export const GET_PRODUCT_BY_COUNTER = import.meta.env
   .VITE_GET_PRODUCT_BY_COUNTER;
 
 // TypePrice API
-export const TYPEPRICES = import.meta.env.VITE_TYPE_PRICES;
+export const GET_ALL_TYPE_PRICE = import.meta.env.VITE_GET_ALL_TYPE_PRICE;
+export const ADD_TYPE_PRICE = import.meta.env.VITE_ADD_TYPE_PRICE;
+export const DELETE_TYPE_PRICE = import.meta.env.VITE_DELETE_TYPE_PRICE;
+export const UPDATE_TYPE_PRICE = import.meta.env.VITE_UPDATE_TYPE_PRICE;
+export const GET_TYPE_PRICE_BY_ID = import.meta.env.VITE_GET_TYPE_PRICE_BY_ID;
 
 // Counter API
 export const COUNTERLIST = import.meta.env.VITE_GET_COUNTER_LIST_API;

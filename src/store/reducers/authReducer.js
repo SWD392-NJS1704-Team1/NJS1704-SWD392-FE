@@ -1,7 +1,7 @@
-import { authService } from "@/services/authService";
-import tokenMethod from "@/utils/token";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { message } from "antd";
+import { authService } from '@/services/authService';
+import tokenMethod from '@/utils/token';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { message } from 'antd';
 
 const initialState = {
   profile: null,
@@ -13,12 +13,12 @@ const initialState = {
 
 export const authSlice = createSlice({
   initialState,
-  name: "auth",
+  name: 'auth',
   reducers: {
     handleLogout: (state) => {
       tokenMethod.remove();
       state.profile = null;
-      message.success("Đăng xuất thành công");
+      message.success('Đăng xuất thành công');
     },
   },
   extraReducers: (builder) => {
@@ -54,7 +54,7 @@ export const { handleLogout, handleShowModal, handleCloseModal } = actions;
 export default authReducer;
 
 export const handleLogin = createAsyncThunk(
-  "auth/handleLogin",
+  'auth/handleLogin',
   async (payload, thunkApi) => {
     try {
       const loginRes = await authService.login(payload);
@@ -65,12 +65,12 @@ export const handleLogin = createAsyncThunk(
         refreshToken,
       });
       // thunkApi.dispatch(handleGetProfile());
-      message.success("Đăng nhập thành công");
+      message.success('Đăng nhập thành công');
       return true;
     } catch (error) {
       const errorInfo = error?.response?.data;
-      if (errorInfo.message === "FAIL") {
-        message.error("Username hoặc password không đúng");
+      if (errorInfo.message === 'FAIL') {
+        message.error('Username hoặc password không đúng');
       }
       return thunkApi.rejectWithValue(errorInfo);
     }
@@ -78,7 +78,7 @@ export const handleLogin = createAsyncThunk(
 );
 
 export const handleGetProfile = createAsyncThunk(
-  "auth/getProfile",
+  'auth/getProfile',
   async (_, thunkApi) => {
     if (tokenMethod.get()) {
       try {

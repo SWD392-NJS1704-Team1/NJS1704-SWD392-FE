@@ -30,7 +30,7 @@ const ProductPage = () => {
   const { data } = useGetProductsList(search);
 
   return (
-    <div>
+    <>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
         <Typography.Title level={3} type="secondary">
           PRODUCTS
@@ -61,7 +61,7 @@ const ProductPage = () => {
       <div className="pagination flex items-center justify-center">
         <Pagination defaultCurrent={1} onChange={onPagiChange} />
       </div>
-    </div>
+    </>
   );
 };
 

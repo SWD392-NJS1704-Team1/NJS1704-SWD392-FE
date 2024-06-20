@@ -140,17 +140,12 @@ const GetCounterList = async () => {
   }
 };
 
-const ResetPassword = async ({
-  id,
-  oldPassword,
-  password,
-  retypePassword
-}) => {
+const ResetPassword = async ({ id, oldPassword, password, retypePassword }) => {
   try {
     const data = await axiosInstance.put(RESETPASSWORD + '/' + id, {
       oldPassword,
       password,
-      retypePassword
+      retypePassword,
     });
     return data;
   } catch (error) {

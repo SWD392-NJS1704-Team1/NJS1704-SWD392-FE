@@ -1,4 +1,8 @@
-import { ADD_PRODUCT, PRODUCTS_LIST } from '@/constant/environments';
+import {
+  ADD_PRODUCT,
+  DELETE_PRODUCT,
+  PRODUCTS_LIST,
+} from '@/constant/environments';
 import axiosInstance from '@/utils/axiosInstance';
 
 const handleAddProduct = async ({
@@ -52,8 +56,55 @@ const getAllProducts = async (keyword, page, limit) => {
     throw new Error(errorResponse.response?.data.message);
   }
 };
+
+const deleteProduct = async (productId) => {
+  try {
+    const endpoint = DELETE_PRODUCT;
+    const res = await axiosInstance.delete(`${endpoint}/${productId}`);
+    return res;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
+const updateProduct = async ({
+  id,
+  product_name,
+  barcode,
+  quantity,
+  price_processing,
+  price_stone,
+  weight,
+  description,
+  image_url,
+  type_id,
+  counter_id,
+}) => {
+  try {
+    const res = await axiosInstance.put(`${UPDATE_PRODUCT}/${id}`, {
+      product_name,
+      barcode,
+      quantity,
+      price_processing,
+      price_stone,
+      weight,
+      description,
+      image_url,
+      type_id,
+      counter_id,
+    });
+    return res;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
 const ProductService = {
   getAllProducts,
   handleAddProduct,
+  deleteProduct,
+  updateProduct,
 };
 export default ProductService;

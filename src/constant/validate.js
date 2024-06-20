@@ -2,6 +2,7 @@ export const REGEX = {
   PHONE: /^((84[3|5|7|8|9])|(0[3|5|7|8|9]))[0-9]{8}$/,
   EMAIL: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
   DOB: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d\d$/,
+  URL_IMG: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/,
 };
 
 export const Length_Password = 3;
@@ -36,4 +37,8 @@ export const MESS = {
   ERROR_OLD_PASSWORD: 'Please enter old password.',
   ERROR_NEW_PASSWORD: 'Please enter new password.',
   ERROR_CONFIRM_PASSWORD: 'Please enter confirm password.',
+  ERROR_TYPE_PRICE_DATE: 'Please enter date.',
+  ERROR_TYPE_PRICE_BUY_PRICE: 'Please enter buy price per gram.',
+  ERROR_TYPE_PRICE_SELL_PRICE: 'Please enter sell price per gram.',
+  ERROR_TYPE_PRICE_TYPE: 'Please enter type.',
 };

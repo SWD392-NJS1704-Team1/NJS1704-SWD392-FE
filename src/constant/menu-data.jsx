@@ -3,6 +3,7 @@ import {
   CloseCircleOutlined,
   DashboardOutlined,
   EditOutlined,
+  MoneyCollectOutlined,
   PercentageOutlined,
   ProductOutlined,
   ShopOutlined,
@@ -19,6 +20,10 @@ import UpdateCustomer from '@/components/UpdateCustomer/UpdateCustomer';
 import ResetPassword from '@/components/ResetUserPassword/ResetPassword';
 import DeleteCounter from '@/components/DeleteCounter/DeleteCounter';
 import UpdateCounter from '@/components/UpdateCounter/UpdateCounter';
+import UpdateProduct from '@/components/UpdateProduct/UpdateProduct';
+import DeleteProduct from '@/components/DeleteProduct/DeleteProduct';
+import UpdateTypePrices from '@/components/UpdateTypePrices/UpdateTypePrices';
+import DeleteTypePrice from '@/components/DeleteTypePrice/DeleteTypePrice';
 
 // Navigation Sider
 export const MenuItems = [
@@ -51,6 +56,11 @@ export const MenuItems = [
     label: 'Counter',
     key: 'counter',
     icon: <WalletFilled />,
+  },
+  {
+    label: 'Type Prices',
+    key: 'type-prices',
+    icon: <MoneyCollectOutlined />,
   },
   {
     label: 'Promotion',
@@ -117,7 +127,10 @@ export const ViewCustomerOptionDropdown = (id, name) => [
 export const ViewCounterOptionDropdown = (id, name) => [
   {
     label: (
-      <Popup title="Update Counter" content={<UpdateCounter id={id} name={name} />}>
+      <Popup
+        title="Update Counter"
+        content={<UpdateCounter id={id} name={name} />}
+      >
         Update Counter
       </Popup>
     ),
@@ -126,8 +139,58 @@ export const ViewCounterOptionDropdown = (id, name) => [
   },
   {
     label: (
-      <Popup title="Delete Counter" content={<DeleteCounter id={id} name={name} />}>
+      <Popup
+        title="Delete Counter"
+        content={<DeleteCounter id={id} name={name} />}
+      >
         Delete Counter
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+];
+export const ViewProductOptionDropdown = (id, product_name) => [
+  {
+    label: (
+      <Popup
+        title="Update Product"
+        content={<UpdateProduct id={id} product_name={product_name} />}
+      >
+        Update Product
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup
+        title="Delete Product"
+        content={<DeleteProduct id={id} product_name={product_name} />}
+      >
+        Delete Product
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+];
+
+export const ViewTypePricesOptionDropdown = (id) => [
+  {
+    label: (
+      <Popup title="Update Type Price" content={<UpdateTypePrices id={id} />}>
+        Update Type Price
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup title="Delete Type Price" content={<DeleteTypePrice id={id} />}>
+        Delete Type Price
       </Popup>
     ),
     key: 'delete',

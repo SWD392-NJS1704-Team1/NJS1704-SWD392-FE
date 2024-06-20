@@ -1,30 +1,31 @@
 import { queryClient } from '@/constant/storage';
 import ProductService from '@/services/productService';
+import UserManagementListAPI from '@/services/userService';
 import { closePopup } from '@/store/reducers/popupReducer';
 import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';
 import { useDispatch } from 'react-redux';
 
-const useAddProduct = () => {
+const useUpdateProduct = () => {
   const dispatch = useDispatch();
 
   return useMutation({
-    mutationFn: ProductService.handleAddProduct,
+    mutationFn: ProductService.updateProduct,
     onSuccess: () => {
-      dispatch(closePopup('Create a new Product'));
+      dispatch(closePopup('Update Product'));
       queryClient.invalidateQueries({ queryKey: ['products'] });
       notification.success({
-        message: 'Create successfully',
-        description: 'Create a new Product successfully',
+        message: 'Update successfully',
+        description: 'Update a Product successfully',
       });
     },
     onError: () => {
       notification.error({
-        message: 'Create failed',
-        description: 'Create a new Product failed',
+        message: 'Update failed',
+        description: 'Update a Product failed',
       });
     },
   });
 };
 
-export default useAddProduct;
+export default useUpdateProduct;

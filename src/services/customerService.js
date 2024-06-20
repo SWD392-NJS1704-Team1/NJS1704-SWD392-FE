@@ -1,5 +1,10 @@
-import { ADDCUSTOMER, CUSTOMERLIST, DELETECUSTOMER, UPDATECUSTOMER } from "@/constant/environments";
-import axiosInstance from "@/utils/axiosInstance";
+import {
+  ADDCUSTOMER,
+  CUSTOMERLIST,
+  DELETECUSTOMER,
+  UPDATECUSTOMER,
+} from '@/constant/environments';
+import axiosInstance from '@/utils/axiosInstance';
 
 const AddCustomer = ({
   fullName,
@@ -16,16 +21,13 @@ const AddCustomer = ({
       address,
       accumulated_point,
     });
-   
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);
   }
 };
 
-const GetCustomerList = async ({ keyword}) => {
-
-
+const GetCustomerList = async ({ keyword }) => {
   try {
     const endpoint = CUSTOMERLIST;
     let value = '';
@@ -33,9 +35,7 @@ const GetCustomerList = async ({ keyword}) => {
       value = `?keyword=${keyword}`;
     }
 
-    const res = await axiosInstance.get(
-      `${endpoint}${value}`
-    );
+    const res = await axiosInstance.get(`${endpoint}${value}`);
 
     return res;
   } catch (error) {
@@ -62,7 +62,6 @@ const UpdateCustomer = async ({
   phone,
   address,
   accumulated_point,
- 
 }) => {
   try {
     console.log({
@@ -90,7 +89,7 @@ const CustomerService = {
   AddCustomer,
   GetCustomerList,
   DeleteCustomer,
-  UpdateCustomer
+  UpdateCustomer,
 };
 
 export default CustomerService;
