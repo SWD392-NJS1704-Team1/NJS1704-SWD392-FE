@@ -24,7 +24,7 @@ const TypePricesPage = () => {
             <SearchBar />
           </div>
           <div className="flex">
-            <Popup title="Add a new Product" content={<AddTypePrices />}>
+            <Popup title="Add a new Type Price" content={<AddTypePrices />}>
               <ConfigAntdButton>
                 <Button
                   type="primary"
