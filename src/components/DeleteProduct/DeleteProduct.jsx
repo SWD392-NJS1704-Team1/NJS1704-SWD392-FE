@@ -9,7 +9,6 @@ const DeleteProduct = ({ id, product_name }) => {
   const deleteProduct = useDeleteProduct(id);
 
   const handleCancel = () => {
-    console.log('Cancel');
     dispatch(closePopup('Delete Product'));
   };
 

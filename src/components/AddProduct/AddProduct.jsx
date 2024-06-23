@@ -40,7 +40,7 @@ const AddProduct = () => {
   };
 
   const handleCancel = () => {
-    dispatch(closePopup('Create a new Product'));
+    dispatch(closePopup('Add a new Product'));
   };
 
   if (isLoading) {

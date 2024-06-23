@@ -30,7 +30,7 @@ const AddTypePrices = () => {
   };
 
   const handleCancel = () => {
-    dispatch(closePopup('Add Type Price'));
+    dispatch(closePopup('Add a new Type Price'));
   };
 
   return (
