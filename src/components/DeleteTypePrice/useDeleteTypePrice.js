@@ -3,25 +3,25 @@ import { useDispatch } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 import { closePopup } from '@/store/reducers/popupReducer';
 import { queryClient } from '@/constant/storage';
-import ProductService from '@/services/productService';
+import TypePricesService from '@/services/typepricesService';
 
-export const useDeleteProduct = (id) => {
+export const useDeleteTypePrice = (id) => {
   const dispatch = useDispatch();
 
   return useMutation({
-    mutationFn: () => ProductService.deleteProduct(id),
+    mutationFn: () => TypePricesService.handleDeleteTypePrice(id),
     onSuccess: () => {
-      dispatch(closePopup('Delete Product'));
-      queryClient.invalidateQueries({ queryKey: ['products'] });
+      dispatch(closePopup('Delete Type Price'));
+      queryClient.invalidateQueries({ queryKey: ['typePrices'] });
       notification.success({
         message: 'Delete successfully',
-        description: 'Delete a Product successfully',
+        description: 'Delete a Type Price successfully',
       });
     },
     onError: () => {
       notification.error({
         message: 'Delete failed',
-        description: 'Delete a Product failed',
+        description: 'Delete a Type Price failed',
       });
     },
   });
