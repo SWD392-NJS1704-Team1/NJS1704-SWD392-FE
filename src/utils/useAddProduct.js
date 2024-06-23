@@ -11,17 +11,17 @@ const useAddProduct = () => {
   return useMutation({
     mutationFn: ProductService.handleAddProduct,
     onSuccess: () => {
-      dispatch(closePopup('Create a new Product'));
+      dispatch(closePopup('Add a new Product'));
       queryClient.invalidateQueries({ queryKey: ['products'] });
       notification.success({
         message: 'Create successfully',
-        description: 'Create a new Product successfully',
+        description: 'Add a new Product successfully',
       });
     },
     onError: () => {
       notification.error({
         message: 'Create failed',
-        description: 'Create a new Product failed',
+        description: 'Add a new Product failed',
       });
     },
   });
