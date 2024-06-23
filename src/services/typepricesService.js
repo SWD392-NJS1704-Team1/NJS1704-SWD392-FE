@@ -26,7 +26,7 @@ const handleGetAllTypePrices = async () => {
 
 const handleGetTypePriceById = async (id) => {
   try {
-    const data = await axiosInstance.get(`${GET_TYPE_PRICE_BY_ID}/${id}`);
+    const data = await axiosInstance.get(GET_TYPE_PRICE_BY_ID + '/' + id);
     return data;
   } catch (error) {
     const errorResponse = error;
@@ -62,7 +62,7 @@ const handleUpdateTypePrice = async ({
   type,
 }) => {
   try {
-    const data = await axiosInstance.put(`${UPDATE_TYPE_PRICE}/${id}`, {
+    const data = await axiosInstance.put(UPDATE_TYPE_PRICE + '/' + id, {
       date,
       buy_price_per_gram,
       sell_price_per_gram,
@@ -77,7 +77,7 @@ const handleUpdateTypePrice = async ({
 
 const handleDeleteTypePrice = async (id) => {
   try {
-    const data = await axiosInstance.delete(`${DELETE_TYPE_PRICE}/${id}`);
+    const data = await axiosInstance.delete(DELETE_TYPE_PRICE + '/' + id);
     return data;
   } catch (error) {
     const errorResponse = error;

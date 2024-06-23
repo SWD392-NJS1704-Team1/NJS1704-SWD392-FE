@@ -2,6 +2,7 @@ import Dropdown from '@/components/Dropdown/Dropdown';
 import {
   ViewCounterOptionDropdown,
   ViewCustomerOptionDropdown,
+  ViewTypePricesOptionDropdown,
   ViewUserOptionDropdown,
 } from './menu-data';
 
@@ -239,7 +240,7 @@ export const TypePricesColumn = [
     title: 'Action',
     key: 'operation',
     render: (record) => {
-      const items = ViewCounterOptionDropdown(record.id, record.counterName);
+      const items = ViewTypePricesOptionDropdown(record.id);
       return <Dropdown items={items} />;
     },
   },

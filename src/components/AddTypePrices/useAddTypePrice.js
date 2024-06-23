@@ -11,7 +11,7 @@ const useAddTypePrice = () => {
   return useMutation({
     mutationFn: TypePricesService.handleCreateTypePrice,
     onSuccess: () => {
-      dispatch(closePopup('Create a new type price'));
+      dispatch(closePopup('Add Type Price'));
       setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ['typePrices'] });
       }, 1000);
@@ -26,9 +26,6 @@ const useAddTypePrice = () => {
         message: 'Create failed',
         description: 'Create a new type price failed',
       });
-    },
-    onSettled: () => {
-      dispatch(closePopup('Create a new type price'));
     },
   });
 };
