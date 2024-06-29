@@ -1,5 +1,5 @@
-import { LOGIN } from "@/constant/environments";
-import axiosInstance from "@/utils/axiosInstance";
+import { LOGIN } from '@/constant/environments';
+import axiosInstance from '@/utils/axiosInstance';
 
 export const authService = {
   login(payload = {}) {
@@ -7,7 +7,7 @@ export const authService = {
   },
   getProfile() {
     return axiosInstance.get(`/users/profile`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
   },
 };

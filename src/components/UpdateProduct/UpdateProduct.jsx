@@ -1,46 +1,53 @@
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { closePopup } from '@/store/reducers/popupReducer';
 import ConfigAntdButton from '../Button/ConfigAntdButton';
-import { Button } from 'antd';
-import { MESS } from '@/constant/validate';
-import ComponentLoading from '../ComponentLoading/ComponentLoading';
+import { Button, notification } from 'antd';
+import { MESS, REGEX } from '@/constant/validate';
 import useUpdateProduct from './useUpdateProduct';
+import useGetTypePricesList from '@/pages/TypePricespage/useGetTypePricesList';
+import useGetCounterList from '@/pages/CounterManagement/useGetCounterList';
+import ComponentLoading from '../ComponentLoading/ComponentLoading';
 
-const UpdateProduct = () => {
+const UpdateProduct = ({ id }) => {
   const dispatch = useDispatch();
-  const { data } = useGetUserInfo(id);
   const updateProduct = useUpdateProduct();
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedCounter, setSelectedCounter] = useState('');
+
+  const { data: typeList, isLoading: typeLoading } = useGetTypePricesList();
+  const { data: counterList, isLoading: counterLoading } = useGetCounterList();
 
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const handleCancel = () => {
-    dispatch(closePopup('Update User'));
-  };
-
-  const onSubmit = (data) => {
-    updateProduct.mutate({
-      product_name: data.product_name,
-      barcode: data.barcode,
-      quantity: data.quantity,
-      price_processing: data.price_processing,
-      price_stone: data.price_stone,
-      weight: data.weight,
-      description: data.description,
-      image_url: data.image_url,
-      type_id: data.type_id,
-      counter_id: data.counter_id,
-    });
-  };
+  useEffect(() => {
+    if (typeList && typeList.length > 0) {
+      setSelectedType(typeList[0].id);
+      setValue('type_id', typeList[0].id);
+    }
+  }, [typeList, setValue]);
 
   useEffect(() => {
-    if (data) {
-      reset({
+    if (counterList && counterList.length > 0) {
+      setSelectedCounter(counterList[0].id);
+      setValue('counter_id', counterList[0].id);
+    }
+  }, [counterList, setValue]);
+
+  const handleCancel = () => {
+    dispatch(closePopup('Update Product'));
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      await updateProduct.mutateAsync({
+        id: id,
         product_name: data.product_name,
         barcode: data.barcode,
         quantity: data.quantity,
@@ -49,14 +56,30 @@ const UpdateProduct = () => {
         weight: data.weight,
         description: data.description,
         image_url: data.image_url,
-        type_id: data.type_id,
-        counter_id: data.counter_id,
+        type_id: selectedType,
+        counter_id: selectedCounter,
+      });
+      notification.success({
+        message: 'Success',
+        description: 'Product updated successfully',
+        duration: 1.5,
+      });
+      dispatch(closePopup('Update Product'));
+    } catch (error) {
+      notification.error({
+        message: 'Error',
+        description: 'Failed to update product',
+        duration: 1.5,
       });
     }
-  }, [data, reset]);
+  };
 
-  if (isLoading) {
-    return <ComponentLoading />;
+  if (typeLoading || counterLoading) {
+    return (
+      <div className="w-full h-full">
+        <ComponentLoading />
+      </div>
+    );
   }
 
   return (
@@ -159,7 +182,7 @@ const UpdateProduct = () => {
               <input
                 type="number"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                placeholder="Weight Stone"
+                placeholder="Weight"
                 {...register('weight', {
                   required: MESS.ERROR_PRODUCT_WEIGHT,
                 })}
@@ -198,7 +221,7 @@ const UpdateProduct = () => {
                 {...register('image_url', {
                   required: MESS.ERROR_PRODUCT_IMAGE,
                   pattern: {
-                    value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/,
+                    value: REGEX.URL_IMG,
                     message: 'URL không hợp lệ',
                   },
                 })}
@@ -214,9 +237,7 @@ const UpdateProduct = () => {
             <h3 className="font-bold mb-1">Type</h3>
             <div className="w-full flex flex-col">
               <select
-                type="number"
                 className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-                placeholder="Type ID"
                 {...register('type_id', {
                   required: MESS.ERROR_PRODUCT_CATEGORY_ID,
                 })}
@@ -228,7 +249,7 @@ const UpdateProduct = () => {
                 </option>
                 {typeList?.map((type) => (
                   <option key={type.id} value={type.id}>
-                    {type.typeName}
+                    {type.type}
                   </option>
                 ))}
               </select>
@@ -275,7 +296,7 @@ const UpdateProduct = () => {
             </Button>
           </ConfigAntdButton>
           <ConfigAntdButton>
-            <Button type="primary" onClick={handleSubmit(onSubmit)}>
+            <Button type="primary" htmlType="submit">
               Update
             </Button>
           </ConfigAntdButton>

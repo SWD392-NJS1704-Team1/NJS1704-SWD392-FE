@@ -1,6 +1,5 @@
 import { queryClient } from '@/constant/storage';
 import ProductService from '@/services/productService';
-import UserManagementListAPI from '@/services/userService';
 import { closePopup } from '@/store/reducers/popupReducer';
 import { useMutation } from '@tanstack/react-query';
 import { notification } from 'antd';

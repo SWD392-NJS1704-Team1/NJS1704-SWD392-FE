@@ -6,12 +6,21 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Typography } from 'antd';
 import useGetCustomerList from './useGetCustomerList';
 import { CustomersColumn } from '@/constant/table-column';
-
-
+import { useState } from 'react';
 
 const CustomerList = () => {
   const { data } = useGetCustomerList();
-// console.log(data)
+  const [page, setPage] = useState({
+    current: 1,
+    pageSize: 5,
+    total: data ? data.length : 0,
+  });
+
+  const handleTableChange = (page) => {
+    setPage(page);
+  };
+
+  // console.log(data)
   return (
     <div>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
@@ -34,8 +43,16 @@ const CustomerList = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={CustomersColumn} dataSource={data} />
-      
+        <Table
+          columns={CustomersColumn}
+          dataSource={data}
+          pagination={{
+            ...page,
+            position: ['bottomCenter'],
+            showSizeChanger: false,
+          }}
+          onChange={handleTableChange}
+        />
       </div>
     </div>
   );
