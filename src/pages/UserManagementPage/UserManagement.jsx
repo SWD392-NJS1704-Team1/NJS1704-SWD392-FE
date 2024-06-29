@@ -1,15 +1,24 @@
-import AddUser from "@/components/AddUser/AddUser";
-import ConfigAntdButton from "@/components/Button/ConfigAntdButton";
-import Popup from "@/components/Popup/Popup";
-import { PlusCircleOutlined } from "@ant-design/icons";
-import { Button, Input, Table, Typography } from "antd";
-import useGetUsersList from "./useGetUsersList";
-import { UsersColumn } from "@/constant/table-column";
-import SearchBar from "@/components/SearchBar/Search-bar";
+import AddUser from '@/components/AddUser/AddUser';
+import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
+import Popup from '@/components/Popup/Popup';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Input, Table, Typography } from 'antd';
+import useGetUsersList from './useGetUsersList';
+import { UsersColumn } from '@/constant/table-column';
+import SearchBar from '@/components/SearchBar/Search-bar';
+import { useState } from 'react';
 
 const UserManagement = () => {
+  const { data } = useGetUsersList();
+  const [page, setPage] = useState({
+    current: 1,
+    pageSize: 5,
+    total: data ? data.length : 0,
+  });
 
-  const { data } = useGetUsersList()
+  const handleTableChange = (page) => {
+    setPage(page);
+  };
 
   return (
     <div>
@@ -31,7 +40,16 @@ const UserManagement = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={UsersColumn} dataSource={data} />
+        <Table
+          columns={UsersColumn}
+          dataSource={data}
+          pagination={{
+            ...page,
+            position: ['bottomCenter'],
+            showSizeChanger: false,
+          }}
+          onChange={handleTableChange}
+        />
       </div>
     </div>
   );

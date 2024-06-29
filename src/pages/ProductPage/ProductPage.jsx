@@ -56,10 +56,16 @@ const ProductPage = () => {
             </Popup>
           </div>
         </div>
-        <Table columns={ProductsColumn} dataSource={data?.productsData} />
-      </div>
-      <div className="pagination flex items-center justify-center">
-        <Pagination defaultCurrent={1} onChange={onPagiChange} />
+        <Table
+          columns={ProductsColumn}
+          dataSource={data?.productsData}
+          pagination={{
+            ...data?.paginationData,
+            position: ['bottomCenter'],
+            showSizeChanger: false,
+          }}
+          onChange={onPagiChange}
+        />
       </div>
     </>
   );
