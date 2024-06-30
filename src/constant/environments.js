@@ -39,3 +39,8 @@ export const UPDATECOUNTER = import.meta.env.VITE_UPDATE_COUNTER_API;
 export const CREATECOUNTER = import.meta.env.VITE_CREATE_COUNTER_API;
 export const COUNTERBYNAME = import.meta.env.VITE_GET_COUNTER_BY_NAME_API;
 export const DELETECOUNTER = import.meta.env.VITE_GET_COUNTER_API;
+
+// Promotion API
+export const PROMOTION_LIST = import.meta.env.VITE_GET_PROMOTION_LIST_API;
+export const CREATE_PROMOTION = import.meta.env.VITE_CREATE_PROMOTION_API;
+export const DELETE_PROMOTION = import.meta.env.VITE_DELETE_PROMOTION_API;

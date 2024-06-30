@@ -197,3 +197,24 @@ export const ViewTypePricesOptionDropdown = (id) => [
     icon: <CloseCircleOutlined />,
   },
 ];
+
+export const ViewPromotionOptionDropdown = (code) => [
+  {
+    label: (
+      <Popup title="Update Promotion" content={'<UpdatePromotion code={code} />'}>
+        Update Promotion
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup title="Delete Promotion" content={'<DeletePromotion code={code} />'}>
+        Delete Promotion
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+];
