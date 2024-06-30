@@ -14,6 +14,7 @@ import CustomerList from './pages/CustomerManagement/CustomerManagement';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CounterManagement from './pages/CounterManagement/CounterManagement';
 import TypePricesPage from './pages/TypePricespage/TypePricesPage';
+import PromotionPage from './pages/PromotionPage/PromotionPage';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
               path={PATHS.TYPE_PRICES.INDEX}
               element={<TypePricesPage />}
             />
+            <Route path={PATHS.PROMOTIONS.INDEX} element={<PromotionPage />} />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

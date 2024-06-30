@@ -3,6 +3,7 @@ import {
   ViewCounterOptionDropdown,
   ViewCustomerOptionDropdown,
   ViewProductOptionDropdown,
+  ViewPromotionOptionDropdown,
   ViewTypePricesOptionDropdown,
   ViewUserOptionDropdown,
 } from './menu-data';
@@ -242,6 +243,46 @@ export const TypePricesColumn = [
     key: 'operation',
     render: (record) => {
       const items = ViewTypePricesOptionDropdown(record.id);
+      return <Dropdown items={items} />;
+    },
+  },
+];
+
+export const PromotionColumn = [
+  {
+    title: 'No',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Promotion Code',
+    dataIndex: 'code',
+    key: 'code',
+  },
+  {
+    title: 'Discount',
+    dataIndex: 'discountPercentage',
+    key: 'discountPercentage',
+  },
+  {
+    title: 'Start Date',
+    dataIndex: 'startDate',
+    key: 'startDate',
+  },
+  {
+    title: 'End Date',
+    dataIndex: 'endDate',
+    key: 'endDate',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      const items = ViewPromotionOptionDropdown(record.code);
       return <Dropdown items={items} />;
     },
   },
