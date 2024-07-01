@@ -3,7 +3,7 @@ const CUSTOMER = '/customers';
 const PRODUCT = '/products';
 const COUNTER = '/counter';
 const TYPE_PRICES = '/type-prices';
-const ORDER = '/orders';
+const ORDER = '/order';
 const PROMOTION = '/promotion';
 
 export const PATHS = {

@@ -287,3 +287,53 @@ export const PromotionColumn = [
     },
   },
 ];
+
+export const OrderColumn = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Order ID',
+    dataIndex: 'fullName',
+    key: 'fullName',
+  },
+  {
+    title: 'Customer Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Staff Name',
+    dataIndex: 'staffName',
+    key: 'staffName',
+  },
+  {
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      const items = ViewCustomerOptionDropdown(record.id, record.fullName);
+      return <Dropdown items={items} />;
+    },
+  },
+];
