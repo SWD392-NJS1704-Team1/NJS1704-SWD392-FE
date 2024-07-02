@@ -2,6 +2,7 @@ import axios from 'axios';
 import tokenMethod from '@/utils/token.js';
 import { BASE_URL, LOGIN } from '@/constant/environments';
 import { authService } from '@/services/authService';
+import { PATHS } from '@/constant/path';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -22,7 +23,7 @@ axiosInstance.interceptors.response.use(
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
-      window.location.href = '/login';
+      window.location.href = PATHS.LOGIN;
       try {
         // Gọi API để cập nhật token mới
         const res = await authService.login({
