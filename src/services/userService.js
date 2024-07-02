@@ -112,7 +112,7 @@ const GetUsersList = async ({ keyword, page, limit }) => {
     }
     const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
 
-    const data = res.users.map((item) => ({
+    const usersData = res.users.map((item) => ({
       id: item.id,
       key: item.id,
       fullname: item.fullname,
@@ -123,7 +123,9 @@ const GetUsersList = async ({ keyword, page, limit }) => {
       counter_name: item.counter?.counterName,
     }));
 
-    return data;
+    const usersPage = res.totalPages || 0;
+
+    return { usersData, usersPage };
   } catch (error) {
     const errorResponse = error;
     throw new Error(errorResponse.response?.data.message);

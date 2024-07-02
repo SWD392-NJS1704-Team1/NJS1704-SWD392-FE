@@ -1,33 +1,30 @@
-import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
-import Popup from '@/components/Popup/Popup';
-import SearchBar from '@/components/SearchBar/Search-bar';
 import { PromotionColumn } from '@/constant/table-column';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Typography } from 'antd';
-import React, { useState } from 'react';
+import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
+import Popup from '@/components/Popup/Popup';
+import SearchBar from '@/components/SearchBar/Search-bar';
+import React from 'react';
 import useGetPromotionList from './useGetPromotionList';
 import AddPromotion from '@/components/AddPromotion/AddPromotion';
 
 const PromotionPage = () => {
   const { data } = useGetPromotionList();
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 5,
-    total: data ? data.length : 0,
-  });
-
-  const handleTableChange = (pagination) => {
-    setPagination(pagination);
-  };
 
   return (
-    <>
-      <div className="bg-primary w-full flex items-center p-4 mt-1">
+    <div
+      style={{
+        backgroundColor: '#f9f9f9',
+        minHeight: '100vh',
+        padding: '20px',
+      }}
+    >
+      <div className="bg-white w-full flex items-center p-4 mt-1 rounded-lg shadow-sm">
         <Typography.Title level={3} type="secondary">
-          Promotion Page
+          PROMOTION MANAGEMENT
         </Typography.Title>
       </div>
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 p-4 mt-4 bg-white rounded-lg shadow-sm">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
             <SearchBar />
@@ -46,14 +43,12 @@ const PromotionPage = () => {
           columns={PromotionColumn}
           dataSource={data}
           pagination={{
-            ...pagination,
+            pageSize: 5,
             position: ['bottomCenter'],
-            showSizeChanger: false,
           }}
-          onChange={handleTableChange}
         />
       </div>
-    </>
+    </div>
   );
 };
 

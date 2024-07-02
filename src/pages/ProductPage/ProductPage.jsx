@@ -1,46 +1,35 @@
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Table, Typography } from 'antd';
+import { ProductsColumn } from '@/constant/table-column';
+import { useState } from 'react';
 import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
-import SearchBar from '@/components/SearchBar/Search-bar';
-import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Pagination, Table, Typography } from 'antd';
 import useGetProductsList from './useGetProductsList';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import queryString from 'query-string';
-import { ProductsColumn } from '@/constant/table-column';
-
-const PRODUCT_LIMITS = 5;
+import ProductSearchBar from '@/components/SearchBar/Product-search-bar';
 
 const ProductPage = () => {
-  const { search } = useLocation();
-  // console.log("search", search);
-  const queryObject = queryString.parse(search);
-  const [_, setSearchParams] = useSearchParams();
-  const updateQueryString = (queryObject) => {
-    const newQueryString = queryString.stringify({
-      ...queryObject,
-      limit: PRODUCT_LIMITS,
-    });
-    setSearchParams(new URLSearchParams(newQueryString));
-  };
-  const onPagiChange = (page) => {
-    updateQueryString({ ...queryObject, page: page });
-  };
-
-  const { data } = useGetProductsList(search);
+  const [current, setCurrent] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const { data } = useGetProductsList(current - 1, limit);
 
   return (
-    <>
-      <div className="bg-primary w-full flex items-center p-4 mt-1">
+    <div
+      style={{
+        backgroundColor: '#f9f9f9',
+        minHeight: '100vh',
+        padding: '20px',
+      }}
+    >
+      <div className="bg-white w-full flex items-center p-4 mt-1 rounded-lg shadow-sm">
         <Typography.Title level={3} type="secondary">
           PRODUCTS
         </Typography.Title>
       </div>
-      {/* Add your product details and components here */}
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 p-4 mt-4 bg-white rounded-lg shadow-sm">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
-            <SearchBar />
+            <ProductSearchBar />
           </div>
           <div className="flex">
             <Popup title="Add a new Product" content={<AddProduct />}>
@@ -60,14 +49,23 @@ const ProductPage = () => {
           columns={ProductsColumn}
           dataSource={data?.productsData}
           pagination={{
-            ...data?.paginationData,
+            total: limit * data?.productsPage,
             position: ['bottomCenter'],
-            showSizeChanger: false,
+            current: current,
+            pageSize: limit,
+            pageSizeOptions: [5, 10, 20, 30],
+            showSizeChanger: true,
+            onChange: (current, limit) => {
+              setCurrent(current);
+              setLimit(limit);
+            },
           }}
-          onChange={onPagiChange}
+          scroll={{
+            x: 1800,
+          }}
         />
       </div>
-    </>
+    </div>
   );
 };
 
