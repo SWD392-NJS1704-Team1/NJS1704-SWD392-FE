@@ -1,17 +1,43 @@
-import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
-import { ProductsColumn } from '@/constant/table-column';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { Button, Table, Typography } from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import useGetProductsList from './useGetProductsList';
 import ProductSearchBar from '@/components/SearchBar/Product-search-bar';
+import { ProductsColumn } from '@/constant/table-column';
 
 const ProductPage = () => {
-  const [current, setCurrent] = useState(1);
-  const [limit, setLimit] = useState(5);
-  const { data } = useGetProductsList(current - 1, limit);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = queryString.parse(location.search);
+  const initialPage = Number(queryParams.page) || 1;
+  const initialLimit = Number(queryParams.limit) || 5;
+
+  // State for current page and page size
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [pageSize, setPageSize] = useState(initialLimit);
+
+  const { data } = useGetProductsList(currentPage - 1, pageSize);
+
+  // Update the URL whenever currentPage or pageSize changes
+  useEffect(() => {
+    const newQueryParams = queryString.stringify({
+      page: currentPage,
+      limit: pageSize,
+    });
+    if (location.search !== `?${newQueryParams}`) {
+      navigate(`?${newQueryParams}`, { replace: true });
+    }
+  }, [currentPage, pageSize, navigate]);
+
+  const handleTableChange = (pagination) => {
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
+  };
 
   return (
     <div
@@ -26,7 +52,7 @@ const ProductPage = () => {
           PRODUCTS
         </Typography.Title>
       </div>
-      <div className="flex flex-col gap-4 p-4 mt-4 bg-white rounded-lg shadow-sm">
+      <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
             <ProductSearchBar />
@@ -49,16 +75,14 @@ const ProductPage = () => {
           columns={ProductsColumn}
           dataSource={data?.productsData}
           pagination={{
-            total: limit * data?.productsPage,
-            position: ['bottomCenter'],
-            current: current,
-            pageSize: limit,
-            pageSizeOptions: [5, 10, 20, 30],
+            current: currentPage,
+            total: data?.productsPage * pageSize,
+            pageSize: pageSize,
+            pageSizeOptions: [5, 10, 20, 50],
             showSizeChanger: true,
-            onChange: (current, limit) => {
-              setCurrent(current);
-              setLimit(limit);
-            },
+            onChange: (page, size) =>
+              handleTableChange({ current: page, pageSize: size }),
+            position: ['bottomCenter'],
           }}
           scroll={{
             x: 1800,

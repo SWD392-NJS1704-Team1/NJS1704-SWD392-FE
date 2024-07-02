@@ -65,7 +65,7 @@ const UpdateProduct = ({ id }) => {
 
   if (typeLoading || counterLoading) {
     return (
-      <div className="w-full h-full">
+      <div className="h-20">
         <ComponentLoading />
       </div>
     );

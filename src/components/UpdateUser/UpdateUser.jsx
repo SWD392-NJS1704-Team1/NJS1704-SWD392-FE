@@ -8,6 +8,7 @@ import { closePopup } from '@/store/reducers/popupReducer';
 import { useEffect, useState } from 'react';
 import useUpdateUser from './useUpdateUser';
 import useGetCounterList from '@/utils/useGetCounterList';
+import ComponentLoading from '../ComponentLoading/ComponentLoading';
 
 const UpdateUser = ({ id }) => {
   const dispatch = useDispatch();
@@ -57,7 +58,11 @@ const UpdateUser = ({ id }) => {
   console.log(selectedRole, temp);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div className="h-20">
+        <ComponentLoading />
+      </div>
+    );
   }
 
   return (

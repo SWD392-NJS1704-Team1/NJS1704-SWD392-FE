@@ -44,7 +44,11 @@ const AddProduct = () => {
   };
 
   if (isLoading) {
-    return <ComponentLoading />;
+    return (
+      <div className="h-20">
+        <ComponentLoading />
+      </div>
+    );
   }
 
   return (
