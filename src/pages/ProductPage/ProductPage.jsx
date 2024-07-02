@@ -1,33 +1,43 @@
+import React, { useState, useEffect } from 'react';
 import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Pagination, Table, Typography } from 'antd';
-import useGetProductsList from './useGetProductsList';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { Button, Table, Typography } from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
+import useGetProductsList from './useGetProductsList';
 import { ProductsColumn } from '@/constant/table-column';
 
-const PRODUCT_LIMITS = 5;
-
 const ProductPage = () => {
-  const { search } = useLocation();
-  // console.log("search", search);
-  const queryObject = queryString.parse(search);
-  const [_, setSearchParams] = useSearchParams();
-  const updateQueryString = (queryObject) => {
-    const newQueryString = queryString.stringify({
-      ...queryObject,
-      limit: PRODUCT_LIMITS,
-    });
-    setSearchParams(new URLSearchParams(newQueryString));
-  };
-  const onPagiChange = (page) => {
-    updateQueryString({ ...queryObject, page: page });
-  };
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = queryString.parse(location.search);
+  const initialPage = Number(queryParams.page) || 1;
+  const initialLimit = Number(queryParams.limit) || 5;
 
-  const { data } = useGetProductsList(search);
+  // State for current page and page size
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [pageSize, setPageSize] = useState(initialLimit);
+
+  const { data } = useGetProductsList(currentPage - 1, pageSize);
+
+  // Update the URL whenever currentPage or pageSize changes
+  useEffect(() => {
+    const newQueryParams = queryString.stringify({
+      page: currentPage,
+      limit: pageSize,
+    });
+    if (location.search !== `?${newQueryParams}`) {
+      navigate(`?${newQueryParams}`, { replace: true });
+    }
+  }, [currentPage, pageSize, navigate]);
+
+  const handleTableChange = (pagination) => {
+    setCurrentPage(pagination.current);
+    setPageSize(pagination.pageSize);
+  };
 
   return (
     <>
@@ -36,7 +46,6 @@ const ProductPage = () => {
           PRODUCTS
         </Typography.Title>
       </div>
-      {/* Add your product details and components here */}
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
@@ -60,11 +69,14 @@ const ProductPage = () => {
           columns={ProductsColumn}
           dataSource={data?.productsData}
           pagination={{
-            ...data?.paginationData,
+            current: currentPage,
+            total: data?.productsPage * pageSize,
+            pageSize: pageSize,
+            showSizeChanger: true,
+            onChange: (page, size) =>
+              handleTableChange({ current: page, pageSize: size }),
             position: ['bottomCenter'],
-            showSizeChanger: false,
           }}
-          onChange={onPagiChange}
         />
       </div>
     </>

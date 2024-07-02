@@ -1,13 +1,11 @@
 import ProductService from '@/services/productService';
 import { useQuery } from '@tanstack/react-query';
 
-const LIMIT = 5;
-
-const useGetProductsList = () => {
+const useGetProductsList = (page, limit) => {
   return useQuery({
-    queryKey: ['products'],
-    queryFn: () =>
-      ProductService.getAllProducts('', 1, LIMIT),
+    queryKey: ['products', page, limit],
+    queryFn: () => ProductService.getAllProducts({ keyword: '', page, limit }),
+    keepPreviousData: true,
   });
 };
 

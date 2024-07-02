@@ -37,17 +37,16 @@ const handleAddProduct = async ({
   }
 };
 
-const getAllProducts = async (keyword, page, limit) => {
+const getAllProducts = async ({ keyword, page, limit }) => {
   try {
     const endpoint = PRODUCTS_LIST;
-    const queryParams = `page=${page}&limit=${limit}`;
-    let value = '';
+    let queryParams = `page=${page}&limit=${limit}`;
 
-    if (value && value.length > 0) {
-      value = `keyword=${keyword}&`;
+    if (keyword && keyword.length > 0) {
+      queryParams = `keyword=${keyword}&${queryParams}`;
     }
 
-    const res = await axiosInstance.get(`${endpoint}?${value}${queryParams}`);
+    const res = await axiosInstance.get(`${endpoint}?${queryParams}`);
     const productsData = res.products || [];
     const productsPage = res.totalPages || 0;
     return { productsData, productsPage };
