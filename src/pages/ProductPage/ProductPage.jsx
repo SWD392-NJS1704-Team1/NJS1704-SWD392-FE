@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
-import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Typography } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 import useGetProductsList from './useGetProductsList';
+import ProductSearchBar from '@/components/SearchBar/Product-search-bar';
 import { ProductsColumn } from '@/constant/table-column';
 
 const ProductPage = () => {
@@ -40,8 +40,14 @@ const ProductPage = () => {
   };
 
   return (
-    <>
-      <div className="bg-primary w-full flex items-center p-4 mt-1">
+    <div
+      style={{
+        backgroundColor: '#f9f9f9',
+        minHeight: '100vh',
+        padding: '20px',
+      }}
+    >
+      <div className="bg-white w-full flex items-center p-4 mt-1 rounded-lg shadow-sm">
         <Typography.Title level={3} type="secondary">
           PRODUCTS
         </Typography.Title>
@@ -49,7 +55,7 @@ const ProductPage = () => {
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
-            <SearchBar />
+            <ProductSearchBar />
           </div>
           <div className="flex">
             <Popup title="Add a new Product" content={<AddProduct />}>
@@ -72,14 +78,18 @@ const ProductPage = () => {
             current: currentPage,
             total: data?.productsPage * pageSize,
             pageSize: pageSize,
+            pageSizeOptions: [5, 10, 20, 50],
             showSizeChanger: true,
             onChange: (page, size) =>
               handleTableChange({ current: page, pageSize: size }),
             position: ['bottomCenter'],
           }}
+          scroll={{
+            x: 1800,
+          }}
         />
       </div>
-    </>
+    </div>
   );
 };
 

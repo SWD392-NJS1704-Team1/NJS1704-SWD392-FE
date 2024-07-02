@@ -7,21 +7,25 @@ import {
   ViewTypePricesOptionDropdown,
   ViewUserOptionDropdown,
 } from './menu-data';
+import { Image } from 'antd';
 
 export const UsersColumn = [
   {
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
+    width: 100,
     sorter: {
       compare: (a, b) => a.id - b.id,
     },
     defaultSortOrder: 'ascend',
+    fixed: 'left',
   },
   {
     title: 'Full Name',
     dataIndex: 'fullname',
     key: 'fullname',
+    fixed: 'left',
   },
   {
     title: 'Email',
@@ -51,6 +55,7 @@ export const UsersColumn = [
   {
     title: 'Action',
     key: 'operation',
+    fixed: 'right',
     render: (record) => {
       const items = ViewUserOptionDropdown(record.id, record.fullname);
       return <Dropdown items={items} />;
@@ -62,16 +67,19 @@ export const CustomersColumn = [
   {
     title: 'ID',
     dataIndex: 'id',
+    width: 100,
     key: 'id',
     sorter: {
       compare: (a, b) => a.id - b.id,
     },
     defaultSortOrder: 'ascend',
+    fixed: 'left',
   },
   {
     title: 'Full Name',
     dataIndex: 'fullName',
     key: 'fullName',
+    fixed: 'left',
   },
   {
     title: 'Email',
@@ -96,6 +104,7 @@ export const CustomersColumn = [
   {
     title: 'Action',
     key: 'operation',
+    fixed: 'right',
     render: (record) => {
       const items = ViewCustomerOptionDropdown(record.id, record.fullName);
       return <Dropdown items={items} />;
@@ -107,16 +116,19 @@ export const ProductsColumn = [
   {
     title: 'ID',
     dataIndex: 'id',
+    width: 100,
     key: 'id',
     sorter: {
       compare: (a, b) => a.id - b.id,
     },
     defaultSortOrder: 'ascend',
+    fixed: 'left',
   },
   {
     title: 'Product Name',
     dataIndex: 'product_name',
     key: 'product_name',
+    fixed: 'left',
   },
   {
     title: 'Barcode',
@@ -152,20 +164,24 @@ export const ProductsColumn = [
     title: 'Image URL',
     dataIndex: 'image_url',
     key: 'image_url',
+    render: (image_url) => <Image width={80} height={80} src={image_url} />,
   },
   {
     title: 'Type ID',
-    dataIndex: 'type_id',
-    key: 'type_id',
+    dataIndex: 'type',
+    key: 'type',
+    render: (type) => type.type,
   },
   {
     title: 'Counter ID',
     dataIndex: 'counter_id',
     key: 'counter_id',
+    render: (counter_id) => counter_id.counterName,
   },
   {
     title: 'Action',
     key: 'operation',
+    fixed: 'right',
     render: (record) => {
       const items = ViewProductOptionDropdown(record.id, record.product_name);
       return <Dropdown items={items} />;

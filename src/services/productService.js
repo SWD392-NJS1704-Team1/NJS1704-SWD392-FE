@@ -1,7 +1,9 @@
 import {
   ADD_PRODUCT,
   DELETE_PRODUCT,
+  GET_PRODUCT_BY_ID,
   PRODUCTS_LIST,
+  UPDATE_PRODUCT,
 } from '@/constant/environments';
 import axiosInstance from '@/utils/axiosInstance';
 
@@ -100,10 +102,21 @@ const updateProduct = async ({
   }
 };
 
+const handleGetProductById = async (id) => {
+  try {
+    const data = await axiosInstance.get(GET_PRODUCT_BY_ID + '/' + id);
+    return data;
+  } catch (error) {
+    const errorResponse = error;
+    throw new Error(errorResponse.response?.data.message);
+  }
+};
+
 const ProductService = {
   getAllProducts,
   handleAddProduct,
   deleteProduct,
   updateProduct,
+  handleGetProductById,
 };
 export default ProductService;
