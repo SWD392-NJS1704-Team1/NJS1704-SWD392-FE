@@ -9,6 +9,7 @@ import queryString from 'query-string';
 import useGetProductsList from './useGetProductsList';
 import ProductSearchBar from '@/components/SearchBar/Product-search-bar';
 import { ProductsColumn } from '@/constant/table-column';
+import './product-table.css';
 
 const ProductPage = () => {
   const location = useLocation();
