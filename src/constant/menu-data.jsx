@@ -3,6 +3,7 @@ import {
   CloseCircleOutlined,
   DashboardOutlined,
   EditOutlined,
+  FolderViewOutlined,
   MoneyCollectOutlined,
   PercentageOutlined,
   ProductOutlined,
@@ -25,6 +26,7 @@ import UpdateProduct from '@/components/UpdateProduct/UpdateProduct';
 import DeleteProduct from '@/components/DeleteProduct/DeleteProduct';
 import UpdateTypePrices from '@/components/UpdateTypePrices/UpdateTypePrices';
 import DeleteTypePrice from '@/components/DeleteTypePrice/DeleteTypePrice';
+import ProductDetailPage from '@/pages/ProductDetailPage/ProductDetailPage';
 import { Link } from 'react-router-dom';
 import UpdateOrder from '@/components/UpdateOrder/UpdateOrder';
 import DeleteOrder from '@/components/DeleteOrder/DeleteOrder';
@@ -73,6 +75,11 @@ export const MenuItems = [
 ];
 
 export const ViewUserOptionDropdown = (id, name) => [
+  {
+    label: <Link to={PATHS.USER.INDEX + '/' + id}>View detail</Link>,
+    key: 'view_detail',
+    icon: <FolderViewOutlined />,
+  },
   {
     label: (
       <Popup title="Update User" content={<UpdateUser id={id} />}>
@@ -153,13 +160,16 @@ export const ViewCounterOptionDropdown = (id, name) => [
     icon: <CloseCircleOutlined />,
   },
 ];
+
 export const ViewProductOptionDropdown = (id, product_name) => [
   {
+    label: <Link to={PATHS.PRODUCT.INDEX + '/' + id}>View detail</Link>,
+    key: 'view_detail',
+    icon: <FolderViewOutlined />,
+  },
+  {
     label: (
-      <Popup
-        title="Update Product"
-        content={<UpdateProduct id={id} product_name={product_name} />}
-      >
+      <Popup title="Update Product" content={<UpdateProduct id={id} />}>
         Update Product
       </Popup>
     ),
@@ -204,7 +214,10 @@ export const ViewTypePricesOptionDropdown = (id) => [
 export const ViewPromotionOptionDropdown = (code) => [
   {
     label: (
-      <Popup title="Update Promotion" content={'<UpdatePromotion code={code} />'}>
+      <Popup
+        title="Update Promotion"
+        content={'<UpdatePromotion code={code} />'}
+      >
         Update Promotion
       </Popup>
     ),
@@ -213,7 +226,10 @@ export const ViewPromotionOptionDropdown = (code) => [
   },
   {
     label: (
-      <Popup title="Delete Promotion" content={'<DeletePromotion code={code} />'}>
+      <Popup
+        title="Delete Promotion"
+        content={'<DeletePromotion code={code} />'}
+      >
         Delete Promotion
       </Popup>
     ),

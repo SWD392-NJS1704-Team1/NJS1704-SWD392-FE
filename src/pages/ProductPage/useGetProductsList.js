@@ -1,13 +1,18 @@
 import ProductService from '@/services/productService';
 import { useQuery } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
 
-const LIMIT = 5;
+const useGetProductsList = (page, limit) => {
+  const searchValue = useSelector((state) => state.watch.searchValue);
 
-const useGetProductsList = () => {
   return useQuery({
-    queryKey: ['products'],
+    queryKey: ['products', searchValue, page, limit],
     queryFn: () =>
-      ProductService.getAllProducts('', 1, LIMIT),
+      ProductService.getAllProducts({
+        keyword: searchValue,
+        page: page,
+        limit: limit,
+      }),
   });
 };
 

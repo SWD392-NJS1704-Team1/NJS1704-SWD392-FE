@@ -9,74 +9,63 @@ import useUpdateProduct from './useUpdateProduct';
 import useGetTypePricesList from '@/pages/TypePricespage/useGetTypePricesList';
 import useGetCounterList from '@/pages/CounterManagement/useGetCounterList';
 import ComponentLoading from '../ComponentLoading/ComponentLoading';
+import { useGetProductInfo } from './useGetProductInfo';
 
 const UpdateProduct = ({ id }) => {
   const dispatch = useDispatch();
   const updateProduct = useUpdateProduct();
-  const [selectedType, setSelectedType] = useState('');
-  const [selectedCounter, setSelectedCounter] = useState('');
-
+  const { data: productInfo } = useGetProductInfo(id);
   const { data: typeList, isLoading: typeLoading } = useGetTypePricesList();
   const { data: counterList, isLoading: counterLoading } = useGetCounterList();
 
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
   useEffect(() => {
-    if (typeList && typeList.length > 0) {
-      setSelectedType(typeList[0].id);
-      setValue('type_id', typeList[0].id);
+    if (productInfo) {
+      reset({
+        product_name: productInfo.product_name,
+        barcode: productInfo.barcode,
+        quantity: productInfo.quantity,
+        price_processing: productInfo.price_processing,
+        price_stone: productInfo.price_stone,
+        weight: productInfo.weight,
+        description: productInfo.description,
+        image_url: productInfo.image_url,
+        type_id: productInfo.type.id,
+        counter_id: productInfo.counter_id.id,
+      });
     }
-  }, [typeList, setValue]);
-
-  useEffect(() => {
-    if (counterList && counterList.length > 0) {
-      setSelectedCounter(counterList[0].id);
-      setValue('counter_id', counterList[0].id);
-    }
-  }, [counterList, setValue]);
+  }, [productInfo, reset]);
 
   const handleCancel = () => {
     dispatch(closePopup('Update Product'));
   };
 
   const onSubmit = async (data) => {
-    try {
-      await updateProduct.mutateAsync({
-        id: id,
-        product_name: data.product_name,
-        barcode: data.barcode,
-        quantity: data.quantity,
-        price_processing: data.price_processing,
-        price_stone: data.price_stone,
-        weight: data.weight,
-        description: data.description,
-        image_url: data.image_url,
-        type_id: selectedType,
-        counter_id: selectedCounter,
-      });
-      notification.success({
-        message: 'Success',
-        description: 'Product updated successfully',
-        duration: 1.5,
-      });
-      dispatch(closePopup('Update Product'));
-    } catch (error) {
-      notification.error({
-        message: 'Error',
-        description: 'Failed to update product',
-        duration: 1.5,
-      });
-    }
+    console.log(data);
+    updateProduct.mutate({
+      id: id,
+      product_name: data.product_name,
+      barcode: data.barcode,
+      quantity: data.quantity,
+      price_processing: data.price_processing,
+      price_stone: data.price_stone,
+      weight: data.weight,
+      description: data.description,
+      image_url: data.image_url,
+      type_id: data.type_id,
+      counter_id: data.counter_id,
+    });
   };
 
   if (typeLoading || counterLoading) {
     return (
-      <div className="w-full h-full">
+      <div className="h-20">
         <ComponentLoading />
       </div>
     );
@@ -241,8 +230,6 @@ const UpdateProduct = ({ id }) => {
                 {...register('type_id', {
                   required: MESS.ERROR_PRODUCT_CATEGORY_ID,
                 })}
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
               >
                 <option value="" disabled>
                   --Select Type--
@@ -268,8 +255,6 @@ const UpdateProduct = ({ id }) => {
                 {...register('counter_id', {
                   required: MESS.ERROR_COUNTER,
                 })}
-                value={selectedCounter}
-                onChange={(e) => setSelectedCounter(e.target.value)}
               >
                 <option value="" disabled>
                   --Select Counter--

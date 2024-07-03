@@ -53,9 +53,13 @@ const GetCounterInfo = async (name) => {
   }
 };
 
-const GetCounterList = async () => {
+const GetCounterList = async ({ keyword }) => {
   try {
-    const data = await axiosInstance.get(COUNTERLIST);
+    let query = COUNTERLIST;
+    if (keyword && keyword.length > 0) {
+      query = COUNTERBYNAME + `?name=${keyword}`;
+    }
+    const data = await axiosInstance.get(query);
     console.log(data);
     return data;
   } catch (error) {

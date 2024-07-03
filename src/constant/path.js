@@ -1,10 +1,11 @@
-const USER_MANAGEMENT = '/user-management';
+const USER = '/user';
 const CUSTOMER = '/customers';
 const PRODUCT = '/products';
 const COUNTER = '/counter';
 const TYPE_PRICES = '/type-prices';
 const ORDER = '/order';
 const PROMOTION = '/promotion';
+const DETAIL = '/:id';
 const ORDER_DETAIL= '/order-detail';
 
 export const PATHS = {
@@ -16,12 +17,15 @@ export const PATHS = {
   RESET_PASSWORD: '/reset-password',
   PRODUCT: {
     INDEX: PRODUCT,
+    DETAIL: PRODUCT + DETAIL,
   },
   USER: {
-    INDEX: USER_MANAGEMENT,
+    INDEX: USER,
+    DETAIL: USER + DETAIL,
   },
   CUSTOMER: {
     INDEX: CUSTOMER,
+    DETAIL: CUSTOMER + DETAIL,
   },
   COUNTER: {
     INDEX: COUNTER,
