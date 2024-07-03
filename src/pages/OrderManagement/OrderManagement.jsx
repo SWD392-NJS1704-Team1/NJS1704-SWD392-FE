@@ -3,9 +3,9 @@ import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Spin, Table, Typography} from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import useGetOrderList from './useGetOrderList';
-import {OrderColumn } from '@/constant/table-column';
+import { OrderColumn } from '@/constant/table-column';
 import AddOrder from '@/components/AddOrder/AddOrder';
 import { useState } from 'react';
 
@@ -21,9 +21,13 @@ const CustomerList = () => {
     setPage(page);
   };
 
-  console.log(data)
+  console.log(data);
   if (isLoading) {
-    return <div><Spin/></div>;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
   }
   return (
     <div>

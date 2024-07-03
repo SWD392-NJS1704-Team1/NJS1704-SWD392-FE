@@ -3,7 +3,7 @@ import AddProduct from '@/components/AddProduct/AddProduct';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 import useGetProductsList from './useGetProductsList';
@@ -22,7 +22,7 @@ const ProductPage = () => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [pageSize, setPageSize] = useState(initialLimit);
 
-  const { data } = useGetProductsList(currentPage - 1, pageSize);
+  const { data, isLoading } = useGetProductsList(currentPage - 1, pageSize);
 
   // Update the URL whenever currentPage or pageSize changes
   useEffect(() => {
@@ -40,6 +40,14 @@ const ProductPage = () => {
     setPageSize(pagination.pageSize);
   };
 
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -53,7 +61,7 @@ const ProductPage = () => {
           PRODUCTS
         </Typography.Title>
       </div>
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 p-4 mt-4 bg-white rounded-lg shadow-sm">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-3 w-96 flex-col">
             <ProductSearchBar />

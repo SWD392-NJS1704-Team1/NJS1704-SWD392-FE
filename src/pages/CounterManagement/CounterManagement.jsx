@@ -1,5 +1,5 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import { CounterColumn } from '@/constant/table-column';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
@@ -8,7 +8,15 @@ import AddCounter from '@/components/AddCounter/AddCounter';
 import CounterSearchBar from '@/components/SearchBar/Counter-search-bar';
 
 const CounterManagement = () => {
-  const { data } = useGetCounterList();
+  const { data, isLoading } = useGetCounterList();
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <div

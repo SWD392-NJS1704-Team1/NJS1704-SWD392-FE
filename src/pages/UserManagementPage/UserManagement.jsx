@@ -2,7 +2,7 @@ import AddUser from '@/components/AddUser/AddUser';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import useGetUsersList from './useGetUsersList';
 import { UsersColumn } from '@/constant/table-column';
 import { useState } from 'react';
@@ -11,7 +11,15 @@ import UserSearchBar from '@/components/SearchBar/Search-bar';
 const UserManagement = () => {
   const [current, setCurrent] = useState(1);
   const [limit, setLimit] = useState(5);
-  const { data } = useGetUsersList(current - 1, limit);
+  const { data, isLoading } = useGetUsersList(current - 1, limit);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <div

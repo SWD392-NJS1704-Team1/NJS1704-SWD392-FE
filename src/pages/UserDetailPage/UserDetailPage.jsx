@@ -8,6 +8,7 @@ import {
   Form,
   Input,
   Select,
+  Spin,
   Typography,
 } from 'antd';
 import { PATHS } from '@/constant/path';
@@ -22,7 +23,7 @@ import { MESS, REGEX } from '@/constant/validate';
 const UserDetailPage = () => {
   const { id } = useParams();
   const { data } = useUserDetail(id);
-  const { data: counterList } = useGetCounterList();
+  const { data: counterList, isLoading } = useGetCounterList();
   const [isEdit, setIsEdit] = useState(false);
   const updateUser = useUpdateUserDetail();
   const [selectedRole, setSelectedRole] = useState(data?.role?.id);
@@ -69,6 +70,14 @@ const UserDetailPage = () => {
       });
     }
   }, [data, reset]);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4 w-full">

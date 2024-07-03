@@ -1,6 +1,6 @@
 import { TypePricesColumn } from '@/constant/table-column';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
@@ -9,7 +9,15 @@ import useGetTypePricesList from './useGetTypePricesList';
 import AddTypePrices from '@/components/AddTypePrices/AddTypePrices';
 
 const TypePricesPage = () => {
-  const { data } = useGetTypePricesList();
+  const { data, isLoading } = useGetTypePricesList();
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <div

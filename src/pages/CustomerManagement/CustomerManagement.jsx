@@ -1,5 +1,5 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import { CustomersColumn } from '@/constant/table-column';
 import AddCustomer from '@/components/AddCustomer/AddCustomer';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
@@ -8,7 +8,15 @@ import useGetCustomerList from './useGetCustomerList';
 import CustomerSearchBar from '@/components/SearchBar/Customer-search-bar';
 
 const CustomerList = () => {
-  const { data } = useGetCustomerList();
+  const { data, isLoading } = useGetCustomerList();
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <div

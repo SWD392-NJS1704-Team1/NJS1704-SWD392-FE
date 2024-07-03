@@ -1,6 +1,6 @@
 import { PromotionColumn } from '@/constant/table-column';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography } from 'antd';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
@@ -9,7 +9,15 @@ import useGetPromotionList from './useGetPromotionList';
 import AddPromotion from '@/components/AddPromotion/AddPromotion';
 
 const PromotionPage = () => {
-  const { data } = useGetPromotionList();
+  const { data, isLoading } = useGetPromotionList();
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Spin />
+      </div>
+    );
+  }
 
   return (
     <div

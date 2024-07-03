@@ -10,6 +10,7 @@ import {
   Image,
   Input,
   Select,
+  Spin,
   Typography,
 } from 'antd';
 import { PATHS } from '@/constant/path';
@@ -19,7 +20,6 @@ import { MESS, REGEX } from '@/constant/validate';
 import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import useGetTypePricesList from '../TypePricespage/useGetTypePricesList';
 import useGetCounterList from '../CounterManagement/useGetCounterList';
-import ComponentLoading from '@/components/ComponentLoading/ComponentLoading';
 import useUpdateProductDetail from './useUpdateProductDetail';
 
 const ProductDetailPage = () => {
@@ -82,8 +82,8 @@ const ProductDetailPage = () => {
 
   if (typeLoading || counterLoading) {
     return (
-      <div className="h-20">
-        <ComponentLoading />
+      <div className="h-full w-full flex items-center justify-center">
+        <Spin />
       </div>
     );
   }
