@@ -2,6 +2,8 @@ import Dropdown from '@/components/Dropdown/Dropdown';
 import {
   ViewCounterOptionDropdown,
   ViewCustomerOptionDropdown,
+  ViewOrderDetailOptionDropdown,
+  ViewOrderOptionDropdown,
   ViewProductOptionDropdown,
   ViewPromotionOptionDropdown,
   ViewTypePricesOptionDropdown,
@@ -332,7 +334,52 @@ export const OrderColumn = [
     title: 'Action',
     key: 'operation',
     render: (record) => {
-      const items = ViewCustomerOptionDropdown(record.id, record.fullName);
+      const items = ViewOrderOptionDropdown(record.id, record.fullName);
+      return <Dropdown items={items} />;
+    },
+  },
+];
+
+export const OrderDetailColumn = [
+  {
+    title: 'No',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Product',
+    dataIndex: 'product',
+    key: 'product',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Quantity',
+    dataIndex: 'quantity',
+    key: 'quantity',
+  },
+  {
+    title: 'Total',
+    dataIndex: 'total',
+    key: 'total',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      const items = ViewOrderDetailOptionDropdown(record.id, record.fullName);
       return <Dropdown items={items} />;
     },
   },

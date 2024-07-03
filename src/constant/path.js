@@ -5,6 +5,7 @@ const COUNTER = '/counter';
 const TYPE_PRICES = '/type-prices';
 const ORDER = '/order';
 const PROMOTION = '/promotion';
+const ORDER_DETAIL= '/order-detail';
 
 export const PATHS = {
   HOME: '/',
@@ -34,4 +35,7 @@ export const PATHS = {
   PROMOTIONS: {
     INDEX: PROMOTION,
   },
+  ORDER_DETAIL:{
+    INDEX: ORDER_DETAIL,
+  }
 };

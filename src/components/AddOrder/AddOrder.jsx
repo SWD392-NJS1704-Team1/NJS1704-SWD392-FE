@@ -13,6 +13,7 @@ const AddOrder = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -29,6 +30,7 @@ const AddOrder = () => {
 
   const handleCancel = () => {
     dispatch(closePopup('Add a new Order'));
+    reset();
   };
 
   return (
