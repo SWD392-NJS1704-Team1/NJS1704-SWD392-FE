@@ -47,3 +47,4 @@ export const DELETE_PROMOTION = import.meta.env.VITE_DELETE_PROMOTION_API;
 
 // Order API
 export const ORDER_LIST = import.meta.env.VITE_GET_ORDER_LIST_API;
+export const DELETE_ORDER = import.meta.env.VITE_DELETE_ORDER_API;
