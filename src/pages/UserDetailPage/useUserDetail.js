@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const useUserDetail = (id) => {
   return useQuery({
-    queryKey: ['getProductInfo'],
+    queryKey: ['getUserInfo'],
     queryFn: () => UserManagementListAPI.GetUserInfo(id),
   });
 };

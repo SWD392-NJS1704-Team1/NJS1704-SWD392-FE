@@ -47,7 +47,6 @@ const UpdateProduct = ({ id }) => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     updateProduct.mutate({
       id: id,
       product_name: data.product_name,

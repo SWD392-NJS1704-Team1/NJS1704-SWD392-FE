@@ -60,7 +60,6 @@ const GetCounterList = async ({ keyword }) => {
       query = COUNTERBYNAME + `?name=${keyword}`;
     }
     const data = await axiosInstance.get(query);
-    console.log(data);
     return data;
   } catch (error) {
     const errorResponse = error;
