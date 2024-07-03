@@ -2,6 +2,8 @@ import Dropdown from '@/components/Dropdown/Dropdown';
 import {
   ViewCounterOptionDropdown,
   ViewCustomerOptionDropdown,
+  ViewOrderDetailOptionDropdown,
+  ViewOrderOptionDropdown,
   ViewProductOptionDropdown,
   ViewPromotionOptionDropdown,
   ViewTypePricesOptionDropdown,
@@ -299,6 +301,101 @@ export const PromotionColumn = [
     key: 'operation',
     render: (record) => {
       const items = ViewPromotionOptionDropdown(record.code);
+      return <Dropdown items={items} />;
+    },
+  },
+];
+
+export const OrderColumn = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Order ID',
+    dataIndex: 'fullName',
+    key: 'fullName',
+  },
+  {
+    title: 'Customer Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Staff Name',
+    dataIndex: 'staffName',
+    key: 'staffName',
+  },
+  {
+    title: 'Date',
+    dataIndex: 'date',
+    key: 'date',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      const items = ViewOrderOptionDropdown(record.id, record.fullName);
+      return <Dropdown items={items} />;
+    },
+  },
+];
+
+export const OrderDetailColumn = [
+  {
+    title: 'No',
+    dataIndex: 'id',
+    key: 'id',
+    sorter: {
+      compare: (a, b) => a.id - b.id,
+    },
+    defaultSortOrder: 'ascend',
+  },
+  {
+    title: 'Product',
+    dataIndex: 'product',
+    key: 'product',
+  },
+  {
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Quantity',
+    dataIndex: 'quantity',
+    key: 'quantity',
+  },
+  {
+    title: 'Total',
+    dataIndex: 'total',
+    key: 'total',
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    render: (record) => {
+      const items = ViewOrderDetailOptionDropdown(record.id, record.fullName);
       return <Dropdown items={items} />;
     },
   },

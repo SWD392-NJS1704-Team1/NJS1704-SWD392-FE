@@ -11,6 +11,7 @@ import {
   SyncOutlined,
   UserOutlined,
   WalletFilled,
+  EyeOutlined
 } from '@ant-design/icons';
 import { PATHS } from './path';
 import Popup from '@/components/Popup/Popup';
@@ -27,7 +28,8 @@ import UpdateTypePrices from '@/components/UpdateTypePrices/UpdateTypePrices';
 import DeleteTypePrice from '@/components/DeleteTypePrice/DeleteTypePrice';
 import ProductDetailPage from '@/pages/ProductDetailPage/ProductDetailPage';
 import { Link } from 'react-router-dom';
-
+import UpdateOrder from '@/components/UpdateOrder/UpdateOrder';
+import DeleteOrder from '@/components/DeleteOrder/DeleteOrder';
 // Navigation Sider
 export const MenuItems = [
   {
@@ -234,4 +236,66 @@ export const ViewPromotionOptionDropdown = (code) => [
     key: 'delete',
     icon: <CloseCircleOutlined />,
   },
+];
+
+export const ViewOrderOptionDropdown = (id, name) => [
+  {
+    label: (
+      <Popup
+        title="Update Customer"
+        content={<UpdateOrder id={id} name={name} />}
+      >
+        Update Order
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup
+        title="Delete Customer"
+        content={<DeleteOrder id={id} name={name} />}
+      >
+        Delete Order
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+  {
+    label: (
+      <Link to={`/order-detail/`}>
+        View Detail
+      </Link>
+    ),
+    key: 'view',
+    icon: <EyeOutlined />,
+  },
+  
+];
+export const ViewOrderDetailOptionDropdown = (id, name) => [
+  {
+    label: (
+      <Popup
+        title="Update Order"
+      >
+        Update 
+      </Popup>
+    ),
+    key: 'edit',
+    icon: <EditOutlined />,
+  },
+  {
+    label: (
+      <Popup
+        title="Delete Order"
+      >
+        Delete 
+      </Popup>
+    ),
+    key: 'delete',
+    icon: <CloseCircleOutlined />,
+  },
+  
 ];

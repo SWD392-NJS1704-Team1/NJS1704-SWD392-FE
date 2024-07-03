@@ -17,6 +17,8 @@ import TypePricesPage from './pages/TypePricespage/TypePricesPage';
 import PromotionPage from './pages/PromotionPage/PromotionPage';
 import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage';
 import UserDetailPage from './pages/UserDetailPage/UserDetailPage';
+import OrderManagement from './pages/OrderManagement/OrderManagement';
+import OrderDetailPage from './pages/OrderDetailPage/OrderDetailPage';
 
 const App = () => {
   return (
@@ -35,16 +37,15 @@ const App = () => {
             <Route path={PATHS.USER.DETAIL} element={<UserDetailPage />} />
             <Route path={PATHS.CUSTOMER.INDEX} element={<CustomerList />} />
             <Route path={PATHS.PRODUCT.INDEX} element={<ProductPage />} />
-            <Route
-              path={PATHS.PRODUCT.DETAIL}
-              element={<ProductDetailPage />}
-            />
             <Route path={PATHS.COUNTER.INDEX} element={<CounterManagement />} />
             <Route
               path={PATHS.TYPE_PRICES.INDEX}
               element={<TypePricesPage />}
             />
             <Route path={PATHS.PROMOTIONS.INDEX} element={<PromotionPage />} />
+            <Route path={PATHS.ORDER.INDEX} element={<OrderManagement />} />
+            <Route path={PATHS.ORDER_DETAIL.INDEX} element={<OrderDetailPage />} />
+
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

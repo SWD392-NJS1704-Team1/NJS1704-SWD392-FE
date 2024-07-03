@@ -41,4 +41,7 @@ export const MESS = {
   ERROR_TYPE_PRICE_BUY_PRICE: 'Please enter buy price per gram.',
   ERROR_TYPE_PRICE_SELL_PRICE: 'Please enter sell price per gram.',
   ERROR_TYPE_PRICE_TYPE: 'Please enter type.',
+  ERROR_ORDER_STAFF_NAME: 'Please enter staff name.',
+  ERROR_ORDER_DATE: 'Please enter date.',
+  ERROR_ORDER_TYPE: 'Please enter type.',
 };
