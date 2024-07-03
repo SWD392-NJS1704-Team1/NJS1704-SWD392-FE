@@ -3,19 +3,19 @@ import ConfigAntdButton from '@/components/Button/ConfigAntdButton';
 import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Table, Typography } from 'antd';
+import { Button, Spin, Table, Typography} from 'antd';
 import useGetOrderList from './useGetOrderList';
 import {OrderColumn } from '@/constant/table-column';
 import AddOrder from '@/components/AddOrder/AddOrder';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 const CustomerList = () => {
   const { data, isLoading } = useGetOrderList();
-//   const [page, setPage] = useState({
-//     current: 1,
-//     pageSize: 5,
-//     total: data ? data.length : 0,
-//   });
+  const [page, setPage] = useState({
+    current: 1,
+    pageSize: 5,
+    total: data ? data.length : 0,
+  });
 
   const handleTableChange = (page) => {
     setPage(page);
@@ -23,7 +23,7 @@ const CustomerList = () => {
 
   console.log(data)
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Spin/></div>;
   }
   return (
     <div>
@@ -50,11 +50,11 @@ const CustomerList = () => {
         <Table
           columns={OrderColumn}
           dataSource={data}
-        //   pagination={{
-        //     ...page,
-        //     position: ['bottomCenter'],
-        //     showSizeChanger: false,
-        //   }}
+          pagination={{
+            ...page,
+            position: ['bottomCenter'],
+            showSizeChanger: false,
+          }}
           onChange={handleTableChange}
         />
       </div>

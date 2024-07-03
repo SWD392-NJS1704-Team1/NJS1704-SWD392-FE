@@ -242,7 +242,7 @@ export const ViewOrderOptionDropdown = (id, name) => [
   {
     label: (
       <Popup
-        title="Update Customer"
+        title="Update Order"
         content={<UpdateOrder id={id} name={name} />}
       >
         Update Order
@@ -254,7 +254,7 @@ export const ViewOrderOptionDropdown = (id, name) => [
   {
     label: (
       <Popup
-        title="Delete Customer"
+        title="Delete Order"
         content={<DeleteOrder id={id} name={name} />}
       >
         Delete Order
