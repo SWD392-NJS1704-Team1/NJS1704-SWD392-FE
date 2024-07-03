@@ -4,70 +4,32 @@ import Popup from '@/components/Popup/Popup';
 import SearchBar from '@/components/SearchBar/Search-bar';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Table, Typography } from 'antd';
-// import useGetCustomerList from './useGetCustomerList';
+import useGetOrderList from './useGetOrderList';
 import {OrderColumn } from '@/constant/table-column';
 import AddOrder from '@/components/AddOrder/AddOrder';
 // import { useState } from 'react';
 
 const CustomerList = () => {
-//   const { data } = useGetCustomerList();
+  const { data, isLoading } = useGetOrderList();
 //   const [page, setPage] = useState({
 //     current: 1,
 //     pageSize: 5,
 //     total: data ? data.length : 0,
 //   });
-const mockData = [
-  {
-    key: '1',
-    id: 1,
-    fullName: 'ORD1001',
-    name: 'John Doe',
-    staffName: 'Alice Johnson',
-    date: '2023-04-01',
-    type: 'Online',
-    status: 'Processing'
-  },
-  {
-    key: '2',
-    id: 2,
-    fullName: 'ORD1002',
-    name: 'Jane Smith',
-    staffName: 'Bob Brown',
-    date: '2023-04-02',
-    type: 'In-store',
-    status: 'Completed'
-  },
-  {
-    key: '3',
-    id: 3,
-    fullName: 'ORD1003',
-    name: 'Michael Davis',
-    staffName: 'Chris Green',
-    date: '2023-04-03',
-    type: 'Online',
-    status: 'Cancelled'
-  },
-  {
-    key: '4',
-    id: 4,
-    fullName: 'ORD1004',
-    name: 'Emily Clark',
-    staffName: 'Diana Carter',
-    date: '2023-04-04',
-    type: 'In-store',
-    status: 'Processing'
-  }
-];
+
   const handleTableChange = (page) => {
     setPage(page);
   };
 
-  // console.log(data)
+  console.log(data)
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       <div className="bg-primary w-full flex items-center p-4 mt-1">
         <Typography.Title level={3} type="secondary">
-          ORDER LIST
+          ORDER HISTORY
         </Typography.Title>
       </div>
       <div className="flex flex-col gap-4 p-4">
@@ -87,7 +49,7 @@ const mockData = [
         </div>
         <Table
           columns={OrderColumn}
-          dataSource={mockData}
+          dataSource={data}
         //   pagination={{
         //     ...page,
         //     position: ['bottomCenter'],

@@ -317,24 +317,20 @@ export const OrderColumn = [
     defaultSortOrder: 'ascend',
   },
   {
-    title: 'Order ID',
-    dataIndex: 'fullName',
+    title: 'Customer Name',
+    dataIndex: ['customer', 'fullName'],
     key: 'fullName',
   },
   {
-    title: 'Customer Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Staff Name',
-    dataIndex: 'staffName',
-    key: 'staffName',
+    title: 'Discount',
+    dataIndex: 'discount',
+    key: 'discount',
   },
   {
     title: 'Date',
     dataIndex: 'date',
     key: 'date',
+    render: (date) => new Date(date).toLocaleString(),
   },
   {
     title: 'Type',
@@ -342,15 +338,15 @@ export const OrderColumn = [
     key: 'type',
   },
   {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
+    title: 'Created By',
+    dataIndex: 'created_by',
+    key: 'created_by',
   },
   {
     title: 'Action',
     key: 'operation',
     render: (record) => {
-      const items = ViewOrderOptionDropdown(record.id, record.fullName);
+      const items = ViewOrderOptionDropdown(record.id, record.customer.fullName);
       return <Dropdown items={items} />;
     },
   },
