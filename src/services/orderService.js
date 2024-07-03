@@ -1,0 +1,26 @@
+import {
+    ORDER_LIST,
+  } from '@/constant/environments';
+  import axiosInstance from '@/utils/axiosInstance';
+  
+const GetOrderList = async () => {
+    try {
+      const data = await axiosInstance.get(ORDER_LIST);
+      const formattedData = data.orders.map(order => ({
+        ...order,
+        fullName: order.customer.fullName,
+      }));
+  
+      return formattedData;
+    } catch (error) {
+      const errorResponse = error;
+      throw new Error(errorResponse.response?.data.message);
+    }
+  };
+  
+  
+  const OrderManagementListAPI = {
+    GetOrderList,
+  };
+  
+  export default OrderManagementListAPI;
