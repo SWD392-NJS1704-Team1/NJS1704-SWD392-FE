@@ -37,6 +37,10 @@ const App = () => {
             <Route path={PATHS.USER.DETAIL} element={<UserDetailPage />} />
             <Route path={PATHS.CUSTOMER.INDEX} element={<CustomerList />} />
             <Route path={PATHS.PRODUCT.INDEX} element={<ProductPage />} />
+            <Route
+              path={PATHS.PRODUCT.DETAIL}
+              element={<ProductDetailPage />}
+            />
             <Route path={PATHS.COUNTER.INDEX} element={<CounterManagement />} />
             <Route
               path={PATHS.TYPE_PRICES.INDEX}
@@ -44,8 +48,10 @@ const App = () => {
             />
             <Route path={PATHS.PROMOTIONS.INDEX} element={<PromotionPage />} />
             <Route path={PATHS.ORDER.INDEX} element={<OrderManagement />} />
-            <Route path={PATHS.ORDER_DETAIL.INDEX} element={<OrderDetailPage />} />
-
+            <Route
+              path={PATHS.ORDER_DETAIL.INDEX}
+              element={<OrderDetailPage />}
+            />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />
