@@ -10,8 +10,8 @@ const useGetUsersList = (current, limit) => {
     queryFn: () =>
       UserManagementListAPI.GetUsersList({
         keyword: searchValue,
-        page: current,
-        limit: limit,
+        page: 0,
+        limit: 5,
       }),
   });
 };
