@@ -10,8 +10,8 @@ const useGetProductsList = (page, limit) => {
     queryFn: () =>
       ProductService.getAllProducts({
         keyword: searchValue,
-        page: page,
-        limit: limit,
+        page: 0,
+        limit: 5,
       }),
   });
 };
