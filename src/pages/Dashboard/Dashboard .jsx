@@ -51,35 +51,6 @@ const customerColumns = [
     key: 'point',
   },
 ];
-// Data for Staff Table
-const staffData = [
-  { id: 1, name: 'Alice', counter: 'A', targets: 10 },
-  { id: 2, name: 'Bob', counter: 'B', targets: 12 },
-  { id: 3, name: 'Charlie', counter: 'C', targets: 8 },
-];
-
-const staffColumns = [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Counter',
-    dataIndex: 'counter',
-    key: 'counter',
-  },
-  {
-    title: 'Targets',
-    dataIndex: 'targets',
-    key: 'targets',
-  },
-];
 
 const Dashboard = () => {
   return (
@@ -95,9 +66,6 @@ const Dashboard = () => {
             columns={customerColumns}
             rowKey="id"
           />
-        </Card>
-        <Card title="Top Staff" className="mt-4">
-          <Table dataSource={staffData} columns={staffColumns} rowKey="id" />
         </Card>
       </Content>
     </Layout>

@@ -21,7 +21,7 @@ const CustomerList = () => {
     setPage(page);
   };
 
-  console.log(data);
+  // console.log(data);
   if (isLoading) {
     return (
       <div className="w-full h-full flex items-center justify-center">
