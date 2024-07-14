@@ -20,11 +20,10 @@ const useAddCustomer = () => {
         description: 'Add a new Customer successfully',
       });
     },
-    onError: () => {
-      console.log(error);
+    onError: (error) => {
       notification.error({
         message: 'Create failed',
-        description: 'Add a new Customer failed',
+        description: error.message,
       });
     },
   });

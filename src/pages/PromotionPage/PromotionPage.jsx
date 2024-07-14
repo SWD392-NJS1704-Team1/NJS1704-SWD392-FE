@@ -37,7 +37,7 @@ const PromotionPage = () => {
           <div className="flex items-center space-x-3 w-96 flex-col">
             <SearchBar />
           </div>
-          <div className="flex">
+          {/* <div className="flex">
             <Popup title="Add Promotion" content={<AddPromotion />}>
               <ConfigAntdButton>
                 <Button type="primary" icon={<PlusCircleOutlined />}>
@@ -45,7 +45,7 @@ const PromotionPage = () => {
                 </Button>
               </ConfigAntdButton>
             </Popup>
-          </div>
+          </div> */}
         </div>
         <Table
           columns={PromotionColumn}

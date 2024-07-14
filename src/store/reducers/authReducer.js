@@ -18,7 +18,7 @@ export const authSlice = createSlice({
     handleLogout: (state) => {
       tokenMethod.remove();
       state.profile = null;
-      message.success('Đăng xuất thành công');
+      message.success('Logout successfully');
     },
   },
   extraReducers: (builder) => {
@@ -65,12 +65,12 @@ export const handleLogin = createAsyncThunk(
         refreshToken,
       });
       // thunkApi.dispatch(handleGetProfile());
-      message.success('Đăng nhập thành công');
+      message.success('Login successfully');
       return true;
     } catch (error) {
       const errorInfo = error?.response?.data;
       if (errorInfo.message === 'FAIL') {
-        message.error('Username hoặc password không đúng');
+        message.error('Username or password incorrect');
       }
       return thunkApi.rejectWithValue(errorInfo);
     }

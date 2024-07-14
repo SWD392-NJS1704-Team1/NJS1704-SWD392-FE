@@ -6,17 +6,17 @@ import {
 import axiosInstance from '@/utils/axiosInstance';
 
 const CreatePromotion = async ({
-  discount_percentage,
-  fixed_discount_amount,
-  start_date,
-  end_date,
+  discountPercentage,
+  fixedDiscountAmount,
+  startDate,
+  endDate,
 }) => {
   try {
     const data = await axiosInstance.post(CREATE_PROMOTION, {
-      discount_percentage,
-      fixed_discount_amount,
-      start_date,
-      end_date,
+      discountPercentage,
+      fixedDiscountAmount,
+      startDate,
+      endDate,
     });
     return data;
   } catch (error) {

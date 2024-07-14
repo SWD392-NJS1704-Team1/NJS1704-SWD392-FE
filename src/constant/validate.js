@@ -44,4 +44,8 @@ export const MESS = {
   ERROR_ORDER_STAFF_NAME: 'Please enter staff name.',
   ERROR_ORDER_DATE: 'Please enter date.',
   ERROR_ORDER_TYPE: 'Please enter type.',
+  ERROR_DISCOUNT_PERCENTAGE: 'Please enter discount percentage.',
+  ERROR_FIXED_DISCOUNT_AMOUNT: 'Please enter fixed discount amount.',
+  ERROR_START_DATE: 'Please enter start date.',
+  ERROR_END_DATE: 'Please enter end date.',
 };

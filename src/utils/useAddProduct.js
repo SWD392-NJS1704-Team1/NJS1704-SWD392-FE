@@ -18,10 +18,10 @@ const useAddProduct = () => {
         description: 'Add a new Product successfully',
       });
     },
-    onError: () => {
+    onError: (error) => {
       notification.error({
         message: 'Create failed',
-        description: 'Add a new Product failed',
+        description: error.message,
       });
     },
   });

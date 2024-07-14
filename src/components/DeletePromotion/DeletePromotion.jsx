@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { closePopup } from '@/store/reducers/popupReducer';
 import { useDeletePromotion } from './useDeletePromotion';
 
-const DeletePromotion = ({ code }) => {
+const DeletePromotion = ({ id, code }) => {
   const dispatch = useDispatch();
-  const deletePromotion = useDeletePromotion(code);
+  const deletePromotion = useDeletePromotion(id);
 
   const handleCancel = () => {
     dispatch(closePopup('Delete Promotion'));
