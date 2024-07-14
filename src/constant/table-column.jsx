@@ -266,6 +266,14 @@ export const TypePricesColumn = [
   },
 ];
 
+export const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 export const PromotionColumn = [
   {
     title: 'No',
@@ -287,23 +295,30 @@ export const PromotionColumn = [
     key: 'discountPercentage',
   },
   {
+    title: 'Fixed Discount',
+    dataIndex: 'fixedDiscountAmount',
+    key: 'fixedDiscountAmount',
+  },
+  {
     title: 'Start Date',
     dataIndex: 'startDate',
     key: 'startDate',
+    render: (startDate) => formatDate(startDate),
   },
   {
     title: 'End Date',
     dataIndex: 'endDate',
     key: 'endDate',
+    render: (endDate) => formatDate(endDate),
   },
-  {
-    title: 'Action',
-    key: 'operation',
-    render: (record) => {
-      const items = ViewPromotionOptionDropdown(record.code);
-      return <Dropdown items={items} />;
-    },
-  },
+  // {
+  //   title: 'Action',
+  //   key: 'operation',
+  //   render: (record) => {
+  //     const items = ViewPromotionOptionDropdown(record.id, record.code);
+  //     return <Dropdown items={items} />;
+  //   },
+  // },
 ];
 
 export const OrderColumn = [
@@ -346,7 +361,10 @@ export const OrderColumn = [
     title: 'Action',
     key: 'operation',
     render: (record) => {
-      const items = ViewOrderOptionDropdown(record.id, record.customer.fullName);
+      const items = ViewOrderOptionDropdown(
+        record.id,
+        record.customer.fullName
+      );
       return <Dropdown items={items} />;
     },
   },

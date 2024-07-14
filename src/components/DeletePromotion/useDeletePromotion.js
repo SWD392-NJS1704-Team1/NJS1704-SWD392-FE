@@ -18,10 +18,10 @@ export const useDeletePromotion = (code) => {
         description: 'Delete Promotion successfully',
       });
     },
-    onError: () => {
+    onError: (error) => {
       notification.error({
         message: 'Delete failed',
-        description: 'Delete Promotion failed',
+        description: error.message,
       });
     },
   });

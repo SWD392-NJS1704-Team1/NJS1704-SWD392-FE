@@ -30,6 +30,7 @@ import ProductDetailPage from '@/pages/ProductDetailPage/ProductDetailPage';
 import { Link } from 'react-router-dom';
 import UpdateOrder from '@/components/UpdateOrder/UpdateOrder';
 import DeleteOrder from '@/components/DeleteOrder/DeleteOrder';
+import DeletePromotion from '@/components/DeletePromotion/DeletePromotion';
 // Navigation Sider
 export const MenuItems = [
   {
@@ -211,7 +212,7 @@ export const ViewTypePricesOptionDropdown = (id) => [
   },
 ];
 
-export const ViewPromotionOptionDropdown = (code) => [
+export const ViewPromotionOptionDropdown = (id, code) => [
   {
     label: (
       <Popup
@@ -228,7 +229,7 @@ export const ViewPromotionOptionDropdown = (code) => [
     label: (
       <Popup
         title="Delete Promotion"
-        content={'<DeletePromotion code={code} />'}
+        content={<DeletePromotion id={id} code={code} />}
       >
         Delete Promotion
       </Popup>

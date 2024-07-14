@@ -18,10 +18,10 @@ const useAddUser = () => {
         description: "Create a new User successfully",
       });
     },
-    onError: () => {
+    onError: (error) => {
       notification.error({
         message: "Create failed",
-        description: "Create a new User failed",
+        description: error.message,
       });
     },
   });

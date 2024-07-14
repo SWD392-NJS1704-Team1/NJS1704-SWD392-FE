@@ -13,15 +13,17 @@ const AddPromotion = () => {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     addPromotion.mutate({
-      counter_name: data.counter_name,
-      location: data.location,
+      discountPercentage: data.discountPercentage,
+      fixedDiscountAmount: data.fixedDiscountAmount,
+      startDate: data.startDate,
+      endDate: data.endDate,
     });
     reset();
   };
@@ -31,44 +33,48 @@ const AddPromotion = () => {
     reset();
   };
 
+  const startDate = watch('startDate');
+
   return (
     <div className="p-2">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex m-4">
           <h1 className="w-1/4 flex font-bold items-center mr-4">
-            Promotion Code
+            Discount Percentage
           </h1>
           <div className="w-3/4">
             <input
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-              placeholder="Promotion Code..."
-              {...register('discount_percentage', {
-                required: MESS.ERROR_COUNTER_NAME,
+              placeholder="Discount Percentage..."
+              {...register('discountPercentage', {
+                required: MESS.ERROR_DISCOUNT_PERCENTAGE,
               })}
             />
-            {errors.discount_percentage && (
+            {errors.discountPercentage && (
               <span className="text-red-500 text-sm">
-                {errors.discount_percentage.message}
+                {errors.discountPercentage.message}
               </span>
             )}
           </div>
         </div>
 
         <div className="flex m-4">
-          <h1 className="w-1/4 flex font-bold items-center mr-4">Discount</h1>
+          <h1 className="w-1/4 flex font-bold items-center mr-4">
+            Fixed Discount Amount
+          </h1>
           <div className="w-3/4">
             <input
               type="text"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
-              placeholder="Discount..."
-              {...register('fixed_discount_amount', {
-                required: MESS.ERROR_LOCATION,
+              placeholder="Fixed Discount Amount..."
+              {...register('fixedDiscountAmount', {
+                required: MESS.ERROR_FIXED_DISCOUNT_AMOUNT,
               })}
             />
-            {errors.fixed_discount_amount && (
+            {errors.fixedDiscountAmount && (
               <span className="text-red-500 text-sm">
-                {errors.fixed_discount_amount.message}
+                {errors.fixedDiscountAmount.message}
               </span>
             )}
           </div>
@@ -81,11 +87,11 @@ const AddPromotion = () => {
               type="date"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="Start Date..."
-              {...register('start_date', { required: MESS.ERROR_LOCATION })}
+              {...register('startDate', { required: MESS.ERROR_START_DATE })}
             />
-            {errors.start_date && (
+            {errors.startDate && (
               <span className="text-red-500 text-sm">
-                {errors.start_date.message}
+                {errors.startDate.message}
               </span>
             )}
           </div>
@@ -98,13 +104,15 @@ const AddPromotion = () => {
               type="date"
               className="block w-full p-2 rounded-md text-md border-2 border-gray-300 focus:outline-none"
               placeholder="End Date..."
-              {...register('end_date', {
-                required: MESS.ERROR_LOCATION,
+              {...register('endDate', {
+                required: MESS.ERROR_END_DATE,
+                validate: (value) =>
+                  value > startDate || 'End date must be after start date',
               })}
             />
-            {errors.end_date && (
+            {errors.endDate && (
               <span className="text-red-500 text-sm">
-                {errors.end_date.message}
+                {errors.endDate.message}
               </span>
             )}
           </div>
