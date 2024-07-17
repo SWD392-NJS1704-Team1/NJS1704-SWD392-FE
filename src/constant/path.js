@@ -7,6 +7,7 @@ const ORDER = '/order';
 const PROMOTION = '/promotion';
 const DETAIL = '/:id';
 const ORDER_DETAIL= '/order-detail';
+const GOLD_PRICE = '/gold-price';
 
 export const PATHS = {
   HOME: '/',
@@ -41,5 +42,9 @@ export const PATHS = {
   },
   ORDER_DETAIL:{
     INDEX: ORDER_DETAIL,
-  }
+  },
+  GOLD_PRICE: {
+    INDEX: GOLD_PRICE,
+  },
+  
 };

@@ -44,6 +44,11 @@ export const MenuItems = [
     icon: <ProductOutlined />,
   },
   {
+    label: 'Gold Price',
+    key: PATHS.GOLD_PRICE.INDEX,
+    icon: <MoneyCollectOutlined />,
+  },
+  {
     label: 'Order',
     key: 'order',
     icon: <ShopOutlined />,

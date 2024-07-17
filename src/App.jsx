@@ -19,6 +19,7 @@ import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage';
 import UserDetailPage from './pages/UserDetailPage/UserDetailPage';
 import OrderManagement from './pages/OrderManagement/OrderManagement';
 import OrderDetailPage from './pages/OrderDetailPage/OrderDetailPage';
+import GoldPricePage from './pages/GoldPrice/GoldPrice';
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
               path={PATHS.ORDER_DETAIL.INDEX}
               element={<OrderDetailPage />}
             />
+            <Route path={PATHS.GOLD_PRICE.INDEX} element={<GoldPricePage />} />
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />
