@@ -1,6 +1,5 @@
-import { Spin } from "antd";
-import React from "react";
-import styled from "styled-components";
+import { Spin } from 'antd';
+import styled from 'styled-components';
 
 const Loading = styled.div`
   display: flex;
@@ -13,7 +12,7 @@ const Loading = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 10;
 `;
 
 const ComponentLoading = () => {

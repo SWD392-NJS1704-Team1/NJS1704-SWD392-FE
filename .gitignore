@@ -7,12 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-.yarn
+node_modules/
+yarn.lock
+package-lock.json
+.yarn/
 .idea
-dist
+dist/
+scripts/
 dist-ssr
 *.local
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*

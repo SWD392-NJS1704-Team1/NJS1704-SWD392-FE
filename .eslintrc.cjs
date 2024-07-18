@@ -14,9 +14,16 @@ module.exports = {
   rules: {
     "react/jsx-no-target-blank": "off",
     "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "no-undef": "off",
+    "no-useless-escape": "off",
+    "no-unused-vars": "off",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
     ],
+  },
+  globals: {
+    someGlobalVariable: "readonly", // Define your global variables here
   },
 };
